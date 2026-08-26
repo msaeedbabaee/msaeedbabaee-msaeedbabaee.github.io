@@ -1,29 +1,72 @@
 ---
 layout: default
+title: Software Data AI Projects
 ---
 
 
-<article class="project-page">
+<section class="page-header">
 
 
 <h1>
-{{page.title}}
+Software, Data & AI Projects
 </h1>
 
 
+<p>
+Engineering software,
+machine learning,
+data analysis and computational tools.
+</p>
 
-{% if page.image %}
 
-<img src="{{page.image}}">
+</section>
+
+
+
+<section class="grid">
+
+
+{% for project in site.projects %}
+
+
+<div class="project-card">
+
+
+{% if project.image %}
+
+<img src="{{project.image}}">
 
 {% endif %}
+
+
+
+<div class="card-content">
+
+
+<h2>
+
+<a href="{{project.url}}">
+
+{{project.title}}
+
+</a>
+
+</h2>
+
+
+
+<p>
+
+{{project.excerpt}}
+
+</p>
 
 
 
 <div class="tags">
 
 
-{% for tag in page.tags %}
+{% for tag in project.tags %}
 
 <span>
 {{tag}}
@@ -37,30 +80,21 @@ layout: default
 
 
 
-{{content}}
-
-
-
-{% if page.github %}
-
-<a class="button"
-href="{{page.github}}">
-GitHub →
+<a href="{{project.url}}">
+View Project →
 </a>
 
-{% endif %}
+
+
+</div>
+
+
+</div>
 
 
 
-{% if page.demo %}
-
-<a class="button"
-href="{{page.demo}}">
-Live Demo →
-</a>
-
-{% endif %}
+{% endfor %}
 
 
 
-</article>
+</section>
