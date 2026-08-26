@@ -1,27 +1,61 @@
-title: "msaeedbabaee | Geotechnical Engineering & AI"
+backend:
+  name: github
+  repo: msaeedbabaee/msaeedbabaee.github.io
+  branch: main # اگر برنچ اصلی شما master است، این را به master تغییر دهید
+  # base_url بعد از راه‌اندازی OAuth اضافه می‌شود
 
-description: "Geotechnical engineering design, numerical modeling, software, data science and AI projects"
-
-url: "https://msaeedbabaee.github.io"
-baseurl: ""
-
-markdown: kramdown
-highlighter: rouge
+media_folder: "assets/images/uploads"
+public_folder: "/assets/images/uploads"
 
 collections:
-  projects:
-    output: true
-    permalink: /projects/:path/
+  # --------------------------------------------------
+  # ۱. بخش پروژه‌ها (Projects)
+  # --------------------------------------------------
+  - name: "projects"
+    label: "Projects"
+    folder: "_projects"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - {label: "Layout", name: "layout", widget: "hidden", default: "project"}
+      - {label: "Title", name: "title", widget: "string"}
+      - {label: "Category", name: "category", widget: "select", options: ["Machine Learning & AI", "Geotechnical Design", "Numerical Modeling", "Software & Tools"]}
+      - {label: "Project Date", name: "date", widget: "datetime", format: "YYYY-MM-DD"}
+      - {label: "Cover Image", name: "image", widget: "image", required: false}
+      - {label: "Technologies", name: "tech_stack", widget: "list", default: ["Python"]}
+      - {label: "GitHub Link", name: "github", widget: "string", required: false}
+      - {label: "Live Demo Link", name: "demo", widget: "string", required: false}
+      - {label: "Short Description", name: "description", widget: "text"}
+      - {label: "Full Content", name: "body", widget: "markdown"}
 
-  services:
-    output: true
-    permalink: /services/:path/
+  # --------------------------------------------------
+  # ۲. بخش خدمات تخصصی (Services)
+  # --------------------------------------------------
+  - name: "services"
+    label: "Services"
+    folder: "_services"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - {label: "Layout", name: "layout", widget: "hidden", default: "services"}
+      - {label: "Title", name: "title", widget: "string"}
+      - {label: "Short Description", name: "description", widget: "text"}
+      - {label: "Icon Class", name: "icon", widget: "string", default: "fa-solid fa-gears"}
+      - {label: "Full Service Details", name: "body", widget: "markdown"}
 
-plugins:
-  - jekyll-seo-tag
-  - jekyll-sitemap
-
-exclude:
-  - README.md
-  - Gemfile
-  - Gemfile.lock
+  # --------------------------------------------------
+  # ۳. بخش مقالات مهندسی (Engineering Articles / Blog)
+  # --------------------------------------------------
+  - name: "posts"
+    label: "Engineering Articles"
+    folder: "_posts"
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    fields:
+      - {label: "Layout", name: "layout", widget: "hidden", default: "post"}
+      - {label: "Title", name: "title", widget: "string"}
+      - {label: "Publish Date", name: "date", widget: "datetime"}
+      - {label: "Categories", name: "categories", widget: "list", default: ["Geotechnics"]}
+      - {label: "Cover Image", name: "image", widget: "image", required: false}
+      - {label: "Summary", name: "description", widget: "text"}
+      - {label: "Article Body", name: "body", widget: "markdown"}
