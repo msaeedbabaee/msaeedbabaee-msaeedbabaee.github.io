@@ -1,1 +1,59 @@
+---
+layout: default
+title: Projects
+---
 
+
+<section class="page-header">
+
+<h1>
+Software, Data & AI Projects
+</h1>
+
+</section>
+
+
+
+<section class="grid">
+
+{% for project in site.projects %}
+
+<div class="project-card">
+
+
+{% if project.image %}
+
+<img src="{{project.image}}">
+
+{% endif %}
+
+
+<h2>
+<a href="{{project.url}}">
+{{project.title}}
+</a>
+</h2>
+
+
+<p>
+{{project.excerpt}}
+</p>
+
+
+<div class="tags">
+
+{% for tag in project.tags %}
+
+<span>{{tag}}</span>
+
+{% endfor %}
+
+</div>
+
+
+</div>
+
+
+{% endfor %}
+
+</section>
