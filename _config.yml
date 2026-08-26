@@ -1,15 +1,45 @@
-title: Your Name Portfolio
+title: Your Name
 
 description: >
-  Geotechnical Engineering,
-  Software, Data Science and AI Projects
+  Geotechnical Engineering Design,
+  Software Development,
+  Data Science and AI Projects
 
-theme: minima
+
+url: "https://msaeedbabaee.github.io"
+
+
+markdown: kramdown
+
 
 collections:
 
   projects:
     output: true
+    permalink: /projects/:name/
+
 
   services:
     output: true
+    permalink: /services/:name/
+
+
+plugins:
+  - jekyll-feed
+
+
+
+defaults:
+
+- scope:
+    path: ""
+    type: projects
+  values:
+    layout: project
+
+
+- scope:
+    path: ""
+    type: services
+  values:
+    layout: service
