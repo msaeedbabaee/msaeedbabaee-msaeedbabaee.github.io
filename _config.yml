@@ -1,0 +1,15 @@
+title: Your Name Portfolio
+
+description: >
+  Geotechnical Engineering,
+  Software, Data Science and AI Projects
+
+theme: minima
+
+collections:
+
+  projects:
+    output: true
+
+  services:
+    output: true
