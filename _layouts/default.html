@@ -1,1 +1,98 @@
 
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>
+{{ page.title }} | {{ site.title }}
+</title>
+
+<link rel="stylesheet" href="/assets/css/style.css">
+
+</head>
+
+
+<body>
+
+
+<header>
+
+<nav>
+
+<div class="logo">
+
+<a href="/">
+{{site.title}}
+</a>
+
+</div>
+
+
+
+<div class="menu">
+
+<a href="/">Home</a>
+
+<a href="/services.html">
+Geotechnical Design
+</a>
+
+<a href="/projects.html">
+Software, Data & AI
+</a>
+
+<a href="/blog.html">
+Engineering Blog
+</a>
+
+<a href="/about.html">
+About
+</a>
+
+<a href="/contact.html">
+Contact
+</a>
+
+
+<button id="themeBtn">
+☾
+</button>
+
+
+</div>
+
+
+</nav>
+
+</header>
+
+
+
+<main>
+
+{{content}}
+
+</main>
+
+
+
+<footer>
+
+<p>
+© {{site.time | date:"%Y"}} {{site.title}}
+</p>
+
+</footer>
+
+
+
+<script src="/assets/js/script.js"></script>
+
+
+</body>
+
+</html>
