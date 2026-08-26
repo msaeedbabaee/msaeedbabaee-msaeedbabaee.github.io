@@ -1,19 +1,3 @@
----
-layout: default
-title: Projects
----
-
-
-<section class="page-header">
-
-<h1>
-Software, Data & AI Projects
-</h1>
-
-</section>
-
-
-
 <section class="grid">
 
 {% for project in site.projects %}
@@ -28,25 +12,69 @@ Software, Data & AI Projects
 {% endif %}
 
 
+
+<div class="card-content">
+
+
+<div class="category">
+
+{{project.category}}
+
+</div>
+
+
 <h2>
+
 <a href="{{project.url}}">
 {{project.title}}
 </a>
+
 </h2>
 
 
+
 <p>
-{{project.excerpt}}
+
+{{project.description}}
+
 </p>
+
 
 
 <div class="tags">
 
-{% for tag in project.tags %}
+{% for tech in project.technologies %}
 
-<span>{{tag}}</span>
+<span>
+{{tech}}
+</span>
 
 {% endfor %}
+
+</div>
+
+
+
+<div class="project-links">
+
+
+<a href="{{project.url}}">
+Details →
+</a>
+
+
+{% if project.github %}
+
+<a href="{{project.github}}">
+GitHub
+</a>
+
+{% endif %}
+
+
+
+</div>
+
 
 </div>
 
