@@ -1,46 +1,24 @@
+<!doctype html>
 
-title: Your Name
+<html>
 
-description: >
-  Geotechnical Engineering Design,
-  Software Development,
-  Data Science and AI Projects
+<head>
 
+<meta charset="utf-8">
 
-url: "https://msaeedbabaee.github.io"
-
-
-markdown: kramdown
+<title>
+CMS
+</title>
 
 
-collections:
-
-  projects:
-    output: true
-    permalink: /projects/:name/
+<script src="https://unpkg.com/decap-cms@3.0.0/dist/decap-cms.js">
+</script>
 
 
-  services:
-    output: true
-    permalink: /services/:name/
+</head>
 
+<body>
 
-plugins:
-  - jekyll-feed
+</body>
 
-
-
-defaults:
-
-- scope:
-    path: ""
-    type: projects
-  values:
-    layout: project
-
-
-- scope:
-    path: ""
-    type: services
-  values:
-    layout: service
+</html>
