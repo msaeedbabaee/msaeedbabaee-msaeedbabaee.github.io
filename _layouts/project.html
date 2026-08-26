@@ -1,100 +1,32 @@
 ---
 layout: default
-title: Software Data AI Projects
+title: Projects & Software
 ---
 
-
 <section class="page-header">
-
-
-<h1>
-Software, Data & AI Projects
-</h1>
-
-
-<p>
-Engineering software,
-machine learning,
-data analysis and computational tools.
-</p>
-
-
+  <span class="badge-tag">Portfolio</span>
+  <h1>Software, Data & AI Projects</h1>
+  <p>Numerical modeling tools, AI algorithms, and geotechnical applications.</p>
 </section>
 
-
-
 <section class="grid">
+  {% for project in site.projects %}
+    <article class="project-card">
+      <span class="category">{{ project.category | default: "Project" }}</span>
+      <h2><a href="{{ project.url | relative_url }}">{{ project.title }}</a></h2>
+      <p>{{ project.description | default: project.excerpt | strip_html | truncate: 110 }}</p>
+      
+      {% if project.tags %}
+        <div class="tags">
+          {% for tag in project.tags %}
+            <span>{{ tag }}</span>
+          {% endfor %}
+        </div>
+      {% endif %}
 
-
-{% for project in site.projects %}
-
-
-<div class="project-card">
-
-
-{% if project.image %}
-
-<img src="{{project.image}}">
-
-{% endif %}
-
-
-
-<div class="card-content">
-
-
-<h2>
-
-<a href="{{project.url}}">
-
-{{project.title}}
-
-</a>
-
-</h2>
-
-
-
-<p>
-
-{{project.excerpt}}
-
-</p>
-
-
-
-<div class="tags">
-
-
-{% for tag in project.tags %}
-
-<span>
-{{tag}}
-</span>
-
-
-{% endfor %}
-
-
-</div>
-
-
-
-<a href="{{project.url}}">
-View Project →
-</a>
-
-
-
-</div>
-
-
-</div>
-
-
-
-{% endfor %}
-
-
-
+      <div class="project-links">
+        <a href="{{ project.url | relative_url }}">View Details &rarr;</a>
+      </div>
+    </article>
+  {% endfor %}
 </section>
