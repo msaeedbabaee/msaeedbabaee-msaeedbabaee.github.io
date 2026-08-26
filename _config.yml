@@ -1,9 +1,9 @@
-title: Your Name
+title: M. S. B
 
 description: >
   Geotechnical Engineering Design,
-  Software Development,
-  Data Science and AI Projects
+  Numerical Modeling,
+  Software, Data Science and AI Projects
 
 
 url: "https://msaeedbabaee.github.io"
@@ -31,15 +31,15 @@ plugins:
 
 defaults:
 
-- scope:
-    path: ""
-    type: projects
-  values:
-    layout: project
+  - scope:
+      path: ""
+      type: projects
+    values:
+      layout: project
 
 
-- scope:
-    path: ""
-    type: services
-  values:
-    layout: service
+  - scope:
+      path: ""
+      type: services
+    values:
+      layout: service
