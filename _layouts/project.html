@@ -1,32 +1,13 @@
 ---
 layout: default
-title: Projects & Software
 ---
 
-<section class="page-header">
-  <span class="badge-tag">Portfolio</span>
-  <h1>Software, Data & AI Projects</h1>
-  <p>Numerical modeling tools, AI algorithms, and geotechnical applications.</p>
-</section>
+<article class="content-container">
+  <a href="javascript:history.back()" class="back-link">&larr; Back to list</a>
+  <span class="badge-tag">{{ page.category | default: page.layout | capitalize }}</span>
+  <h1 style="margin-top: 0.5rem; font-size: 2.25rem;">{{ page.title }}</h1>
 
-<section class="grid">
-  {% for project in site.projects %}
-    <article class="project-card">
-      <span class="category">{{ project.category | default: "Project" }}</span>
-      <h2><a href="{{ project.url | relative_url }}">{{ project.title }}</a></h2>
-      <p>{{ project.description | default: project.excerpt | strip_html | truncate: 110 }}</p>
-      
-      {% if project.tags %}
-        <div class="tags">
-          {% for tag in project.tags %}
-            <span>{{ tag }}</span>
-          {% endfor %}
-        </div>
-      {% endif %}
-
-      <div class="project-links">
-        <a href="{{ project.url | relative_url }}">View Details &rarr;</a>
-      </div>
-    </article>
-  {% endfor %}
-</section>
+  <div class="markdown-body" style="margin-top: 1.5rem;">
+    {{ content }}
+  </div>
+</article>
