@@ -1,45 +1,27 @@
-title: M. S. B
+title: "msaeedbabaee | Geotechnical Engineering & AI"
 
-description: >
-  Geotechnical Engineering Design,
-  Numerical Modeling,
-  Software, Data Science and AI Projects
-
+description: "Geotechnical engineering design, numerical modeling, software, data science and AI projects"
 
 url: "https://msaeedbabaee.github.io"
-
+baseurl: ""
 
 markdown: kramdown
-
+highlighter: rouge
 
 collections:
-
   projects:
     output: true
-    permalink: /projects/:name/
-
+    permalink: /projects/:path/
 
   services:
     output: true
-    permalink: /services/:name/
-
+    permalink: /services/:path/
 
 plugins:
-  - jekyll-feed
+  - jekyll-seo-tag
+  - jekyll-sitemap
 
-
-
-defaults:
-
-  - scope:
-      path: ""
-      type: projects
-    values:
-      layout: project
-
-
-  - scope:
-      path: ""
-      type: services
-    values:
-      layout: service
+exclude:
+  - README.md
+  - Gemfile
+  - Gemfile.lock
