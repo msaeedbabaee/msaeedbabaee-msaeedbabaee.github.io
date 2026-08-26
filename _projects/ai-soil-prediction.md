@@ -1,29 +1,41 @@
 ---
-title: AI Soil Property Prediction
+title: AI-Based Soil Parameter Prediction
 
-image: /assets/images/projects/soil-ai.png
+category: Software & AI
 
-tags:
+image: /assets/images/projects/soil-ai.jpg
+
+description: >
+Machine learning framework for prediction
+of geotechnical soil parameters.
+
+technologies:
 - Python
+- Scikit-Learn
 - Machine Learning
-- Geotechnical
+- Geotechnical Data
 
 github: https://github.com/msaeedbabaee
 
-demo:
+demo: 
+
+year: 2026
+
 ---
 
-## Overview
+## Project Overview
 
-Machine learning approach for predicting
-geotechnical parameters.
+Development of a data-driven model for
+prediction of soil properties.
 
-## Methods
+## Methodology
 
 - Data preprocessing
 - Feature engineering
-- Regression models
+- Machine learning models
+- Model evaluation
 
-## Tools
+## Engineering Application
 
-Python, Scikit-Learn, Pandas
+The model can support geotechnical
+design workflows and numerical analysis.
