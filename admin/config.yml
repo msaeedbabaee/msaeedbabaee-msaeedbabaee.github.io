@@ -1,61 +1,42 @@
 backend:
   name: github
   repo: msaeedbabaee/msaeedbabaee.github.io
-  branch: main # اگر برنچ اصلی شما master است، این را به master تغییر دهید
-  # base_url بعد از راه‌اندازی OAuth اضافه می‌شود
+  branch: main
+  base_url: https://decap-cms-oauth-theta.vercel.app
+  auth_endpoint: auth
 
-media_folder: "assets/images/uploads"
-public_folder: "/assets/images/uploads"
+# Media store location in your repository
+media_folder: "assets/images"
 
+# Public URL path for uploaded media files
+public_folder: "/assets/images"
+
+# Content Collections Configuration
 collections:
-  # --------------------------------------------------
-  # ۱. بخش پروژه‌ها (Projects)
-  # --------------------------------------------------
-  - name: "projects"
-    label: "Projects"
-    folder: "_projects"
-    create: true
-    slug: "{{slug}}"
-    fields:
-      - {label: "Layout", name: "layout", widget: "hidden", default: "project"}
-      - {label: "Title", name: "title", widget: "string"}
-      - {label: "Category", name: "category", widget: "select", options: ["Machine Learning & AI", "Geotechnical Design", "Numerical Modeling", "Software & Tools"]}
-      - {label: "Project Date", name: "date", widget: "datetime", format: "YYYY-MM-DD"}
-      - {label: "Cover Image", name: "image", widget: "image", required: false}
-      - {label: "Technologies", name: "tech_stack", widget: "list", default: ["Python"]}
-      - {label: "GitHub Link", name: "github", widget: "string", required: false}
-      - {label: "Live Demo Link", name: "demo", widget: "string", required: false}
-      - {label: "Short Description", name: "description", widget: "text"}
-      - {label: "Full Content", name: "body", widget: "markdown"}
-
-  # --------------------------------------------------
-  # ۲. بخش خدمات تخصصی (Services)
-  # --------------------------------------------------
-  - name: "services"
-    label: "Services"
-    folder: "_services"
-    create: true
-    slug: "{{slug}}"
-    fields:
-      - {label: "Layout", name: "layout", widget: "hidden", default: "services"}
-      - {label: "Title", name: "title", widget: "string"}
-      - {label: "Short Description", name: "description", widget: "text"}
-      - {label: "Icon Class", name: "icon", widget: "string", default: "fa-solid fa-gears"}
-      - {label: "Full Service Details", name: "body", widget: "markdown"}
-
-  # --------------------------------------------------
-  # ۳. بخش مقالات مهندسی (Engineering Articles / Blog)
-  # --------------------------------------------------
+  # Blog Posts Collection
   - name: "posts"
-    label: "Engineering Articles"
+    label: "Posts"
     folder: "_posts"
     create: true
     slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
     fields:
-      - {label: "Layout", name: "layout", widget: "hidden", default: "post"}
-      - {label: "Title", name: "title", widget: "string"}
-      - {label: "Publish Date", name: "date", widget: "datetime"}
-      - {label: "Categories", name: "categories", widget: "list", default: ["Geotechnics"]}
-      - {label: "Cover Image", name: "image", widget: "image", required: false}
-      - {label: "Summary", name: "description", widget: "text"}
-      - {label: "Article Body", name: "body", widget: "markdown"}
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Publish Date", name: "date", widget: "datetime" }
+      - { label: "Layout", name: "layout", widget: "hidden", default: "post" }
+      - { label: "Excerpt", name: "description", widget: "text", required: false }
+      - { label: "Featured Image", name: "image", widget: "image", required: false }
+      - { label: "Categories", name: "categories", widget: "list", required: false }
+      - { label: "Tags", name: "tags", widget: "list", required: false }
+      - { label: "Body", name: "body", widget: "markdown" }
+
+  # Static Pages Collection
+  - name: "pages"
+    label: "Pages"
+    files:
+      - label: "About Me"
+        name: "about"
+        file: "about.md"
+        fields:
+          - { label: "Title", name: "title", widget: "string" }
+          - { label: "Layout", name: "layout", widget: "hidden", default: "page" }
+          - { label: "Body", name: "body", widget: "markdown" }
