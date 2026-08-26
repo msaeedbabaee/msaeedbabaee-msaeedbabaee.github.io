@@ -1,27 +1,6 @@
 title: "msaeedbabaee | Geotechnical Engineering & AI"
-
-description: "Geotechnical engineering design, numerical modeling, software, data science and AI projects"
-
+description: "Geotechnical Engineering, Numerical Modeling, Data Science & AI"
 url: "https://msaeedbabaee.github.io"
 baseurl: ""
 
 markdown: kramdown
-highlighter: rouge
-
-collections:
-  projects:
-    output: true
-    permalink: /projects/:path/
-
-  services:
-    output: true
-    permalink: /services/:path/
-
-plugins:
-  - jekyll-seo-tag
-  - jekyll-sitemap
-
-exclude:
-  - README.md
-  - Gemfile
-  - Gemfile.lock
