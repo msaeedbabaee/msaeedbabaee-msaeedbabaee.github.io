@@ -1,1 +1,101 @@
 
+---
+layout: default
+title: Software Data AI Projects
+---
+
+
+<section class="page-header">
+
+
+<h1>
+Software, Data & AI Projects
+</h1>
+
+
+<p>
+Engineering software,
+machine learning,
+data analysis and computational tools.
+</p>
+
+
+</section>
+
+
+
+<section class="grid">
+
+
+{% for project in site.projects %}
+
+
+<div class="project-card">
+
+
+{% if project.image %}
+
+<img src="{{project.image}}">
+
+{% endif %}
+
+
+
+<div class="card-content">
+
+
+<h2>
+
+<a href="{{project.url}}">
+
+{{project.title}}
+
+</a>
+
+</h2>
+
+
+
+<p>
+
+{{project.excerpt}}
+
+</p>
+
+
+
+<div class="tags">
+
+
+{% for tag in project.tags %}
+
+<span>
+{{tag}}
+</span>
+
+
+{% endfor %}
+
+
+</div>
+
+
+
+<a href="{{project.url}}">
+View Project →
+</a>
+
+
+
+</div>
+
+
+</div>
+
+
+
+{% endfor %}
+
+
+
+</section>
