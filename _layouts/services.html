@@ -1,1 +1,93 @@
 
+---
+layout: default
+title: Geotechnical Design
+---
+
+
+<section class="page-header">
+
+
+<h1>
+Geotechnical Design & Engineering Analysis
+</h1>
+
+
+<p>
+Engineering design,
+numerical modeling and simulation.
+</p>
+
+
+</section>
+
+
+
+
+<section class="grid">
+
+
+{% for service in site.services %}
+
+
+
+<div class="project-card">
+
+
+{% if service.image %}
+
+<img src="{{service.image}}">
+
+{% endif %}
+
+
+
+<h2>
+
+<a href="{{service.url}}">
+
+{{service.title}}
+
+</a>
+
+
+</h2>
+
+
+
+<p>
+
+{{service.excerpt}}
+
+</p>
+
+
+
+
+<div class="tags">
+
+{% for tag in service.tags %}
+
+<span>
+{{tag}}
+</span>
+
+{% endfor %}
+
+</div>
+
+
+
+<a href="{{service.url}}">
+View Details →
+</a>
+
+
+</div>
+
+
+
+{% endfor %}
+
+
+</section>
