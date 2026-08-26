@@ -2,7 +2,7 @@ backend:
 
   name: github
 
-  repo: msaeedbabaee/USERNAME.github.io
+  repo: repo: msaeedbabaee/msaeedbabaee.github.io
 
   branch: main
 
