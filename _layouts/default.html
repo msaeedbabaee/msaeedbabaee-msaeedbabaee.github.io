@@ -1,97 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>
-{{ page.title }} | {{ site.title }}
-</title>
-
-<link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}?v=2.0">
-  
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{ page.title }} | Saeed Babaee</title>
+  <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
 </head>
-
-
 <body>
+  <header>
+    <nav>
+      <div class="logo">
+        <a href="{{ '/' | relative_url }}">Saeed Babaee</a>
+      </div>
+      <div class="menu">
+        <a href="{{ '/services.html' | relative_url }}">Services</a>
+        <a href="{{ '/projects.html' | relative_url }}">Projects</a>
+        <a href="{{ '/blog.html' | relative_url }}">Blog</a>
+        <a href="{{ '/about.html' | relative_url }}">About</a>
+        <a href="{{ '/contact.html' | relative_url }}">Contact</a>
+        <button id="themeBtn" onclick="toggleTheme()">🌙</button>
+      </div>
+    </nav>
+  </header>
 
+  <main>
+    {{ content }}
+  </main>
 
-<header>
+  <footer>
+    <p>&copy; {{ 'now' | date: "%Y" }} Saeed Babaee. All rights reserved.</p>
+  </footer>
 
-<nav>
-
-<div class="logo">
-
-<a href="/">
-{{site.title}}
-</a>
-
-</div>
-
-
-
-<div class="menu">
-
-<a href="/">Home</a>
-
-<a href="/services.html">
-Geotechnical Design
-</a>
-
-<a href="/projects.html">
-Software, Data & AI
-</a>
-
-<a href="/blog.html">
-Engineering Blog
-</a>
-
-<a href="/about.html">
-About
-</a>
-
-<a href="/contact.html">
-Contact
-</a>
-
-
-<button id="themeBtn">
-☾
-</button>
-
-
-</div>
-
-
-</nav>
-
-</header>
-
-
-
-<main>
-
-{{content}}
-
-</main>
-
-
-
-<footer>
-
-<p>
-© {{site.time | date:"%Y"}} {{site.title}}
-</p>
-
-</footer>
-
-
-
-<script src="/assets/js/script.js"></script>
-
-
+  <script src="{{ '/assets/js/script.js' | relative_url }}"></script>
 </body>
-
 </html>
