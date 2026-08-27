@@ -32,5 +32,34 @@
   </footer>
 
   <script src="{{ '/assets/js/script.js' | relative_url }}"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const filterBtns = document.querySelectorAll('.filter-btn');
+      const cards = document.querySelectorAll('.project-card, .card, .service-card');
+
+      if (!filterBtns.length || !cards.length) return;
+
+      filterBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+          filterBtns.forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+
+          const selectedFilter = btn.getAttribute('data-filter');
+
+          cards.forEach(card => {
+            const cardTags = card.getAttribute('data-tags')
+              ? card.getAttribute('data-tags').trim().split(/\s+/)
+              : [];
+
+            if (selectedFilter === 'all' || cardTags.includes(selectedFilter)) {
+              card.classList.remove('is-hidden');
+            } else {
+              card.classList.add('is-hidden');
+            }
+          });
+        });
+      });
+    });
+  </script>
 </body>
 </html>
