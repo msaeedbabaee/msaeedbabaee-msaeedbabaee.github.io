@@ -1,44 +1,50 @@
 ---
 layout: default
-title: Projects & Software
+title: Engineering Blog
 ---
 
 <section class="page-header">
-  <span class="badge-tag">Portfolio</span>
-  <h1>Software, Data & AI Projects</h1>
-  <p>Numerical modeling tools, AI algorithms, and geotechnical applications.</p>
+  <h1>Engineering Blog</h1>
+  <p>Technical notes about geotechnical engineering, programming and artificial intelligence.</p>
 </section>
 
-<!-- Dynamic Tag Filter Bar -->
-{% assign all_project_tags = site.projects | map: "technologies" | default: site.projects | map: "tags" | flatten | uniq %}
-{% if all_project_tags.size > 0 %}
+{% assign raw_post_tags = "" | split: "" %}
+{% for post in site.posts %}
+  {% if post.tags %}
+    {% assign raw_post_tags = raw_post_tags | concat: post.tags %}
+  {% endif %}
+{% endfor %}
+{% assign all_post_tags = raw_post_tags | uniq %}
+
+{% if all_post_tags.size > 0 %}
 <div class="filter-container">
-  <button class="filter-btn active" data-filter="all">All Projects</button>
-  {% for tag in all_project_tags %}
-    <button class="filter-btn" data-filter="{{ tag | slugify }}">{{ tag }}</button>
+  <button class="filter-btn active" data-filter="all">All Posts</button>
+  {% for tag in all_post_tags %}
+    {% assign tag_clean = tag | strip %}
+    {% if tag_clean != "" %}
+      <button class="filter-btn" data-filter="{{ tag_clean | slugify }}">{{ tag_clean }}</button>
+    {% endif %}
   {% endfor %}
 </div>
 {% endif %}
 
 <section class="grid">
-  {% for project in site.projects %}
-    {% assign tech_list = project.technologies | default: project.tags %}
-    <article class="project-card" data-tags="{% for tag in tech_list %}{{ tag | slugify }} {% endfor %}">
-      <span class="category">{{ project.category | default: "Project" }}</span>
-      <h2><a href="{{ project.url | relative_url }}">{{ project.title }}</a></h2>
-      <p>{{ project.description | default: project.excerpt | strip_html | truncate: 110 }}</p>
-      
-      {% if tech_list %}
+  {% for post in site.posts %}
+    <div class="project-card" data-tags="{% for tag in post.tags %}{{ tag | slugify }} {% endfor %}">
+      <h2><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h2>
+      <p>{{ post.excerpt | strip_html | truncate: 120 }}</p>
+
+      {% if post.tags %}
         <div class="tags">
-          {% for item in tech_list %}
-            <span>{{ item }}</span>
+          {% for tag in post.tags %}
+            <span>{{ tag }}</span>
           {% endfor %}
         </div>
       {% endif %}
 
       <div class="project-links">
-        <a href="{{ project.url | relative_url }}">View Details &rarr;</a>
+        <a href="{{ post.url | relative_url }}">Read More &rarr;</a>
       </div>
-    </article>
+    </div>
   {% endfor %}
 </section>
