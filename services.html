@@ -9,13 +9,22 @@ title: Services
   <p>Specialized technical consulting, numerical analysis, and site characterization.</p>
 </section>
 
-<!-- Dynamic Tag Filter Bar -->
-{% assign all_service_tags = site.services | map: "tags" | flatten | uniq %}
+{% assign raw_service_tags = "" | split: "" %}
+{% for service in site.services %}
+  {% if service.tags %}
+    {% assign raw_service_tags = raw_service_tags | concat: service.tags %}
+  {% endif %}
+{% endfor %}
+{% assign all_service_tags = raw_service_tags | uniq %}
+
 {% if all_service_tags.size > 0 %}
 <div class="filter-container">
   <button class="filter-btn active" data-filter="all">All Services</button>
   {% for tag in all_service_tags %}
-    <button class="filter-btn" data-filter="{{ tag | slugify }}">{{ tag }}</button>
+    {% assign tag_clean = tag | strip %}
+    {% if tag_clean != "" %}
+      <button class="filter-btn" data-filter="{{ tag_clean | slugify }}">{{ tag_clean }}</button>
+    {% endif %}
   {% endfor %}
 </div>
 {% endif %}
