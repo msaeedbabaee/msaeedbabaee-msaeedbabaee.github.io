@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "_services/Slope Stability.md",
+                "file": "_projects/ai slope.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Slope Stability"
+              "title": "ai slope"
             }
           }
         ]
@@ -190,14 +190,14 @@
   },
   "active": "bac8ab8f788b639e",
   "lastOpenFiles": [
-    "README.md",
     "_services/Slope Stability.md",
+    "_projects/ai slope.md",
+    "README.md",
     "_templates/post-template.md.md",
     "_services/slope-analysis.md",
     "_services/sample-service.md",
     "_services/foundation-design.md",
     "_posts/2026-08-26-ai-geotech.md",
-    "_projects/Untitled.md",
     "_projects/ai-soil-prediction.md",
     "_projects/soil-ml.md",
     "_projects/example-project.md",
