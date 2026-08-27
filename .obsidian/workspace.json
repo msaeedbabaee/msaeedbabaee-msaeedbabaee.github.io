@@ -79,8 +79,7 @@
               "title": "Bookmarks"
             }
           }
-        ],
-        "currentTab": 1
+        ]
       }
     ],
     "direction": "horizontal",
@@ -191,15 +190,19 @@
   },
   "active": "bac8ab8f788b639e",
   "lastOpenFiles": [
+    "_services/slope-analysis.md",
+    "_templates/post-template.md.md",
+    "_services/sample-service.md",
+    "_services/foundation-design.md",
+    "_posts/2026-08-26-ai-geotech.md",
+    "_projects/Untitled.md",
+    "_projects/ai-soil-prediction.md",
+    "_projects/soil-ml.md",
+    "_projects/example-project.md",
+    "_projects/ai slope stability.md",
     "_templates/service-template.md.md",
     "_templates/project-template.md.md",
-    "_templates/post-template.md.md",
-    "_projects/Untitled.md",
     "Untitled.md",
-    "_templates",
-    "_projects/ai-soil-prediction.md",
-    "_projects/example-project.md",
-    "_projects/soil-ml.md",
-    "_projects/ai slope stability.md"
+    "_templates"
   ]
 }
