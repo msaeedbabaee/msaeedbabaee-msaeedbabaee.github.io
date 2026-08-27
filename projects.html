@@ -16,10 +16,11 @@ title: Projects & Software
       <h2><a href="{{ project.url | relative_url }}">{{ project.title }}</a></h2>
       <p>{{ project.description | default: project.excerpt | strip_html | truncate: 110 }}</p>
       
-      {% if project.tags %}
+      {% assign tech_list = project.technologies | default: project.tags %}
+      {% if tech_list %}
         <div class="tags">
-          {% for tag in project.tags %}
-            <span>{{ tag }}</span>
+          {% for item in tech_list %}
+            <span>{{ item }}</span>
           {% endfor %}
         </div>
       {% endif %}
