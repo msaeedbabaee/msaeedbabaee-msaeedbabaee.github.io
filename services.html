@@ -9,12 +9,41 @@ title: Services
   <p>Specialized technical consulting, numerical analysis, and site characterization.</p>
 </section>
 
+{% assign raw_service_tags = "" | split: "" %}
+{% for service in site.services %}
+  {% if service.tags %}
+    {% assign raw_service_tags = raw_service_tags | concat: service.tags %}
+  {% endif %}
+{% endfor %}
+{% assign all_service_tags = raw_service_tags | uniq %}
+
+{% if all_service_tags.size > 0 %}
+<div class="filter-container">
+  <button class="filter-btn active" data-filter="all">All Services</button>
+  {% for tag in all_service_tags %}
+    {% assign tag_clean = tag | strip %}
+    {% if tag_clean != "" %}
+      <button class="filter-btn" data-filter="{{ tag_clean | slugify }}">{{ tag_clean }}</button>
+    {% endif %}
+  {% endfor %}
+</div>
+{% endif %}
+
 <section class="grid">
   {% for service in site.services %}
-    <article class="project-card">
+    <article class="project-card" data-tags="{% for tag in service.tags %}{{ tag | slugify }} {% endfor %}">
       <span class="category">Engineering Service</span>
       <h2><a href="{{ service.url | relative_url }}">{{ service.title }}</a></h2>
       <p>{{ service.description | default: service.excerpt | strip_html | truncate: 120 }}</p>
+      
+      {% if service.tags %}
+        <div class="tags">
+          {% for tag in service.tags %}
+            <span>{{ tag }}</span>
+          {% endfor %}
+        </div>
+      {% endif %}
+
       <div class="project-links">
         <a href="{{ service.url | relative_url }}">Read Details &rarr;</a>
       </div>

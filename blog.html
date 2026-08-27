@@ -3,62 +3,48 @@ layout: default
 title: Engineering Blog
 ---
 
-
 <section class="page-header">
-
-
-<h1>
-Engineering Blog
-</h1>
-
-
-<p>
-Technical notes about geotechnical engineering,
-programming and artificial intelligence.
-</p>
-
-
+  <h1>Engineering Blog</h1>
+  <p>Technical notes about geotechnical engineering, programming and artificial intelligence.</p>
 </section>
 
+{% assign raw_post_tags = "" | split: "" %}
+{% for post in site.posts %}
+  {% if post.tags %}
+    {% assign raw_post_tags = raw_post_tags | concat: post.tags %}
+  {% endif %}
+{% endfor %}
+{% assign all_post_tags = raw_post_tags | uniq %}
 
-
+{% if all_post_tags.size > 0 %}
+<div class="filter-container">
+  <button class="filter-btn active" data-filter="all">All Posts</button>
+  {% for tag in all_post_tags %}
+    {% assign tag_clean = tag | strip %}
+    {% if tag_clean != "" %}
+      <button class="filter-btn" data-filter="{{ tag_clean | slugify }}">{{ tag_clean }}</button>
+    {% endif %}
+  {% endfor %}
+</div>
+{% endif %}
 
 <section class="grid">
+  {% for post in site.posts %}
+    <div class="project-card" data-tags="{% for tag in post.tags %}{{ tag | slugify }} {% endfor %}">
+      <h2><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h2>
+      <p>{{ post.excerpt | strip_html | truncate: 120 }}</p>
 
+      {% if post.tags %}
+        <div class="tags">
+          {% for tag in post.tags %}
+            <span>{{ tag }}</span>
+          {% endfor %}
+        </div>
+      {% endif %}
 
-{% for post in site.posts %}
-
-
-<div class="project-card">
-
-
-<h2>
-
-<a href="{{post.url}}">
-{{post.title}}
-</a>
-
-</h2>
-
-
-
-<p>
-
-{{post.excerpt}}
-
-</p>
-
-
-
-<a href="{{post.url}}">
-Read More →
-</a>
-
-
-</div>
-
-
-{% endfor %}
-
-
+      <div class="project-links">
+        <a href="{{ post.url | relative_url }}">Read More &rarr;</a>
+      </div>
+    </div>
+  {% endfor %}
 </section>
