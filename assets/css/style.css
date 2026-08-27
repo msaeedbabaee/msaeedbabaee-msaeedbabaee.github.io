@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
 
 /* Dynamic Theme Variables - Dark Mode (Default) */
 :root {
@@ -138,7 +138,7 @@ header nav {
 
 .hero h1 {
   font-size: 2.5rem;
-  font-weight: 700;
+  font-weight: 800;
   line-height: 1.2;
   letter-spacing: -0.03em;
   margin-bottom: 1.25rem;
@@ -204,26 +204,36 @@ header nav {
   font-size: 0.95rem;
 }
 
-/* Grid & Cards */
-.grid {
+/* Grid & Layouts */
+.grid,
+.projects-grid,
+.services-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  gap: 1.25rem;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 1.5rem;
+  margin-top: 2rem;
 }
 
-.project-card {
+/* Universal Modern Card Styles */
+.card,
+.project-card,
+.service-card {
   background: var(--card);
   border: 1px solid var(--border);
-  border-radius: 8px;
+  border-radius: 10px;
   padding: 1.5rem;
   display: flex;
   flex-direction: column;
-  transition: border-color 0.2s, background-color 0.2s;
+  transition: all 0.25s ease;
 }
 
-.project-card:hover {
+.card:hover,
+.project-card:hover,
+.service-card:hover {
   border-color: var(--border-hover);
   background: var(--card-hover);
+  transform: translateY(-3px);
+  box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.3);
 }
 
 .category {
@@ -235,26 +245,29 @@ header nav {
   margin-bottom: 0.5rem;
 }
 
-.project-card h2 {
+.project-card h2,
+.card h2 {
   font-size: 1.1rem;
   font-weight: 600;
   margin-bottom: 0.5rem;
   letter-spacing: -0.01em;
 }
 
-.project-card h2 a {
+.project-card h2 a,
+.card h2 a {
   color: var(--text);
   text-decoration: none;
 }
 
-.project-card p {
+.project-card p,
+.card p {
   color: var(--muted);
   font-size: 0.875rem;
   margin-bottom: 1.25rem;
   flex-grow: 1;
 }
 
-/* Updated Tags Layout */
+/* Tags Layout */
 .tags {
   display: flex;
   flex-wrap: wrap;
