@@ -1,6 +1,6 @@
 ---
-import Layout from '../../layouts/Layout.astro';
 import { getCollection, render } from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
 
 export async function getStaticPaths() {
   const projects = await getCollection('projects');
@@ -14,18 +14,30 @@ const { project } = Astro.props;
 const { Content } = await render(project);
 ---
 
-<Layout title={`${project.data.title} | Saeed Babaee`}>
-  <article class="space-y-6 max-w-3xl mx-auto">
-    <div class="border-b border-border pb-6 space-y-2">
-      <div class="flex items-center gap-3 text-xs font-mono text-muted-foreground">
-        <span class="uppercase">{project.data.category || 'Project'}</span>
-        {project.data.date && <span>• {project.data.date}</span>}
-      </div>
-      <h1 class="text-3xl font-extrabold text-foreground">{project.data.title}</h1>
-      <p class="text-base text-muted-foreground">{project.data.description}</p>
+<Layout title={`${project.data.title} | پروژه‌ها`} description={project.data.description}>
+  <article class="container mx-auto max-w-3xl px-4 py-10 md:py-16 space-y-8">
+    <!-- Back Button -->
+    <div>
+      <a href="/projects" class="inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground h-9 px-3 text-muted-foreground hover:text-foreground">
+        ← بازگشت به پروژه‌ها
+      </a>
     </div>
 
-    <div class="prose dark:prose-invert max-w-none text-foreground leading-relaxed">
+    <!-- Title & Description Header -->
+    <div class="space-y-4 border-b border-border/40 pb-8">
+      <div class="flex flex-wrap gap-2">
+        {project.data.tags?.map((tag: string) => (
+          <span class="inline-flex items-center rounded-md bg-muted px-2.5 py-0.5 text-xs font-medium text-muted-foreground">
+            {tag}
+          </span>
+        ))}
+      </div>
+      <h1 class="text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl">{project.data.title}</h1>
+      <p class="text-lg text-muted-foreground leading-relaxed">{project.data.description}</p>
+    </div>
+
+    <!-- MDX Content Rendering -->
+    <div class="prose prose-neutral dark:prose-invert max-w-none prose-headings:font-semibold prose-headings:tracking-tight prose-a:text-primary prose-a:underline-offset-4 hover:prose-a:underline">
       <Content />
     </div>
   </article>

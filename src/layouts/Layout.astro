@@ -1,143 +1,58 @@
 ---
 import '../styles/global.css';
 
-const { title = "Saeed Babaee | Computational Engineer", description = "Personal Website & Portfolio of Saeed Babaee" } = Astro.props;
-const pathname = new URL(Astro.request.url).pathname;
+interface Props {
+  title?: string;
+  description?: string;
+}
 
-const navItems = [
-  { name: 'Home', href: '/' },
-  { name: 'About', href: '/about' },
-  { name: 'Projects', href: '/projects' },
-  { name: 'Research', href: '/research' },
-  { name: 'Services', href: '/services' },
-  { name: 'Contact', href: '/contact' },
-];
+const { 
+  title = "پرتفولیو شخصی", 
+  description = "پرتفولیو و رزومه شخصی" 
+} = Astro.props;
 ---
 
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<html lang="fa" dir="rtl">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>{title}</title>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
     <meta name="description" content={description} />
-    <script is:inline>
-      const theme = (() => {
-        if (typeof localStorage !== 'undefined' && localStorage.getItem('theme')) {
-          return localStorage.getItem('theme');
-        }
-        return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-      })();
-      if (theme === 'dark') {
-        document.documentElement.classList.add('dark');
-      } else {
-        document.documentElement.classList.remove('dark');
-      }
-    </script>
+    <title>{title}</title>
+
+    <!-- Inter Font -->
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Vazirmatn:wght@400;500;600;700&display=swap" rel="stylesheet" />
   </head>
-  <body class="bg-background text-foreground min-h-screen flex flex-col font-sans antialiased selection:bg-primary selection:text-primary-foreground">
-    <header class="sticky top-0 z-50 w-full border-b border-border/60 bg-background/80 backdrop-blur-md">
-      <div class="max-w-5xl mx-auto flex h-16 items-center justify-between px-4 sm:px-6">
-        <a href="/" class="text-lg font-bold tracking-tight hover:opacity-80 transition-opacity">
-          Saeed<span class="text-primary">.</span>
+  <body class="min-h-screen bg-background text-foreground antialiased selection:bg-primary selection:text-primary-foreground">
+    <header class="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+      <div class="container mx-auto flex h-14 max-w-screen-2xl items-center justify-between px-4">
+        <a href="/" class="flex items-center space-x-2 font-bold tracking-tight">
+          <span>لوگو / نام</span>
         </a>
-
-        <!-- Desktop Nav -->
-        <nav class="hidden md:flex items-center gap-6 text-sm font-medium">
-          {navItems.map((item) => {
-            const isActive = pathname === item.href || (item.href !== '/' && pathname.startsWith(item.href));
-            return (
-              <a
-                href={item.href}
-                class={`transition-colors relative py-1 hover:text-foreground ${
-                  isActive 
-                    ? 'text-foreground font-semibold border-b-2 border-primary' 
-                    : 'text-muted-foreground'
-                }`}
-              >
-                {item.name}
-              </a>
-            );
-          })}
+        <nav class="flex items-center gap-6 text-sm font-medium">
+          <a href="/projects" class="transition-colors hover:text-foreground/80 text-foreground/60">پروژه‌ها</a>
+          <a href="/research" class="transition-colors hover:text-foreground/80 text-foreground/60">تحقیقات</a>
+          <a href="/about" class="transition-colors hover:text-foreground/80 text-foreground/60">درباره من</a>
+          <a href="/contact" class="inline-flex h-9 items-center justify-center rounded-md bg-primary px-4 text-xs font-medium text-primary-foreground shadow transition-colors hover:bg-primary/90">ارتباط</a>
         </nav>
-
-        <div class="flex items-center gap-3">
-          <button
-            id="theme-toggle"
-            type="button"
-            class="rounded-lg p-2 text-muted-foreground hover:bg-accent hover:text-foreground transition-colors border border-border/40"
-            aria-label="Toggle theme"
-          >
-            <span id="theme-icon" class="text-sm">🌙</span>
-          </button>
-
-          <button
-            id="mobile-menu-btn"
-            type="button"
-            class="md:hidden rounded-lg p-2 text-muted-foreground hover:bg-accent border border-border/40"
-            aria-label="Toggle Menu"
-          >
-            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
-            </svg>
-          </button>
-        </div>
-      </div>
-
-      <!-- Mobile Dropdown -->
-      <div id="mobile-menu" class="hidden md:hidden border-b border-border bg-background px-4 py-3 space-y-2">
-        {navItems.map((item) => (
-          <a
-            href={item.href}
-            class="block py-2 text-sm font-medium text-muted-foreground hover:text-primary"
-          >
-            {item.name}
-          </a>
-        ))}
       </div>
     </header>
 
-    <main class="flex-1 max-w-5xl w-full mx-auto px-4 sm:px-6 py-8 sm:py-12">
+    <main class="flex-1">
       <slot />
     </main>
 
-    <footer class="border-t border-border/60 py-6">
-      <div class="max-w-5xl mx-auto flex flex-col md:h-12 items-center justify-between gap-4 px-4 sm:px-6 md:flex-row text-xs text-muted-foreground">
-        <p>© {new Date().getFullYear()} Saeed Babaee. All rights reserved.</p>
-        <div class="flex gap-4">
-          <a href="https://github.com/msaeedbabaee" target="_blank" class="hover:text-foreground transition-colors">GitHub</a>
-          <a href="https://linkedin.com/in/msaeedbabaee" target="_blank" class="hover:text-foreground transition-colors">LinkedIn</a>
-        </div>
+    <footer class="border-t border-border/40 py-6 md:px-8 md:py-0">
+      <div class="container mx-auto flex flex-col items-center justify-between gap-4 md:h-24 md:flex-row px-4">
+        <p class="text-balance text-center text-sm leading-loose text-muted-foreground md:text-left">
+          تمامی حقوق محفوظ است.
+        </p>
       </div>
     </footer>
-
-    <script>
-      const btn = document.getElementById('theme-toggle');
-      const icon = document.getElementById('theme-icon');
-
-      function updateIcon() {
-        const isDark = document.documentElement.classList.contains('dark');
-        if (icon) icon.textContent = isDark ? '☀️' : '🌙';
-      }
-      updateIcon();
-
-      btn?.addEventListener('click', () => {
-        const isDark = document.documentElement.classList.contains('dark');
-        if (isDark) {
-          document.documentElement.classList.remove('dark');
-          localStorage.setItem('theme', 'light');
-        } else {
-          document.documentElement.classList.add('dark');
-          localStorage.setItem('theme', 'dark');
-        }
-        updateIcon();
-      });
-
-      const mobileBtn = document.getElementById('mobile-menu-btn');
-      const mobileMenu = document.getElementById('mobile-menu');
-      mobileBtn?.addEventListener('click', () => {
-        mobileMenu?.classList.toggle('hidden');
-      });
-    </script>
   </body>
 </html>

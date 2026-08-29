@@ -2,35 +2,76 @@
 import Layout from '../layouts/Layout.astro';
 ---
 
-<Layout title="Contact | Saeed Babaee">
-  <div class="max-w-2xl mx-auto space-y-8">
-    <div>
-      <h1 class="text-3xl font-extrabold tracking-tight text-foreground">Get in Touch</h1>
-      <p class="text-muted-foreground mt-2">Have a question or want to collaborate on research? Drop a message below.</p>
+<Layout title="ارتباط با من | پرتفولیو" description="فرم تماس و راه‌های ارتباطی">
+  <div class="container mx-auto max-w-screen-md px-4 py-10 md:py-16 space-y-8">
+    <!-- Header -->
+    <div class="flex flex-col items-center text-center space-y-2 border-b border-border/40 pb-8">
+      <h1 class="text-3xl font-bold tracking-tight sm:text-4xl">ارتباط با من</h1>
+      <p class="text-muted-foreground text-base max-w-[30rem]">
+        جهت همکاری در پروژه‌ها، مشاوره یا مطرح کردن پیشنهادات می‌توانید پیام بفرستید.
+      </p>
     </div>
 
-    <form class="space-y-4 rounded-xl border border-border p-6 bg-card">
-      <div class="space-y-2">
-        <label class="text-sm font-medium text-foreground">Name</label>
-        <input type="text" class="w-full rounded-lg border border-input bg-background px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary" placeholder="Your name" />
-      </div>
+    <!-- Form Section (shadcn/ui style inputs) -->
+    <div class="rounded-lg border bg-card text-card-foreground shadow-sm p-6 sm:p-8">
+      <form class="space-y-6">
+        <div class="grid gap-4 sm:grid-cols-2">
+          <div class="space-y-2">
+            <label class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70" for="name">
+              نام و نام خانوادگی
+            </label>
+            <input
+              type="text"
+              id="name"
+              placeholder="علی محمدی"
+              class="flex h-9 w-full rounded-md border border-input bg-transparent px-3 py-1 text-sm shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50"
+            />
+          </div>
 
-      <div class="space-y-2">
-        <label class="text-sm font-medium text-foreground">Email</label>
-        <input type="email" class="w-full rounded-lg border border-input bg-background px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary" placeholder="your@email.com" />
-      </div>
+          <div class="space-y-2">
+            <label class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70" for="email">
+              ایمیل
+            </label>
+            <input
+              type="email"
+              id="email"
+              placeholder="example@domain.com"
+              class="flex h-9 w-full rounded-md border border-input bg-transparent px-3 py-1 text-sm shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50"
+            />
+          </div>
+        </div>
 
-      <div class="space-y-2">
-        <label class="text-sm font-medium text-foreground">Message</label>
-        <textarea rows="4" class="w-full rounded-lg border border-input bg-background px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary" placeholder="Your message..."></textarea>
-      </div>
+        <div class="space-y-2">
+          <label class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70" for="subject">
+            موضوع
+          </label>
+          <input
+            type="text"
+            id="subject"
+            placeholder="موضوع پیام..."
+            class="flex h-9 w-full rounded-md border border-input bg-transparent px-3 py-1 text-sm shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50"
+          />
+        </div>
 
-      <button
-        type="submit"
-        class="w-full rounded-xl bg-primary px-4 py-2.5 text-sm font-medium text-primary-foreground hover:bg-primary/90 transition-all shadow-sm"
-      >
-        Send Message
-      </button>
-    </form>
+        <div class="space-y-2">
+          <label class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70" for="message">
+            متن پیام
+          </label>
+          <textarea
+            id="message"
+            rows="5"
+            placeholder="پیام خود را بنویسید..."
+            class="flex min-h-[60px] w-full rounded-md border border-input bg-transparent px-3 py-2 text-sm shadow-sm transition-colors placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50"
+          ></textarea>
+        </div>
+
+        <button
+          type="submit"
+          class="inline-flex h-10 w-full items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground shadow transition-colors hover:bg-primary/90 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring sm:w-auto"
+        >
+          ارسال پیام
+        </button>
+      </form>
+    </div>
   </div>
 </Layout>
