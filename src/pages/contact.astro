@@ -3,54 +3,30 @@ import Layout from '../layouts/Layout.astro';
 ---
 
 <Layout title="Contact | Saeed Babaee">
-  <div class="space-y-8">
-    <div class="space-y-2">
-      <h1 class="text-3xl font-extrabold tracking-tight text-foreground">Contact</h1>
-      <p class="text-sm text-muted-foreground">
-        Get in touch for research collaborations, engineering consulting, or general inquiries.
-      </p>
-    </div>
+  <div class="max-w-xl mx-auto space-y-6">
+    <h1 class="text-3xl font-bold tracking-tight">Get in Touch</h1>
+    <p class="text-sm text-muted-foreground">Feel free to reach out for collaborations or inquiries.</p>
 
-    <div class="h-[1px] w-full bg-border"></div>
-
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-      <!-- Contact Info Card -->
-      <div class="rounded-lg border border-border bg-card p-6 space-y-4 shadow-sm">
-        <h2 class="text-lg font-bold tracking-tight text-card-foreground">Direct Channels</h2>
-        <div class="space-y-4 text-xs text-muted-foreground">
-          <div class="flex flex-col space-y-1">
-            <span class="font-semibold text-foreground">Email</span>
-            <a href="mailto:contact@saeedbabaee.com" class="hover:text-foreground transition-colors">contact@saeedbabaee.com</a>
-          </div>
-          <div class="flex flex-col space-y-1">
-            <span class="font-semibold text-foreground">GitHub</span>
-            <a href="https://github.com/msaeedbabaee" target="_blank" class="hover:text-foreground transition-colors">github.com/msaeedbabaee</a>
-          </div>
-          <div class="flex flex-col space-y-1">
-            <span class="font-semibold text-foreground">LinkedIn</span>
-            <a href="https://linkedin.com/in/msaeedbabaee" target="_blank" class="hover:text-foreground transition-colors">linkedin.com/in/msaeedbabaee</a>
-          </div>
-        </div>
+    <!-- جایگزینی YOUR_FORMSPREE_ID با شناسه واقعی -->
+    <form action="https://formspree.io/f/YOUR_FORMSPREE_ID" method="POST" class="space-y-4">
+      <div>
+        <label class="block text-sm font-medium mb-1" for="name">Name</label>
+        <input type="text" id="name" name="name" required class="w-full px-3 py-2 rounded-md border border-border bg-background text-foreground focus:outline-none focus:ring-2 focus:ring-primary text-sm" />
       </div>
 
-      <!-- Contact Form Card -->
-      <form class="rounded-lg border border-border bg-card p-6 space-y-4 shadow-sm">
-        <div class="space-y-1.5">
-          <label class="text-xs font-medium text-foreground">Name</label>
-          <input type="text" placeholder="Your name" class="w-full h-9 rounded-md border border-input bg-background px-3 text-xs text-foreground focus:outline-none focus:ring-1 focus:ring-ring" />
-        </div>
-        <div class="space-y-1.5">
-          <label class="text-xs font-medium text-foreground">Email</label>
-          <input type="email" placeholder="name@example.com" class="w-full h-9 rounded-md border border-input bg-background px-3 text-xs text-foreground focus:outline-none focus:ring-1 focus:ring-ring" />
-        </div>
-        <div class="space-y-1.5">
-          <label class="text-xs font-medium text-foreground">Message</label>
-          <textarea rows="4" placeholder="Your message..." class="w-full rounded-md border border-input bg-background p-3 text-xs text-foreground focus:outline-none focus:ring-1 focus:ring-ring"></textarea>
-        </div>
-        <button type="submit" class="w-full h-9 rounded-md bg-primary text-xs font-medium text-primary-foreground shadow hover:bg-primary/90 transition-colors">
-          Send Message
-        </button>
-      </form>
-    </div>
+      <div>
+        <label class="block text-sm font-medium mb-1" for="email">Email</label>
+        <input type="email" id="email" name="email" required class="w-full px-3 py-2 rounded-md border border-border bg-background text-foreground focus:outline-none focus:ring-2 focus:ring-primary text-sm" />
+      </div>
+
+      <div>
+        <label class="block text-sm font-medium mb-1" for="message">Message</label>
+        <textarea id="message" name="message" rows="4" required class="w-full px-3 py-2 rounded-md border border-border bg-background text-foreground focus:outline-none focus:ring-2 focus:ring-primary text-sm"></textarea>
+      </div>
+
+      <button type="submit" class="w-full bg-primary text-primary-foreground py-2 px-4 rounded-md text-sm font-medium hover:opacity-90 transition-opacity">
+        Send Message
+      </button>
+    </form>
   </div>
 </Layout>

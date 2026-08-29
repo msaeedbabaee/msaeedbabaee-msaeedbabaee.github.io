@@ -1,46 +1,31 @@
 ---
 import Layout from '../layouts/Layout.astro';
-
-const services = [
-  {
-    title: "AI & Data Solutions",
-    description: "Custom machine learning models and data pipelines for engineering applications."
-  },
-  {
-    title: "Geotechnical Numerical Modeling",
-    description: "Advanced FEA & constitutive modeling for soil-structure interaction, slope stability, and tunnels."
-  },
-  {
-    title: "Software & Web Development",
-    description: "Building modern high-performance web applications and engineering software platforms."
-  }
-];
 ---
 
-<Layout title="Services | SAEED BABAEE">
+<Layout title="Services | Saeed Babaee">
   <div class="space-y-8">
-    <div class="space-y-3">
-      <h1 class="text-4xl sm:text-5xl font-extrabold tracking-tight text-zinc-900 dark:text-white">
-        Services
-      </h1>
-      <p class="text-base font-normal text-zinc-700 dark:text-zinc-300">
-        Professional solutions in AI, Geotechnical Engineering, and Software Development.
-      </p>
+    <div class="space-y-2">
+      <h1 class="text-3xl font-extrabold tracking-tight text-foreground">Services</h1>
+      <p class="text-sm text-muted-foreground">Engineering consulting and computational AI solutions.</p>
     </div>
 
-    <div class="h-[1px] w-full bg-zinc-200 dark:bg-zinc-800/80"></div>
+    <div class="h-[1px] w-full bg-border"></div>
 
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 pt-2">
-      {services.map((service) => (
-        <div class="rounded-xl border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-[#0c0c0e] p-6 space-y-3 shadow-sm">
-          <h2 class="text-xl font-bold tracking-tight text-zinc-900 dark:text-white">
-            {service.title}
-          </h2>
-          <p class="text-sm text-zinc-700 dark:text-zinc-300 leading-relaxed font-normal">
-            {service.description}
-          </p>
-        </div>
-      ))}
+    <div class="grid md:grid-cols-3 gap-6">
+      <div class="rounded-lg border border-border bg-card p-6 space-y-3 shadow-sm hover:border-foreground/20 transition-all">
+        <h2 class="text-lg font-bold text-card-foreground">AI & ML Solutions</h2>
+        <p class="text-sm text-muted-foreground leading-relaxed">Developing physics-informed neural networks and surrogate models for complex physical systems.</p>
+      </div>
+
+      <div class="rounded-lg border border-border bg-card p-6 space-y-3 shadow-sm hover:border-foreground/20 transition-all">
+        <h2 class="text-lg font-bold text-card-foreground">Geotechnical Analysis</h2>
+        <p class="text-sm text-muted-foreground leading-relaxed">Advanced finite element modeling (FEA) and reliability assessment for slope stability.</p>
+      </div>
+
+      <div class="rounded-lg border border-border bg-card p-6 space-y-3 shadow-sm hover:border-foreground/20 transition-all">
+        <h2 class="text-lg font-bold text-card-foreground">Automation Scripts</h2>
+        <p class="text-sm text-muted-foreground leading-relaxed">Custom Python tooling to automate complex engineering simulations and data post-processing.</p>
+      </div>
     </div>
   </div>
 </Layout>
