@@ -1,42 +1,65 @@
 ---
-import Layout from '../../layouts/Layout.astro';
+import Layout from '../layouts/Layout.astro';
 import { getCollection } from 'astro:content';
 
-const projects = await getCollection('projects');
+const allProjects = await getCollection('projects');
+const projects = allProjects ? allProjects.slice(0, 2) : [];
 ---
 
-<Layout title="Projects | Saeed Babaee">
-  <div class="space-y-8">
-    <div class="space-y-2">
-      <h1 class="text-3xl font-extrabold tracking-tight text-foreground">Projects</h1>
-      <p class="text-sm text-muted-foreground">Selected engineering and computational research projects.</p>
-    </div>
+<Layout title="Saeed Babaee | Computational Engineer & AI Researcher">
+  <div class="space-y-16">
+    <!-- Hero Section -->
+    <section class="space-y-6 pt-4">
+      <div class="inline-flex items-center gap-2 rounded-full border border-border bg-secondary/50 px-3 py-1 text-xs font-mono text-secondary-foreground">
+        <span class="h-1.5 w-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+        Available for Research Collaborations
+      </div>
+      
+      <h1 class="text-4xl sm:text-5xl font-extrabold tracking-tight text-foreground leading-tight">
+        Computational Geotechnics & AI Solutions
+      </h1>
+      
+      <p class="text-lg text-muted-foreground max-w-2xl leading-relaxed">
+        I specialize in integrating machine learning frameworks with numerical modeling for geotechnical slope stability, structural analysis, and engineering automation.
+      </p>
 
-    <div class="h-[1px] w-full bg-border"></div>
-
-    <div class="grid gap-4 sm:grid-cols-2">
-      {projects.map((project) => (
-        <a 
-          href={`/projects/${project.id}`} 
-          class="block p-5 rounded-lg border border-border bg-card shadow-sm hover:shadow-md transition-all hover:border-foreground/20 group"
-        >
-          <h2 class="text-lg font-bold text-card-foreground group-hover:text-primary transition-colors mb-2">
-            {project.data.title}
-          </h2>
-          <p class="text-sm text-muted-foreground line-clamp-3 mb-4 leading-relaxed">
-            {project.data.description}
-          </p>
-          {project.data.tags && (
-            <div class="flex flex-wrap gap-1.5">
-              {project.data.tags.map((tag: string) => (
-                <span class="inline-flex items-center rounded-md bg-secondary px-2.5 py-0.5 text-xs font-medium text-secondary-foreground border border-border/50">
-                  {tag}
-                </span>
-              ))}
-            </div>
-          )}
+      <div class="flex flex-wrap gap-4 pt-2">
+        <a href="/projects" class="inline-flex items-center justify-center rounded-md bg-primary px-5 py-2.5 text-sm font-medium text-primary-foreground shadow hover:opacity-90 transition-all">
+          View Projects
         </a>
-      ))}
-    </div>
+        <a href="/contact" class="inline-flex items-center justify-center rounded-md border border-border bg-background px-5 py-2.5 text-sm font-medium text-foreground hover:bg-secondary transition-all">
+          Get in Touch
+        </a>
+      </div>
+    </section>
+
+    <!-- Core Competencies -->
+    <section class="space-y-4">
+      <h2 class="text-xs font-mono uppercase tracking-wider text-muted-foreground">Core Competencies</h2>
+      <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+        {['Machine Learning', 'PLAXIS 3D', 'Python / PyTorch', 'Numerical Modeling'].map((skill) => (
+          <div class="rounded-lg border border-border bg-card p-3 text-center text-sm font-medium text-card-foreground">
+            {skill}
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <!-- Featured Projects -->
+    <section class="space-y-6">
+      <div class="flex items-center justify-between">
+        <h2 class="text-2xl font-bold tracking-tight text-foreground">Featured Projects</h2>
+        <a href="/projects" class="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">View all →</a>
+      </div>
+      
+      <div class="grid gap-4">
+        {projects.map((project) => (
+          <a href={`/projects/${project.id}`} class="group block rounded-lg border border-border bg-card p-6 hover:border-foreground/20 transition-all">
+            <h3 class="text-xl font-bold text-card-foreground group-hover:text-primary transition-colors">{project.data.title}</h3>
+            <p class="text-sm text-muted-foreground mt-2">{project.data.description}</p>
+          </a>
+        ))}
+      </div>
+    </section>
   </div>
 </Layout>
