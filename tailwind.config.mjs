@@ -4,9 +4,12 @@ export default {
   content: ['./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}'],
   theme: {
     extend: {
-      fontFamily: {
-        sans: ['Inter', 'system-ui', '-apple-system', 'sans-serif'],
-        mono: ['JetBrains Mono', 'Fira Code', 'monospace'],
+      colors: {
+        dark: {
+          bg: '#000000',
+          card: '#0c0c0e',
+          border: '#1f1f23',
+        },
       },
     },
   },

@@ -3,7 +3,10 @@
 @tailwind utilities;
 
 @layer base {
-  /* اسکرول‌بار سفارشی و مدرن */
+  body {
+    @apply bg-white text-zinc-900 dark:bg-black dark:text-zinc-100 antialiased selection:bg-zinc-900 selection:text-white dark:selection:bg-zinc-100 dark:selection:text-black;
+  }
+
   ::-webkit-scrollbar {
     width: 6px;
   }
@@ -13,15 +16,4 @@
   ::-webkit-scrollbar-thumb {
     @apply bg-zinc-300 dark:bg-zinc-800 rounded-full;
   }
-
-  /* هایلایت متن */
-  ::selection {
-    @apply bg-zinc-900 text-white dark:bg-zinc-100 dark:text-black;
-  }
-}
-
-/* پس‌زمینه نقطه‌ای شبیه به Vercel / Shadcn */
-.bg-dot-pattern {
-  background-image: radial-gradient(rgba(120, 120, 120, 0.15) 1px, transparent 1px);
-  background-size: 24px 24px;
 }

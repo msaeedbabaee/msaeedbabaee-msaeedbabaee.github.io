@@ -1,10 +1,8 @@
 ---
 import Layout from '../layouts/Layout.astro';
 
-// لیست تکنولوژی‌های فیلتر
 const filters = ["All Projects", "Python", "PyTorch", "PLAXIS 3D", "Scikit-Learn", "Geotechnical Data", "Machine Learning"];
 
-// نمونه داده پروژه‌ها
 const projects = [
   {
     category: "SOFTWARE & AI",
@@ -12,85 +10,75 @@ const projects = [
     description: "A concise summary describing the core engineering problem, numerical model, or machine learning framework.",
     tags: ["Python", "PyTorch", "PLAXIS 3D", "Scikit-Learn", "Geotechnical Data", "Machine Learning"],
     link: "/projects/ai-slope"
-  },
-  {
-    category: "NUMERICAL MODELING",
-    title: "geotech-pipeline",
-    description: "Automated geotechnical dataset preprocessing & 3D slope stability analysis pipeline.",
-    tags: ["Python", "PLAXIS 3D", "Geotechnical Data"],
-    link: "/projects/geotech-pipeline"
   }
 ];
 ---
 
-<Layout title="Projects | Saeed Babaee">
-  <div class="space-y-10">
+<Layout title="Projects | SAEED BABAEE">
+  <div class="space-y-8">
     
-    <!-- Hero Header -->
-    <div class="space-y-4">
-      <div class="inline-flex items-center px-3 py-1 rounded-md border border-zinc-200 dark:border-zinc-800 bg-zinc-100 dark:bg-zinc-900 text-[11px] font-mono font-semibold tracking-wider text-zinc-700 dark:text-zinc-300 uppercase">
+    <!-- Header Section -->
+    <div class="space-y-3">
+      <div class="inline-flex items-center px-3 py-1 rounded-md border border-zinc-200 dark:border-zinc-800 bg-zinc-100 dark:bg-zinc-900 text-[11px] font-mono font-semibold tracking-wider text-zinc-800 dark:text-zinc-200 uppercase">
         PORTFOLIO
       </div>
       <h1 class="text-4xl sm:text-5xl font-extrabold tracking-tight text-zinc-900 dark:text-white">
         Software, Data & AI Projects
       </h1>
-      <p class="text-lg text-zinc-600 dark:text-zinc-400 max-w-2xl font-normal">
+      <p class="text-base text-zinc-600 dark:text-zinc-400 font-normal">
         Numerical modeling tools, AI algorithms, and geotechnical applications.
       </p>
     </div>
 
-    <!-- خط جداکننده نازک -->
-    <div class="h-[1px] w-full bg-zinc-200 dark:bg-zinc-800/80"></div>
+    <!-- Line Divider -->
+    <div class="h-[1px] w-full bg-zinc-200 dark:bg-zinc-800"></div>
 
-    <!-- فیلترها (Filter Pills) -->
-    <div class="flex flex-wrap gap-2 pt-2">
+    <!-- Filter Buttons -->
+    <div class="flex flex-wrap gap-2 pt-1">
       {filters.map((filter, index) => (
-        <button class={`px-3.5 py-1.5 text-xs font-mono font-medium rounded-md border transition-all ${
+        <button class={`px-3.5 py-1.5 text-xs font-medium rounded-md border transition-colors ${
           index === 0 
-            ? "bg-zinc-900 text-white dark:bg-zinc-100 dark:text-zinc-900 border-transparent shadow-sm" 
-            : "bg-white dark:bg-zinc-900/50 border-zinc-200 dark:border-zinc-800 text-zinc-600 dark:text-zinc-400 hover:border-zinc-400 dark:hover:border-zinc-600 hover:text-zinc-900 dark:hover:text-zinc-100"
+            ? "bg-zinc-900 text-white dark:bg-white dark:text-zinc-900 border-transparent font-semibold" 
+            : "bg-white dark:bg-zinc-900/60 border-zinc-200 dark:border-zinc-800 text-zinc-600 dark:text-zinc-400 hover:border-zinc-300 dark:hover:border-zinc-700 hover:text-zinc-900 dark:hover:text-zinc-200"
         }`}>
           {filter}
         </button>
       ))}
     </div>
 
-    <!-- کارت پروژه‌ها (Shadcn UI Style Cards) -->
-    <div class="grid grid-cols-1 gap-6 pt-4">
+    <!-- Project Cards -->
+    <div class="grid grid-cols-1 gap-6 pt-2">
       {projects.map((project) => (
-        <div class="group relative rounded-xl border border-zinc-200 dark:border-zinc-800/90 bg-white dark:bg-[#0c0c0e]/80 p-6 sm:p-8 transition-all duration-300 hover:border-zinc-400 dark:hover:border-zinc-700 hover:shadow-lg dark:hover:shadow-[0_0_30px_rgba(255,255,255,0.02)]">
-          <div class="flex flex-col space-y-4">
-            
-            <span class="text-[11px] font-mono font-semibold tracking-wider uppercase text-zinc-500 dark:text-zinc-500">
-              {project.category}
-            </span>
-            
-            <h2 class="text-2xl font-bold tracking-tight text-zinc-900 dark:text-zinc-100 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
-              {project.title}
-            </h2>
-            
-            <p class="text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed max-w-3xl">
-              {project.description}
-            </p>
-            
-            <!-- تگ‌های پروژه -->
-            <div class="flex flex-wrap gap-2 pt-2">
-              {project.tags.map((tag) => (
-                <span class="px-2.5 py-1 text-xs font-mono bg-zinc-100 dark:bg-zinc-900/90 border border-zinc-200/80 dark:border-zinc-800 rounded-md text-zinc-600 dark:text-zinc-400">
-                  {tag}
-                </span>
-              ))}
-            </div>
-            
-            <!-- دکمه جزییات همراه با انیمیشن فلش -->
-            <div class="pt-4">
-              <a href={project.link} class="inline-flex items-center text-sm font-semibold text-zinc-900 dark:text-zinc-100 group/link hover:underline underline-offset-4">
-                View Details 
-                <span class="inline-block transition-transform duration-200 group-hover/link:translate-x-1 ml-1">→</span>
-              </a>
-            </div>
-
+        <div class="rounded-xl border border-zinc-200 dark:border-zinc-800/80 bg-zinc-50/50 dark:bg-[#0c0c0e] p-6 sm:p-8 space-y-4">
+          
+          <span class="text-[11px] font-mono font-semibold tracking-wider uppercase text-zinc-500 dark:text-zinc-400 block">
+            {project.category}
+          </span>
+          
+          <h2 class="text-2xl font-bold tracking-tight text-zinc-900 dark:text-white">
+            {project.title}
+          </h2>
+          
+          <p class="text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed max-w-3xl">
+            {project.description}
+          </p>
+          
+          <!-- Tags -->
+          <div class="flex flex-wrap gap-2 pt-2">
+            {project.tags.map((tag) => (
+              <span class="px-2.5 py-1 text-xs font-mono bg-zinc-100 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-md text-zinc-700 dark:text-zinc-300">
+                {tag}
+              </span>
+            ))}
           </div>
+          
+          <!-- Link -->
+          <div class="pt-2">
+            <a href={project.link} class="inline-flex items-center text-xs font-bold text-zinc-900 dark:text-white hover:underline underline-offset-4">
+              View Details →
+            </a>
+          </div>
+
         </div>
       ))}
     </div>
