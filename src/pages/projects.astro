@@ -1,81 +1,48 @@
 ---
 import Layout from '../layouts/Layout.astro';
 
-const filters = ["All Projects", "Python", "PyTorch", "PLAXIS 3D", "Scikit-Learn", "Geotechnical Data", "Machine Learning"];
-
 const projects = [
   {
-    category: "SOFTWARE & AI",
-    title: "ai slope",
-    description: "A concise summary describing the core engineering problem, numerical model, or machine learning framework.",
-    tags: ["Python", "PyTorch", "PLAXIS 3D", "Scikit-Learn", "Geotechnical Data", "Machine Learning"],
-    link: "/projects/ai-slope"
+    title: "AI Slope Stability Analysis",
+    category: "Machine Learning / Geotechnical",
+    description: "A machine learning framework for geotechnical slope stability analysis using deep surrogate models.",
+    tags: ["Python", "PyTorch", "PLAXIS 3D"],
+    slug: "ai-slope"
   }
 ];
 ---
 
-<Layout title="Projects | SAEED BABAEE">
+<Layout title="Projects | Saeed Babaee">
   <div class="space-y-8">
-    
-    <div class="space-y-3">
-      <div class="inline-flex items-center px-3 py-1 rounded-md border border-zinc-300 dark:border-zinc-700 bg-zinc-100 dark:bg-zinc-900 text-[11px] font-semibold tracking-wider text-zinc-800 dark:text-zinc-200 uppercase">
-        PORTFOLIO
-      </div>
-      <h1 class="text-4xl sm:text-5xl font-extrabold tracking-tight text-zinc-900 dark:text-white">
-        Software, Data & AI Projects
-      </h1>
-      <p class="text-base text-zinc-700 dark:text-zinc-300 font-normal">
-        Numerical modeling tools, AI algorithms, and geotechnical applications.
+    <div class="space-y-2">
+      <h1 class="text-3xl font-extrabold tracking-tight text-foreground">Projects</h1>
+      <p class="text-sm text-muted-foreground">
+        A collection of computational engineering and machine learning projects.
       </p>
     </div>
 
-    <div class="h-[1px] w-full bg-zinc-200 dark:bg-zinc-800/80"></div>
+    <div class="h-[1px] w-full bg-border"></div>
 
-    <div class="flex flex-wrap gap-2 pt-1">
-      {filters.map((filter, index) => (
-        <button class={`px-3.5 py-1.5 text-xs font-semibold rounded-md border transition-colors ${
-          index === 0 
-            ? "bg-zinc-900 text-white dark:bg-white dark:text-zinc-900 border-transparent" 
-            : "bg-white dark:bg-zinc-900 border-zinc-300 dark:border-zinc-800 text-zinc-700 dark:text-zinc-300 hover:border-zinc-400 dark:hover:border-zinc-600 hover:text-zinc-900 dark:hover:text-white"
-        }`}>
-          {filter}
-        </button>
-      ))}
-    </div>
-
-    <div class="grid grid-cols-1 gap-6 pt-2">
+    <div class="space-y-4">
       {projects.map((project) => (
-        <div class="rounded-xl border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-[#0c0c0e] p-6 sm:p-8 space-y-4">
-          
-          <span class="text-[11px] font-semibold tracking-wider uppercase text-zinc-600 dark:text-zinc-400 block">
-            {project.category}
-          </span>
-          
-          <h2 class="text-2xl font-bold tracking-tight text-zinc-900 dark:text-white">
-            {project.title}
-          </h2>
-          
-          <p class="text-sm text-zinc-700 dark:text-zinc-300 leading-relaxed max-w-3xl">
-            {project.description}
-          </p>
-          
-          <div class="flex flex-wrap gap-2 pt-2">
+        <div class="rounded-lg border border-border bg-card p-6 space-y-4 shadow-sm hover:border-accent-foreground/20 transition-colors">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+            <h2 class="text-xl font-bold tracking-tight text-card-foreground hover:text-muted-foreground cursor-pointer transition-colors">
+              {project.title}
+            </h2>
+          </div>
+
+          <p class="text-xs text-muted-foreground leading-relaxed">{project.description}</p>
+
+          <div class="flex flex-wrap gap-1.5 pt-2">
             {project.tags.map((tag) => (
-              <span class="px-2.5 py-1 text-xs font-medium bg-zinc-200/80 dark:bg-zinc-900 border border-zinc-300 dark:border-zinc-700/80 rounded-md text-zinc-800 dark:text-zinc-200">
-                {tag}
+              <span class="inline-flex items-center rounded-md border border-border bg-secondary px-2.5 py-0.5 text-[11px] font-mono font-medium text-secondary-foreground">
+                #{tag}
               </span>
             ))}
           </div>
-          
-          <div class="pt-2">
-            <a href={project.link} class="inline-flex items-center text-xs font-bold text-zinc-900 dark:text-white hover:underline underline-offset-4">
-              View Details →
-            </a>
-          </div>
-
         </div>
       ))}
     </div>
-
   </div>
 </Layout>
