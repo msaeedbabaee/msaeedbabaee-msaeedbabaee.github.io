@@ -13,13 +13,14 @@
   },
   "dependencies": {
     "@astrojs/mdx": "^7.0.8",
+    "@astrojs/tailwind": "^6.0.2",
     "@keystatic/astro": "^6.0.0",
     "@keystatic/core": "^0.6.9",
     "@tailwindcss/vite": "^4.3.3",
     "astro": "^7.2.9",
     "rehype-katex": "^7.0.1",
     "remark-math": "^6.0.0",
-    "tailwindcss": "^4.3.3"
+    "tailwindcss": "^3.4.19"
   },
   "allowScripts": {
     "esbuild": true
