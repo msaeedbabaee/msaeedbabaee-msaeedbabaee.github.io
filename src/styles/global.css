@@ -1,87 +1,82 @@
----
-import Layout from '../layouts/Layout.astro';
-import { getCollection } from 'astro:content';
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-const allProjects = await getCollection('projects');
-const featuredProjects = allProjects.slice(0, 3);
----
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 240 10% 3.9%;
 
-<Layout title="Saeed Babaee | Computational Engineer">
-  <div class="space-y-16">
-    
-    <!-- Hero Section -->
-    <section class="space-y-6 pt-4 sm:pt-8">
-      <div class="inline-flex items-center rounded-full border border-border px-3 py-1 text-xs font-medium text-muted-foreground bg-muted/50">
-        Computational Engineering & Geotechnics
-      </div>
-      
-      <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-foreground leading-tight">
-        Integrating AI & Computational Mechanics
-      </h1>
-      
-      <p class="text-lg text-muted-foreground max-w-2xl leading-relaxed">
-        I specialize in numerical modeling, geotechnical simulation, physics-informed machine learning, and automation for engineering applications.
-      </p>
+    --card: 0 0% 100%;
+    --card-foreground: 240 10% 3.9%;
 
-      <div class="flex flex-wrap gap-3 pt-2">
-        <a
-          href="/projects"
-          class="inline-flex items-center justify-center rounded-md bg-primary px-5 py-2.5 text-sm font-medium text-primary-foreground shadow transition-all hover:bg-primary/90 active:scale-[0.98]"
-        >
-          View Projects
-        </a>
-        <a
-          href="/contact"
-          class="inline-flex items-center justify-center rounded-md border border-input bg-background px-5 py-2.5 text-sm font-medium shadow-sm transition-all hover:bg-accent hover:text-accent-foreground active:scale-[0.98]"
-        >
-          Get in Touch
-        </a>
-      </div>
-    </section>
+    --popover: 0 0% 100%;
+    --popover-foreground: 240 10% 3.9%;
 
-    <!-- Featured Projects -->
-    <section class="space-y-6">
-      <div class="flex items-center justify-between">
-        <div>
-          <h2 class="text-2xl font-bold tracking-tight text-foreground">Featured Projects</h2>
-          <p class="text-sm text-muted-foreground mt-1">Highlights of recent work and implementations.</p>
-        </div>
-        <a href="/projects" class="text-sm font-medium text-primary hover:underline hidden sm:inline-flex">
-          View All →
-        </a>
-      </div>
+    --primary: 240 5.9% 10%;
+    --primary-foreground: 0 0% 98%;
 
-      <div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-        {featuredProjects.map((project) => (
-          <a
-            href={`/projects/${project.id}`}
-            class="group block rounded-lg border border-border bg-card p-5 shadow-sm transition-all duration-200 hover:shadow-md hover:border-primary/40 hover:-translate-y-0.5"
-          >
-            <div class="text-xs font-medium text-muted-foreground uppercase tracking-wide mb-2">
-              {project.data.category || 'Project'}
-            </div>
+    --secondary: 240 4.8% 95.9%;
+    --secondary-foreground: 240 5.9% 10%;
 
-            <h3 class="text-lg font-semibold text-card-foreground group-hover:text-primary transition-colors">
-              {project.data.title}
-            </h3>
+    --muted: 240 4.8% 95.9%;
+    --muted-foreground: 240 3.8% 46.1%;
 
-            <p class="text-sm text-muted-foreground mt-2 line-clamp-3 leading-relaxed">
-              {project.data.description}
-            </p>
+    --accent: 240 4.8% 95.9%;
+    --accent-foreground: 240 5.9% 10%;
 
-            {project.data.tags && (
-              <div class="flex flex-wrap gap-1.5 mt-4 pt-3 border-t border-border/50">
-                {project.data.tags.map((tag) => (
-                  <span class="rounded-md bg-muted px-2 py-0.5 text-xs text-muted-foreground transition-colors group-hover:bg-primary/10 group-hover:text-primary">
-                    {tag}
-                  </span>
-                ))}
-              </div>
-            )}
-          </a>
-        ))}
-      </div>
-    </section>
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
 
-  </div>
-</Layout>
+    --border: 240 5.9% 90%;
+    --input: 240 5.9% 90%;
+    --ring: 240 5.9% 10%;
+
+    --radius: 0.5rem;
+  }
+
+  .dark {
+    --background: 240 10% 3.9%;
+    --foreground: 0 0% 98%;
+
+    --card: 240 10% 3.9%;
+    --card-foreground: 0 0% 98%;
+
+    --popover: 240 10% 3.9%;
+    --popover-foreground: 0 0% 98%;
+
+    --primary: 0 0% 98%;
+    --primary-foreground: 240 5.9% 10%;
+
+    --secondary: 240 3.7% 15.9%;
+    --secondary-foreground: 0 0% 98%;
+
+    --muted: 240 3.7% 15.9%;
+    --muted-foreground: 240 5% 64.9%;
+
+    --accent: 240 3.7% 15.9%;
+    --accent-foreground: 0 0% 98%;
+
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 98%;
+
+    --border: 240 3.7% 15.9%;
+    --input: 240 3.7% 15.9%;
+    --ring: 240 4.9% 83.9%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  }
+}
