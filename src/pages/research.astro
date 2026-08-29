@@ -1,35 +1,59 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import { getCollection } from 'astro:content';
 
-const research = await getCollection('research');
+const publications = [
+  {
+    title: "Physics-Informed Neural Networks in Geotechnical Stability Analysis",
+    type: "Journal Paper",
+    date: "2024",
+    summary: "Investigation into incorporating soil constitutive equations into deep learning loss functions for real-time safety calculations.",
+    tags: ["PINNs", "Geomechanics", "Deep Learning"]
+  },
+  {
+    title: "Automated Finite Element Mesh Optimization using Reinforcement Learning",
+    type: "Conference Proceeding",
+    date: "2023",
+    summary: "Evaluating adaptive meshing techniques guided by Q-learning algorithms for high-stress gradient zones in soil modeling.",
+    tags: ["FEA", "Reinforcement Learning", "Mesh Generation"]
+  }
+];
 ---
 
-<Layout title="Research & Technical Notes">
-  <section class="py-8">
-    <h1 class="text-3xl font-bold mb-2">Research & Technical Notes</h1>
-    <p class="text-gray-600 mb-8">
-      Academic papers, thesis documents, and Quarto technical reports.
-    </p>
+<Layout title="Research | Saeed Babaee">
+  <div class="space-y-8">
+    <div class="space-y-2">
+      <h1 class="text-3xl font-extrabold tracking-tight">Research & Publications</h1>
+      <p class="text-sm text-muted-foreground">
+        Academic articles, conference papers, and computational research notes.
+      </p>
+    </div>
+
+    <div class="h-[1px] w-full bg-border"></div>
 
     <div class="space-y-4">
-      {research.map((item) => (
-        <div class="border rounded-xl p-5 shadow-sm bg-white flex flex-col sm:flex-row justify-between sm:items-center gap-4">
-          <div>
-            <span class="text-xs font-semibold px-2.5 py-1 rounded mb-2 inline-block bg-purple-50 text-purple-700 uppercase tracking-wide">
-              {item.data.type === 'paper' ? 'Academic Paper' : 'Quarto Report'}
+      {publications.map((pub) => (
+        <div class="rounded-lg border border-border bg-card p-6 space-y-3 shadow-sm hover:border-accent-foreground/20 transition-colors">
+          <div class="flex items-center justify-between text-xs text-muted-foreground">
+            <span class="inline-flex items-center rounded-md border border-border bg-secondary px-2 py-0.5 font-medium text-secondary-foreground">
+              {pub.type}
             </span>
-            <h2 class="text-lg font-bold">{item.data.title}</h2>
-            {item.data.date && <p class="text-sm text-gray-500 mt-1">Published: {item.data.date}</p>}
+            <span class="font-mono">{pub.date}</span>
           </div>
-          
-          {item.data.pdfLink && (
-            <a href={item.data.pdfLink} target="_blank" class="px-4 py-2 bg-slate-900 text-white text-sm font-medium rounded-lg hover:bg-slate-800 transition-colors shrink-0">
-              Download PDF
-            </a>
-          )}
+
+          <div class="space-y-1">
+            <h2 class="text-lg font-bold tracking-tight text-card-foreground leading-snug">{pub.title}</h2>
+            <p class="text-xs text-muted-foreground leading-relaxed">{pub.summary}</p>
+          </div>
+
+          <div class="flex flex-wrap gap-1.5 pt-1">
+            {pub.tags.map((tag) => (
+              <span class="inline-flex items-center text-[11px] font-mono text-muted-foreground">
+                #{tag}
+              </span>
+            ))}
+          </div>
         </div>
       ))}
     </div>
-  </section>
+  </div>
 </Layout>

@@ -1,71 +1,39 @@
 ---
 import Layout from '../layouts/Layout.astro';
 
-const skillCategories = [
-  {
-    title: "AI & Machine Learning",
-    skills: ["Python", "PyTorch", "TensorFlow", "Scikit-Learn", "Neural Networks", "Data Pipeline"]
-  },
-  {
-    title: "Geotechnical & Numerical Modeling",
-    skills: ["PLAXIS 2D/3D", "FLAC3D", "Slope Stability", "Soil Mechanics", "Finite Element Analysis"]
-  },
-  {
-    title: "Software Engineering",
-    skills: ["TypeScript", "Astro", "Tailwind CSS", "Git / GitHub", "REST APIs", "Docker"]
-  }
+const skills = [
+  "Python / PyTorch", "TensorFlow", "PLAXIS 2D/3D", "Geotechnical FEA",
+  "TypeScript", "Astro", "Tailwind CSS", "FastAPI", "Git / CI/CD"
 ];
 ---
 
-<Layout title="About Me | Saeed Babaee">
-  <section class="py-8 max-w-4xl mx-auto space-y-12">
-    <!-- Header & Resume Download -->
-    <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6 border-b pb-8">
-      <div>
-        <h1 class="text-3xl font-bold mb-2">Saeed Babaee</h1>
-        <p class="text-slate-600 text-lg">
-          Geotechnical Engineer & AI / Software Specialist
-        </p>
-      </div>
-      <a 
-        href="/resume.pdf" 
-        download 
-        class="inline-flex items-center gap-2 px-5 py-2.5 bg-blue-600 hover:bg-blue-700 text-white font-medium text-sm rounded-lg transition-colors shadow-sm shrink-0"
-      >
-        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-        </svg>
-        Download Resume (PDF)
-      </a>
-    </div>
-
-    <!-- Bio Section -->
-    <div class="space-y-4">
-      <h2 class="text-2xl font-bold text-slate-800">Bio & Background</h2>
-      <p class="text-slate-700 leading-relaxed">
-        I specialize at the intersection of geotechnical engineering, machine learning, and software development. My focus centers on building computational models, physics-informed AI frameworks, and automated analysis tools for complex geotechnical systems.
+<Layout title="About | Saeed Babaee">
+  <div class="space-y-8">
+    <div class="space-y-2">
+      <h1 class="text-3xl font-extrabold tracking-tight">About Me</h1>
+      <p class="text-sm text-muted-foreground">
+        Background, core competencies, and computational research background.
       </p>
     </div>
 
-    <!-- Skills & Tech Stack -->
-    <div class="space-y-6">
-      <h2 class="text-2xl font-bold text-slate-800">Skills & Tech Stack</h2>
-      <div class="grid md:grid-cols-3 gap-6">
-        {skillCategories.map((cat) => (
-          <div class="border rounded-xl p-5 bg-white shadow-sm space-y-3">
-            <h3 class="font-semibold text-slate-900 border-b pb-2 text-base">
-              {cat.title}
-            </h3>
-            <div class="flex flex-wrap gap-1.5">
-              {cat.skills.map((skill) => (
-                <span class="text-xs bg-slate-100 text-slate-700 px-2.5 py-1 rounded-md font-medium">
-                  {skill}
-                </span>
-              ))}
-            </div>
-          </div>
+    <div class="h-[1px] w-full bg-border"></div>
+
+    <div class="rounded-lg border border-border bg-card p-6 space-y-4 shadow-sm">
+      <h2 class="text-lg font-bold tracking-tight">Biography</h2>
+      <p class="text-xs text-muted-foreground leading-relaxed space-y-2">
+        I am a Geotechnical Engineer and AI Specialist focused on merging physics-based numerical modeling with modern machine learning paradigms. My work bridges the gap between traditional geotechnical soil-structure interaction and scalable algorithmic solutions.
+      </p>
+    </div>
+
+    <div class="rounded-lg border border-border bg-card p-6 space-y-4 shadow-sm">
+      <h2 class="text-lg font-bold tracking-tight">Technical Stack & Skills</h2>
+      <div class="flex flex-wrap gap-2">
+        {skills.map((skill) => (
+          <span class="inline-flex items-center rounded-md border border-border bg-secondary px-3 py-1 text-xs font-medium text-secondary-foreground">
+            {skill}
+          </span>
         ))}
       </div>
     </div>
-  </section>
+  </div>
 </Layout>
