@@ -1,12 +1,26 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+
+const services = await getCollection('services');
 ---
 
 <Layout title="Services">
-  <div class="max-w-3xl mx-auto py-8">
-    <h1 class="text-3xl font-bold mb-4">Services</h1>
-    <p class="text-gray-700 leading-relaxed">
-      Consulting and professional services.
+  <section class="py-8">
+    <h1 class="text-3xl font-bold mb-2">Services</h1>
+    <p class="text-gray-600 mb-8">
+      Professional solutions in AI, Geotechnical Engineering, and Software Development.
     </p>
-  </div>
+
+    <div class="grid md:grid-cols-3 gap-6">
+      {services.map((service) => (
+        <div class="border rounded-xl p-6 shadow-sm hover:shadow-md transition-all bg-white">
+          <h2 class="text-xl font-bold mb-3">{service.data.title}</h2>
+          {service.data.summary && (
+            <p class="text-gray-600 text-sm">{service.data.summary}</p>
+          )}
+        </div>
+      ))}
+    </div>
+  </section>
 </Layout>

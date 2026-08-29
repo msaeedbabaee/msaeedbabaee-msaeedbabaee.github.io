@@ -1,12 +1,35 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+
+const research = await getCollection('research');
 ---
 
-<Layout title="Research">
-  <div class="max-w-3xl mx-auto py-8">
-    <h1 class="text-3xl font-bold mb-4">Research & Publications</h1>
-    <p class="text-gray-700 leading-relaxed">
-      Overview of ongoing research topics, papers, and findings.
+<Layout title="Research & Technical Notes">
+  <section class="py-8">
+    <h1 class="text-3xl font-bold mb-2">Research & Technical Notes</h1>
+    <p class="text-gray-600 mb-8">
+      Academic papers, thesis documents, and Quarto technical reports.
     </p>
-  </div>
+
+    <div class="space-y-4">
+      {research.map((item) => (
+        <div class="border rounded-xl p-5 shadow-sm bg-white flex flex-col sm:flex-row justify-between sm:items-center gap-4">
+          <div>
+            <span class="text-xs font-semibold px-2.5 py-1 rounded mb-2 inline-block bg-purple-50 text-purple-700 uppercase tracking-wide">
+              {item.data.type === 'paper' ? 'Academic Paper' : 'Quarto Report'}
+            </span>
+            <h2 class="text-lg font-bold">{item.data.title}</h2>
+            {item.data.date && <p class="text-sm text-gray-500 mt-1">Published: {item.data.date}</p>}
+          </div>
+          
+          {item.data.pdfLink && (
+            <a href={item.data.pdfLink} target="_blank" class="px-4 py-2 bg-slate-900 text-white text-sm font-medium rounded-lg hover:bg-slate-800 transition-colors shrink-0">
+              Download PDF
+            </a>
+          )}
+        </div>
+      ))}
+    </div>
+  </section>
 </Layout>
