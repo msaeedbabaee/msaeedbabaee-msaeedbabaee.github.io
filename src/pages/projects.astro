@@ -17,41 +17,37 @@ const projects = [
 <Layout title="Projects | SAEED BABAEE">
   <div class="space-y-8">
     
-    <!-- Header Section -->
     <div class="space-y-3">
-      <div class="inline-flex items-center px-3 py-1 rounded-md border border-zinc-200 dark:border-zinc-800 bg-zinc-100 dark:bg-zinc-900 text-[11px] font-mono font-semibold tracking-wider text-zinc-800 dark:text-zinc-200 uppercase">
+      <div class="inline-flex items-center px-3 py-1 rounded-md border border-zinc-300 dark:border-zinc-700 bg-zinc-100 dark:bg-zinc-900 text-[11px] font-semibold tracking-wider text-zinc-800 dark:text-zinc-200 uppercase">
         PORTFOLIO
       </div>
       <h1 class="text-4xl sm:text-5xl font-extrabold tracking-tight text-zinc-900 dark:text-white">
         Software, Data & AI Projects
       </h1>
-      <p class="text-base text-zinc-600 dark:text-zinc-400 font-normal">
+      <p class="text-base text-zinc-700 dark:text-zinc-300 font-normal">
         Numerical modeling tools, AI algorithms, and geotechnical applications.
       </p>
     </div>
 
-    <!-- Line Divider -->
-    <div class="h-[1px] w-full bg-zinc-200 dark:bg-zinc-800"></div>
+    <div class="h-[1px] w-full bg-zinc-200 dark:bg-zinc-800/80"></div>
 
-    <!-- Filter Buttons -->
     <div class="flex flex-wrap gap-2 pt-1">
       {filters.map((filter, index) => (
-        <button class={`px-3.5 py-1.5 text-xs font-medium rounded-md border transition-colors ${
+        <button class={`px-3.5 py-1.5 text-xs font-semibold rounded-md border transition-colors ${
           index === 0 
-            ? "bg-zinc-900 text-white dark:bg-white dark:text-zinc-900 border-transparent font-semibold" 
-            : "bg-white dark:bg-zinc-900/60 border-zinc-200 dark:border-zinc-800 text-zinc-600 dark:text-zinc-400 hover:border-zinc-300 dark:hover:border-zinc-700 hover:text-zinc-900 dark:hover:text-zinc-200"
+            ? "bg-zinc-900 text-white dark:bg-white dark:text-zinc-900 border-transparent" 
+            : "bg-white dark:bg-zinc-900 border-zinc-300 dark:border-zinc-800 text-zinc-700 dark:text-zinc-300 hover:border-zinc-400 dark:hover:border-zinc-600 hover:text-zinc-900 dark:hover:text-white"
         }`}>
           {filter}
         </button>
       ))}
     </div>
 
-    <!-- Project Cards -->
     <div class="grid grid-cols-1 gap-6 pt-2">
       {projects.map((project) => (
-        <div class="rounded-xl border border-zinc-200 dark:border-zinc-800/80 bg-zinc-50/50 dark:bg-[#0c0c0e] p-6 sm:p-8 space-y-4">
+        <div class="rounded-xl border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-[#0c0c0e] p-6 sm:p-8 space-y-4">
           
-          <span class="text-[11px] font-mono font-semibold tracking-wider uppercase text-zinc-500 dark:text-zinc-400 block">
+          <span class="text-[11px] font-semibold tracking-wider uppercase text-zinc-600 dark:text-zinc-400 block">
             {project.category}
           </span>
           
@@ -59,20 +55,18 @@ const projects = [
             {project.title}
           </h2>
           
-          <p class="text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed max-w-3xl">
+          <p class="text-sm text-zinc-700 dark:text-zinc-300 leading-relaxed max-w-3xl">
             {project.description}
           </p>
           
-          <!-- Tags -->
           <div class="flex flex-wrap gap-2 pt-2">
             {project.tags.map((tag) => (
-              <span class="px-2.5 py-1 text-xs font-mono bg-zinc-100 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-md text-zinc-700 dark:text-zinc-300">
+              <span class="px-2.5 py-1 text-xs font-medium bg-zinc-200/80 dark:bg-zinc-900 border border-zinc-300 dark:border-zinc-700/80 rounded-md text-zinc-800 dark:text-zinc-200">
                 {tag}
               </span>
             ))}
           </div>
           
-          <!-- Link -->
           <div class="pt-2">
             <a href={project.link} class="inline-flex items-center text-xs font-bold text-zinc-900 dark:text-white hover:underline underline-offset-4">
               View Details →

@@ -1,26 +1,46 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import { getCollection } from 'astro:content';
 
-const services = await getCollection('services');
+const services = [
+  {
+    title: "AI & Data Solutions",
+    description: "Custom machine learning models and data pipelines for engineering applications."
+  },
+  {
+    title: "Geotechnical Numerical Modeling",
+    description: "Advanced FEA & constitutive modeling for soil-structure interaction, slope stability, and tunnels."
+  },
+  {
+    title: "Software & Web Development",
+    description: "Building modern high-performance web applications and engineering software platforms."
+  }
+];
 ---
 
-<Layout title="Services">
-  <section class="py-8">
-    <h1 class="text-3xl font-bold mb-2">Services</h1>
-    <p class="text-gray-600 mb-8">
-      Professional solutions in AI, Geotechnical Engineering, and Software Development.
-    </p>
+<Layout title="Services | SAEED BABAEE">
+  <div class="space-y-8">
+    <div class="space-y-3">
+      <h1 class="text-4xl sm:text-5xl font-extrabold tracking-tight text-zinc-900 dark:text-white">
+        Services
+      </h1>
+      <p class="text-base font-normal text-zinc-700 dark:text-zinc-300">
+        Professional solutions in AI, Geotechnical Engineering, and Software Development.
+      </p>
+    </div>
 
-    <div class="grid md:grid-cols-3 gap-6">
+    <div class="h-[1px] w-full bg-zinc-200 dark:bg-zinc-800/80"></div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 pt-2">
       {services.map((service) => (
-        <div class="border rounded-xl p-6 shadow-sm hover:shadow-md transition-all bg-white">
-          <h2 class="text-xl font-bold mb-3">{service.data.title}</h2>
-          {service.data.summary && (
-            <p class="text-gray-600 text-sm">{service.data.summary}</p>
-          )}
+        <div class="rounded-xl border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-[#0c0c0e] p-6 space-y-3 shadow-sm">
+          <h2 class="text-xl font-bold tracking-tight text-zinc-900 dark:text-white">
+            {service.title}
+          </h2>
+          <p class="text-sm text-zinc-700 dark:text-zinc-300 leading-relaxed font-normal">
+            {service.description}
+          </p>
         </div>
       ))}
     </div>
-  </section>
+  </div>
 </Layout>
