@@ -1,0 +1,32 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { getCollection, render } from 'astro:content';
+
+export async function getStaticPaths() {
+  const projects = await getCollection('projects');
+  return projects.map((project) => ({
+    params: { id: project.id },
+    props: { project },
+  }));
+}
+
+const { project } = Astro.props;
+const { Content } = await render(project);
+---
+
+<Layout title={`${project.data.title} | Saeed Babaee`}>
+  <article class="space-y-6 max-w-3xl mx-auto">
+    <div class="border-b border-border pb-6 space-y-2">
+      <div class="flex items-center gap-3 text-xs font-mono text-muted-foreground">
+        <span class="uppercase">{project.data.category || 'Project'}</span>
+        {project.data.date && <span>• {project.data.date}</span>}
+      </div>
+      <h1 class="text-3xl font-extrabold text-foreground">{project.data.title}</h1>
+      <p class="text-base text-muted-foreground">{project.data.description}</p>
+    </div>
+
+    <div class="prose dark:prose-invert max-w-none text-foreground leading-relaxed">
+      <Content />
+    </div>
+  </article>
+</Layout>
