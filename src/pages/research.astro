@@ -1,44 +1,85 @@
 ---
-import { getCollection } from 'astro:content';
 import Layout from '../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
 
-const researchList = await getCollection('research');
+const researchItems = await getCollection('research');
 ---
 
-<Layout title="Research | Portfolio" description="Scientific articles and research work">
-  <div class="container mx-auto max-w-screen-xl px-4 py-10 md:py-16 space-y-8">
-    <!-- Header -->
-    <div class="flex flex-col items-start gap-2 border-b border-border/40 pb-8">
-      <h1 class="text-3xl font-bold tracking-tight sm:text-4xl">Research & Publications</h1>
-      <p class="text-muted-foreground text-lg">
+<Layout title="Research | Saeed Babaee">
+  <div class="space-y-8">
+    
+    <div class="space-y-2">
+      <h1 class="text-3xl font-bold tracking-tight">Research & Publications</h1>
+      <p class="text-muted-foreground">
         Academic research, computational modeling, and published literature.
       </p>
     </div>
 
-    <!-- Research Cards -->
-    <div class="grid gap-6 md:grid-cols-2">
-      {researchList.map((item) => (
-        <div class="rounded-lg border bg-card text-card-foreground shadow-sm transition-all hover:shadow-md flex flex-col justify-between p-6 space-y-4">
-          <div class="space-y-2">
-            <div class="flex items-center justify-between">
-              <span class="inline-flex items-center rounded-md bg-secondary px-2.5 py-0.5 text-xs font-semibold text-secondary-foreground">
-                Scientific Publication
+    <div class="space-y-4">
+      {researchItems.length > 0 ? (
+        researchItems.map((item) => (
+          <article class="group rounded-lg border border-border bg-card p-5 shadow-sm transition-all duration-200 hover:shadow-md hover:border-primary/40">
+            <div class="flex flex-wrap items-center gap-2 mb-2">
+              <span class="rounded-md bg-muted px-2 py-0.5 text-xs font-medium text-muted-foreground">
+                {item.data.type || 'Scientific Publication'}
               </span>
+              {item.data.year && (
+                <span class="text-xs text-muted-foreground">{item.data.year}</span>
+              )}
             </div>
-            <h2 class="text-xl font-bold tracking-tight">{item.data.title}</h2>
-            <p class="text-sm text-muted-foreground leading-relaxed">
+            
+            <h2 class="text-lg font-semibold text-card-foreground group-hover:text-primary transition-colors">
+              {item.data.title}
+            </h2>
+            
+            <p class="text-sm text-muted-foreground mt-2 leading-relaxed">
               {item.data.description}
             </p>
+            
+            <div class="flex items-center justify-between mt-4 pt-3 border-t border-border/50">
+              <span class="text-xs text-muted-foreground">
+                {item.data.status || 'Peer-reviewed'}
+              </span>
+              
+              {item.data.link ? (
+                <a 
+                  href={item.data.link} 
+                  target="_blank" 
+                  class="text-sm font-medium text-primary hover:underline"
+                >
+                  Read paper →
+                </a>
+              ) : (
+                <span class="text-sm text-muted-foreground">Coming soon</span>
+              )}
+            </div>
+          </article>
+        ))
+      ) : (
+        // Fallback if collection is empty
+        <article class="rounded-lg border border-border bg-card p-5 shadow-sm">
+          <div class="flex flex-wrap items-center gap-2 mb-2">
+            <span class="rounded-md bg-muted px-2 py-0.5 text-xs font-medium text-muted-foreground">
+              Scientific Publication
+            </span>
+            <span class="text-xs text-muted-foreground">2024</span>
           </div>
-
-          <div class="pt-4 border-t border-border/40 flex items-center justify-between text-xs text-muted-foreground">
-            <span>Peer-reviewed</span>
-            <a href="#" class="inline-flex items-center justify-center rounded-md text-xs font-medium transition-colors hover:bg-accent hover:text-accent-foreground h-8 px-3 text-primary">
-              Read paper →
-            </a>
+          
+          <h2 class="text-lg font-semibold text-card-foreground">
+            Physics-Informed Neural Networks in Geomechanics
+          </h2>
+          
+          <p class="text-sm text-muted-foreground mt-2 leading-relaxed">
+            A research review on application of PINNs for solving partial differential equations in soil mechanics.
+          </p>
+          
+          <div class="flex items-center justify-between mt-4 pt-3 border-t border-border/50">
+            <span class="text-xs text-muted-foreground">Peer-reviewed</span>
+            <span class="text-sm text-muted-foreground">Coming soon</span>
           </div>
-        </div>
-      ))}
+        </article>
+      )}
     </div>
+
   </div>
 </Layout>

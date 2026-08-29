@@ -2,76 +2,113 @@
 import Layout from '../layouts/Layout.astro';
 ---
 
-<Layout title="Contact | Portfolio" description="Contact form and communication details">
-  <div class="container mx-auto max-w-screen-md px-4 py-10 md:py-16 space-y-8">
-    <!-- Header -->
-    <div class="flex flex-col items-center text-center space-y-2 border-b border-border/40 pb-8">
-      <h1 class="text-3xl font-bold tracking-tight sm:text-4xl">Get in Touch</h1>
-      <p class="text-muted-foreground text-base max-w-[30rem]">
+<Layout title="Contact | Saeed Babaee">
+  <div class="max-w-3xl mx-auto space-y-8">
+    
+    <div class="space-y-2 text-center sm:text-left">
+      <h1 class="text-3xl font-bold tracking-tight">Get in Touch</h1>
+      <p class="text-muted-foreground">
         Feel free to reach out for collaborations, research inquiries, or general questions.
       </p>
     </div>
 
-    <!-- Form Section -->
-    <div class="rounded-lg border bg-card text-card-foreground shadow-sm p-6 sm:p-8">
-      <form class="space-y-6">
-        <div class="grid gap-4 sm:grid-cols-2">
-          <div class="space-y-2">
-            <label class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70" for="name">
-              Full Name
-            </label>
+    <div class="grid gap-6 md:grid-cols-5">
+      
+      <!-- Direct Channels -->
+      <div class="md:col-span-2 rounded-lg border border-border bg-card p-5 shadow-sm space-y-5">
+        <h2 class="font-semibold text-foreground">Direct Channels</h2>
+        
+        <div class="space-y-4 text-sm">
+          <div>
+            <p class="text-xs font-medium text-muted-foreground uppercase tracking-wide mb-1">Email</p>
+            <a href="mailto:msaeedbabaee@gmail.com" class="text-foreground hover:text-primary transition-colors">
+              msaeedbabaee@gmail.com
+            </a>
+          </div>
+          
+          <div>
+            <p class="text-xs font-medium text-muted-foreground uppercase tracking-wide mb-1">Location</p>
+            <p class="text-foreground">Iran / Remote</p>
+          </div>
+          
+          <div>
+            <p class="text-xs font-medium text-muted-foreground uppercase tracking-wide mb-1">Profiles</p>
+            <div class="flex flex-wrap gap-2 mt-1">
+              <a href="https://github.com/msaeedbabaee" target="_blank" class="rounded-md bg-muted px-2.5 py-1 text-xs hover:bg-primary/10 hover:text-primary transition-colors">
+                GitHub
+              </a>
+              <a href="https://linkedin.com/in/msaeedbabaee" target="_blank" class="rounded-md bg-muted px-2.5 py-1 text-xs hover:bg-primary/10 hover:text-primary transition-colors">
+                LinkedIn
+              </a>
+              <a href="#" target="_blank" class="rounded-md bg-muted px-2.5 py-1 text-xs hover:bg-primary/10 hover:text-primary transition-colors">
+                Google Scholar
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Contact Form -->
+      <div class="md:col-span-3 rounded-lg border border-border bg-card p-5 shadow-sm">
+        <form class="space-y-4" action="#" method="POST">
+          <div class="grid gap-4 sm:grid-cols-2">
+            <div class="space-y-1.5">
+              <label for="name" class="text-sm font-medium">Full Name</label>
+              <input
+                type="text"
+                id="name"
+                name="name"
+                placeholder="Your name"
+                class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+                required
+              />
+            </div>
+            
+            <div class="space-y-1.5">
+              <label for="email" class="text-sm font-medium">Email Address</label>
+              <input
+                type="email"
+                id="email"
+                name="email"
+                placeholder="name@example.com"
+                class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+                required
+              />
+            </div>
+          </div>
+
+          <div class="space-y-1.5">
+            <label for="subject" class="text-sm font-medium">Subject</label>
             <input
               type="text"
-              id="name"
-              placeholder="John Doe"
-              class="flex h-9 w-full rounded-md border border-input bg-transparent px-3 py-1 text-sm shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50"
+              id="subject"
+              name="subject"
+              placeholder="Inquiry regarding..."
+              class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
             />
           </div>
 
-          <div class="space-y-2">
-            <label class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70" for="email">
-              Email Address
-            </label>
-            <input
-              type="email"
-              id="email"
-              placeholder="name@example.com"
-              class="flex h-9 w-full rounded-md border border-input bg-transparent px-3 py-1 text-sm shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50"
-            />
+          <div class="space-y-1.5">
+            <label for="message" class="text-sm font-medium">Message</label>
+            <textarea
+              id="message"
+              name="message"
+              rows="4"
+              placeholder="Type your message here..."
+              class="flex w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 resize-none"
+              required
+            ></textarea>
           </div>
-        </div>
 
-        <div class="space-y-2">
-          <label class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70" for="subject">
-            Subject
-          </label>
-          <input
-            type="text"
-            id="subject"
-            placeholder="Inquiry regarding..."
-            class="flex h-9 w-full rounded-md border border-input bg-transparent px-3 py-1 text-sm shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50"
-          />
-        </div>
-
-        <div class="space-y-2">
-          <label class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70" for="message">
-            Message
-          </label>
-          <textarea
-            id="message"
-            rows="5"
-            placeholder="Type your message here..."
-            class="flex min-h-[60px] w-full rounded-md border border-input bg-transparent px-3 py-2 text-sm shadow-sm transition-colors placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50"
-          ></textarea>
-        </div>
-
-        <button
-          type="submit"
-          class="inline-flex h-10 w-full items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground shadow transition-colors hover:bg-primary/90 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring sm:w-auto"
-        >
-          Send Message
-        </button>
-      </form>
+          <button
+            type="submit"
+            class="inline-flex items-center justify-center rounded-md bg-primary px-5 py-2.5 text-sm font-medium text-primary-foreground shadow transition-all hover:bg-primary/90 active:scale-[0.98] w-full sm:w-auto"
+          >
+            Send Message
+          </button>
+        </form>
+      </div>
     </div>
+
   </div>
 </Layout>
