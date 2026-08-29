@@ -4,12 +4,19 @@ import Layout from '../layouts/Layout.astro';
 
 <Layout title="About | Saeed Babaee">
   <div class="space-y-12 max-w-4xl mx-auto">
-    <!-- Bio Header -->
-    <section class="space-y-4">
-      <h1 class="text-3xl sm:text-4xl font-extrabold tracking-tight text-foreground">About Me</h1>
-      <p class="text-lg text-muted-foreground leading-relaxed">
-        I am a Computational Engineer and AI Researcher dedicated to bridging numerical modeling in geotechnical engineering with modern machine learning methodologies.
-      </p>
+    <!-- Bio Header with Profile Picture -->
+    <section class="flex flex-col sm:flex-row items-center sm:items-start gap-6 pt-2">
+      <img
+        src="/assets/images/profile.jpg"
+        alt="Saeed Babaee"
+        class="w-32 h-32 sm:w-36 sm:h-36 rounded-full object-cover border-2 border-border shadow-md shrink-0"
+      />
+      <div class="space-y-3 text-center sm:text-left">
+        <h1 class="text-3xl sm:text-4xl font-extrabold tracking-tight text-foreground">About Me</h1>
+        <p class="text-base sm:text-lg text-muted-foreground leading-relaxed">
+          I am a Computational Engineer and AI Researcher dedicated to bridging numerical modeling in geotechnical engineering with modern machine learning methodologies.
+        </p>
+      </div>
     </section>
 
     <!-- Education & Academic Background -->
@@ -45,7 +52,7 @@ import Layout from '../layouts/Layout.astro';
       </div>
     </section>
 
-    <!-- Research Areas & Focus -->
+    <!-- Specializations -->
     <section class="space-y-6">
       <h2 class="text-xl font-bold tracking-tight text-foreground border-b border-border pb-2">
         Core Specializations
