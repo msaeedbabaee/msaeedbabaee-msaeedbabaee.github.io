@@ -9,7 +9,8 @@ import Layout from '../layouts/Layout.astro';
       <img
         src="/assets/images/profile.jpg"
         alt="Saeed Babaee"
-        class="w-32 h-32 sm:w-36 sm:h-36 rounded-full object-cover border-2 border-border shadow-md shrink-0 bg-muted"
+        onerror="this.onerror=null; this.src='https://ui-avatars.com/api/?name=Saeed+Babaee&size=200&background=020617&color=fff';"
+        class="w-32 h-32 sm:w-36 sm:h-36 rounded-2xl object-cover border border-border shadow-sm shrink-0 bg-muted"
       />
       <div class="space-y-3 text-center sm:text-left">
         <h1 class="text-3xl sm:text-4xl font-extrabold tracking-tight text-foreground">About Me</h1>
@@ -19,7 +20,7 @@ import Layout from '../layouts/Layout.astro';
       </div>
     </section>
 
-    <!-- Education & Academic Background -->
+    <!-- Education -->
     <section class="space-y-6">
       <h2 class="text-xl font-bold tracking-tight text-foreground border-b border-border pb-2">
         Education
@@ -33,9 +34,6 @@ import Layout from '../layouts/Layout.astro';
             <span>University of Tehran</span>
           </div>
           <h3 class="text-base font-semibold text-foreground">Advanced Geomechanical Modeling & AI</h3>
-          <p class="text-sm text-muted-foreground leading-relaxed">
-            Focused on AI integration with slope stability analysis, finite element modeling, and probabilistic geotechnical calculations.
-          </p>
         </div>
 
         <div class="relative space-y-1">
@@ -45,9 +43,6 @@ import Layout from '../layouts/Layout.astro';
             <span>Completed</span>
           </div>
           <h3 class="text-base font-semibold text-foreground">Civil Engineering Department</h3>
-          <p class="text-sm text-muted-foreground leading-relaxed">
-            Core studies in soil mechanics, structural dynamics, computer programming, and numerical methods.
-          </p>
         </div>
       </div>
     </section>
@@ -59,14 +54,14 @@ import Layout from '../layouts/Layout.astro';
       </h2>
 
       <div class="grid gap-4 sm:grid-cols-2">
-        <div class="rounded-lg border border-border bg-card p-5 space-y-2 hover:border-primary/50 transition-colors">
+        <div class="rounded-xl border border-border bg-card p-5 space-y-2 hover:border-primary/40 transition-colors">
           <h3 class="font-bold text-card-foreground">Machine Learning & Physics-Informed AI</h3>
           <p class="text-sm text-muted-foreground leading-relaxed">
             Developing surrogate models and physics-informed neural networks (PINNs) to accelerate complex geotechnical simulations.
           </p>
         </div>
 
-        <div class="rounded-lg border border-border bg-card p-5 space-y-2 hover:border-primary/50 transition-colors">
+        <div class="rounded-xl border border-border bg-card p-5 space-y-2 hover:border-primary/40 transition-colors">
           <h3 class="font-bold text-card-foreground">Numerical Modeling & Automation</h3>
           <p class="text-sm text-muted-foreground leading-relaxed">
             Automating PLAXIS 2D/3D and numerical workflows using Python scripting for large-scale parametric studies.
