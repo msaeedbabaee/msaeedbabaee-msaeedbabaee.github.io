@@ -25,12 +25,10 @@ const projects = [
 
     <div class="space-y-4">
       {projects.map((project) => (
-        <div class="rounded-lg border border-border bg-card p-6 space-y-4 shadow-sm hover:border-accent-foreground/20 transition-colors">
-          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
-            <h2 class="text-xl font-bold tracking-tight text-card-foreground hover:text-muted-foreground cursor-pointer transition-colors">
-              {project.title}
-            </h2>
-          </div>
+        <div class="rounded-lg border border-border bg-card p-6 space-y-4 shadow-sm hover:border-foreground/20 transition-colors">
+          <h2 class="text-xl font-bold tracking-tight text-card-foreground">
+            {project.title}
+          </h2>
 
           <p class="text-xs text-muted-foreground leading-relaxed">{project.description}</p>
 
