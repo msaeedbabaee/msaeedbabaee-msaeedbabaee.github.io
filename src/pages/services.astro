@@ -1,31 +1,54 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+
+const services = (await getCollection('services')).sort(
+  (a, b) => (a.data.order ?? 99) - (b.data.order ?? 99)
+);
 ---
 
 <Layout title="Services | Saeed Babaee">
-  <div class="space-y-8">
+  <div class="space-y-10">
     <div class="space-y-2">
-      <h1 class="text-3xl font-extrabold tracking-tight text-foreground">Services</h1>
-      <p class="text-sm text-muted-foreground">Engineering consulting and computational AI solutions.</p>
+      <h1 class="text-3xl font-bold tracking-tight">Services</h1>
+      <p class="text-muted-foreground max-w-2xl">
+        Specialized engineering services in geotechnical modeling, AI-driven solutions, and custom software development.
+      </p>
     </div>
 
-    <div class="h-[1px] w-full bg-border"></div>
+    <div class="grid gap-5 sm:grid-cols-2">
+      {services.map((service) => (
+        <div class="rounded-lg border border-border bg-card p-6 shadow-sm transition-all hover:shadow-md hover:border-primary/40">
+          <h2 class="text-lg font-semibold text-card-foreground mb-2">
+            {service.data.title}
+          </h2>
+          <p class="text-sm text-muted-foreground leading-relaxed mb-4">
+            {service.data.description}
+          </p>
+          {service.data.tags && (
+            <div class="flex flex-wrap gap-1.5">
+              {service.data.tags.map((tag) => (
+                <span class="rounded-md bg-muted px-2 py-0.5 text-xs text-muted-foreground">
+                  {tag}
+                </span>
+              ))}
+            </div>
+          )}
+        </div>
+      ))}
+    </div>
 
-    <div class="grid md:grid-cols-3 gap-6">
-      <div class="rounded-lg border border-border bg-card p-6 space-y-3 shadow-sm hover:border-foreground/20 transition-all">
-        <h2 class="text-lg font-bold text-card-foreground">AI & ML Solutions</h2>
-        <p class="text-sm text-muted-foreground leading-relaxed">Developing physics-informed neural networks and surrogate models for complex physical systems.</p>
-      </div>
-
-      <div class="rounded-lg border border-border bg-card p-6 space-y-3 shadow-sm hover:border-foreground/20 transition-all">
-        <h2 class="text-lg font-bold text-card-foreground">Geotechnical Analysis</h2>
-        <p class="text-sm text-muted-foreground leading-relaxed">Advanced finite element modeling (FEA) and reliability assessment for slope stability.</p>
-      </div>
-
-      <div class="rounded-lg border border-border bg-card p-6 space-y-3 shadow-sm hover:border-foreground/20 transition-all">
-        <h2 class="text-lg font-bold text-card-foreground">Automation Scripts</h2>
-        <p class="text-sm text-muted-foreground leading-relaxed">Custom Python tooling to automate complex engineering simulations and data post-processing.</p>
-      </div>
+    <div class="rounded-lg border border-border bg-card p-6 text-center space-y-4">
+      <h3 class="text-lg font-semibold">Interested in working together?</h3>
+      <p class="text-sm text-muted-foreground">
+        Feel free to reach out to discuss your project requirements.
+      </p>
+      <a
+        href="/contact"
+        class="inline-flex items-center justify-center rounded-md bg-primary px-5 py-2.5 text-sm font-medium text-primary-foreground shadow transition-all hover:bg-primary/90"
+      >
+        Get in Touch
+      </a>
     </div>
   </div>
 </Layout>

@@ -6,9 +6,10 @@ const projects = defineCollection({
   schema: z.object({
     title: z.string(),
     description: z.string(),
-    date: z.string().optional(),
     category: z.string().optional(),
     tags: z.array(z.string()).optional(),
+    year: z.number().optional(),
+    featured: z.boolean().optional().default(false),
   }),
 });
 
@@ -17,10 +18,32 @@ const research = defineCollection({
   schema: z.object({
     title: z.string(),
     description: z.string(),
-    date: z.string().optional(),
-    journal: z.string().optional(),
+    type: z.string().optional(),
+    status: z.string().optional(),
+    year: z.number().optional(),
     link: z.string().optional(),
   }),
 });
 
-export const collections = { projects, research };
+const services = defineCollection({
+  loader: glob({ pattern: '**/*.{md,mdx}', base: './src/content/services' }),
+  schema: z.object({
+    title: z.string(),
+    description: z.string(),
+    tags: z.array(z.string()).optional(),
+    order: z.number().optional().default(99),
+  }),
+});
+
+const blog = defineCollection({
+  loader: glob({ pattern: '**/*.{md,mdx}', base: './src/content/blog' }),
+  schema: z.object({
+    title: z.string(),
+    description: z.string(),
+    category: z.string().optional().default('Technical'),
+    date: z.coerce.date(),
+    draft: z.boolean().optional().default(false),
+  }),
+});
+
+export const collections = { projects, research, services, blog };
