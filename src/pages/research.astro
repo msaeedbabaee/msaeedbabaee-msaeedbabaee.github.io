@@ -2,38 +2,38 @@
 import Layout from '../layouts/Layout.astro';
 import { getCollection } from 'astro:content';
 
-const researchPapers = await getCollection('research');
+const researchItems = await getCollection('research');
 ---
 
 <Layout title="Research | Saeed Babaee">
-  <div class="space-y-8">
-    <div class="space-y-2">
+  <div class="space-y-8 max-w-4xl mx-auto">
+    <div>
       <h1 class="text-3xl font-extrabold tracking-tight text-foreground">Research & Publications</h1>
-      <p class="text-sm text-muted-foreground">
-        Academic papers, theses, and computational geotechnical engineering research.
-      </p>
+      <p class="text-muted-foreground mt-2">Academic articles, preprints, and computational geomechanics research.</p>
     </div>
 
-    <div class="h-[1px] w-full bg-border"></div>
-
-    <div class="grid gap-4">
-      {researchPapers.map((paper) => (
-        <div class="rounded-lg border border-border bg-card p-6 space-y-3 shadow-sm hover:border-foreground/20 transition-colors">
-          <div class="flex items-center justify-between">
-            <span class="inline-flex items-center rounded-md border border-border bg-secondary px-2.5 py-0.5 text-xs font-mono text-secondary-foreground">
-              {paper.data.category || 'Paper'}
-            </span>
-            {paper.data.year && <span class="text-xs font-mono text-muted-foreground">{paper.data.year}</span>}
+    {researchItems.length === 0 ? (
+      <div class="rounded-lg border border-border p-8 text-center text-muted-foreground">
+        No research items found.
+      </div>
+    ) : (
+      <div class="space-y-4">
+        {researchItems.map((item) => (
+          <div class="rounded-lg border border-border bg-card p-6 shadow-sm">
+            <div class="flex items-center justify-between text-xs font-mono text-muted-foreground mb-2">
+              <span>{item.data.journal || 'Research Note'}</span>
+              <span>{item.data.date}</span>
+            </div>
+            <h2 class="text-xl font-bold text-card-foreground">{item.data.title}</h2>
+            <p class="text-sm text-muted-foreground mt-2">{item.data.description}</p>
+            {item.data.link && (
+              <a href={item.data.link} target="_blank" class="inline-block mt-4 text-xs font-mono text-primary hover:underline">
+                Read Publication →
+              </a>
+            )}
           </div>
-
-          <div class="space-y-1">
-            <h2 class="text-lg font-bold tracking-tight text-card-foreground">
-              {paper.data.title}
-            </h2>
-            <p class="text-sm text-muted-foreground leading-relaxed">{paper.data.description}</p>
-          </div>
-        </div>
-      ))}
-    </div>
+        ))}
+      </div>
+    )}
   </div>
 </Layout>
