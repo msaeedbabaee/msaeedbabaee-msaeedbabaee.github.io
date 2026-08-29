@@ -23,21 +23,16 @@ const featuredProjects = allProjects.slice(0, 3);
         I specialize in numerical modeling, geotechnical simulation, physics-informed machine learning, and automation for engineering applications.
       </p>
 
-      <!-- دکمه‌های Hero با Hover بهتر -->
       <div class="flex flex-wrap gap-3 pt-2">
         <a
           href="/projects"
-          class="inline-flex items-center justify-center rounded-md bg-primary px-5 py-2.5 
-                 text-sm font-medium text-primary-foreground shadow 
-                 transition-all hover:bg-primary/90 active:scale-[0.98]"
+          class="inline-flex items-center justify-center rounded-md bg-primary px-5 py-2.5 text-sm font-medium text-primary-foreground shadow transition-all hover:bg-primary/90 active:scale-[0.98]"
         >
           View Projects
         </a>
         <a
           href="/contact"
-          class="inline-flex items-center justify-center rounded-md border border-input bg-background 
-                 px-5 py-2.5 text-sm font-medium shadow-sm 
-                 transition-all hover:bg-accent hover:text-accent-foreground active:scale-[0.98]"
+          class="inline-flex items-center justify-center rounded-md border border-input bg-background px-5 py-2.5 text-sm font-medium shadow-sm transition-all hover:bg-accent hover:text-accent-foreground active:scale-[0.98]"
         >
           Get in Touch
         </a>
@@ -58,30 +53,26 @@ const featuredProjects = allProjects.slice(0, 3);
 
       <div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
         {featuredProjects.map((project) => (
-          <!-- کارت پروژه با Hover بهتر -->
           <a
             href={`/projects/${project.id}`}
-            class="group block rounded-lg border border-border bg-card p-5 shadow-sm 
-                   transition-all duration-200 
-                   hover:shadow-md hover:border-primary/40 hover:-translate-y-0.5"
+            class="group block rounded-lg border border-border bg-card p-5 shadow-sm transition-all duration-200 hover:shadow-md hover:border-primary/40 hover:-translate-y-0.5"
           >
             <div class="text-xs font-medium text-muted-foreground uppercase tracking-wide mb-2">
               {project.data.category || 'Project'}
             </div>
-            
+
             <h3 class="text-lg font-semibold text-card-foreground group-hover:text-primary transition-colors">
               {project.data.title}
             </h3>
-            
+
             <p class="text-sm text-muted-foreground mt-2 line-clamp-3 leading-relaxed">
               {project.data.description}
             </p>
-            
+
             {project.data.tags && (
               <div class="flex flex-wrap gap-1.5 mt-4 pt-3 border-t border-border/50">
                 {project.data.tags.map((tag) => (
-                  <span class="rounded-md bg-muted px-2 py-0.5 text-xs text-muted-foreground 
-                               transition-colors group-hover:bg-primary/10 group-hover:text-primary">
+                  <span class="rounded-md bg-muted px-2 py-0.5 text-xs text-muted-foreground transition-colors group-hover:bg-primary/10 group-hover:text-primary">
                     {tag}
                   </span>
                 ))}
