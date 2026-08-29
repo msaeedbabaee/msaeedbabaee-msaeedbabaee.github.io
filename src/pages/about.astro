@@ -1,6 +1,5 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import profileImg from '../../assets/images/profile.jpg';
 ---
 
 <Layout title="About | Saeed Babaee">
@@ -8,9 +7,9 @@ import profileImg from '../../assets/images/profile.jpg';
     <!-- Bio Header -->
     <section class="flex flex-col sm:flex-row items-center sm:items-start gap-6 pt-2">
       <img
-        src={profileImg.src}
+        src="/assets/images/profile.jpg"
         alt="Saeed Babaee"
-        class="w-32 h-32 sm:w-36 sm:h-36 rounded-full object-cover border-2 border-border shadow-md shrink-0"
+        class="w-32 h-32 sm:w-36 sm:h-36 rounded-full object-cover border-2 border-border shadow-md shrink-0 bg-muted"
       />
       <div class="space-y-3 text-center sm:text-left">
         <h1 class="text-3xl sm:text-4xl font-extrabold tracking-tight text-foreground">About Me</h1>
