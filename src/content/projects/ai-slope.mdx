@@ -1,64 +1,14 @@
+
 ---
-title: "ai slope"
-category: "Software & AI"
-description: "A concise summary describing the core engineering problem, numerical model, or machine learning framework."
-image: ""
-technologies:
+title: "AI Slope Stability Analysis"
+category: "AI & Data"
+description: "A machine learning framework for geotechnical slope stability analysis."
+tags:
   - Python
   - PyTorch
   - PLAXIS 3D
-  - Scikit-Learn
-  - Geotechnical Data
-  - Machine Learning
-github: ""
-demo: ""
 year: "2026"
 ---
 
 ## Executive Summary
-Provide a high-level technical overview of the project, highlighting the primary engineering challenge and the computational approach applied.
-
-{/* OPTIONAL: Live Interactive Demo */}
-## Live Interactive Demo
-<div class="demo-container" style="margin: 1.5rem 0;">
-  <iframe src="https://demo.example.com" width="100%" height="450px" style="border: 1px solid var(--border); border-radius: 8px;" loading="lazy"></iframe>
-</div>
-
-{/* OPTIONAL: Theoretical Framework & Equations */}
-## Theoretical Framework & Equations
-Explain the mathematical foundations and constitutive relations:
-
-$$\tau_{f} = c' + (\sigma_n - u) \tan(\phi')$$
-
-$$FS = \frac{\sum (c' \cdot l + (N - U) \tan \phi')}{\sum W \sin \alpha}$$
-
-{/* OPTIONAL: Algorithmic Architecture & Workflow */}
-## Algorithmic Architecture & Workflow
-```mermaid
-graph TD
-    A[Borehole & CPT Data] --> B[Data Preprocessing & Cleaning]
-    B --> C[Feature Extraction]
-    C --> D[PyTorch Neural Network]
-    D --> E[Factor of Safety Calculation]
-    E --> F[PLAXIS 3D Verification]
-{/* OPTIONAL: Implementation & Code Snippet */}
-
-Implementation & Code Snippet
-Python
-import numpy as np
-
-def calculate_factor_of_safety(cohesion: float, phi_deg: float, normal_stress: float) -> float:
-    """Calculates shear strength using Mohr-Coulomb failure criterion."""
-    phi_rad = np.radians(phi_deg)
-    return cohesion + (normal_stress * np.tan(phi_rad))
-{/* OPTIONAL: Visual Analysis & Video Walkthrough */}
-
-Visual Analysis & Video Walkthrough
-Model Mesh & FEA Output
-Figure 1: Finite Element mesh discretization and stress field distribution.
-
-Demonstration Video
-References & Further Reading
-Terzaghi, K., Peck, R. B., & Mesri, G. (1996). Soil Mechanics in Engineering Practice (3rd ed.). John Wiley & Sons.
-
-Bentley Systems. PLAXIS 3D Reference Manual. Documentation Link
+This project applies machine learning algorithms to geotechnical slope stability evaluation and factor of safety prediction.
