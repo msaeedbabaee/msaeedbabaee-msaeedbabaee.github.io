@@ -2,40 +2,40 @@
 import Layout from '../layouts/Layout.astro';
 ---
 
-<Layout title="ارتباط با من | پرتفولیو" description="فرم تماس و راه‌های ارتباطی">
+<Layout title="Contact | Portfolio" description="Contact form and communication details">
   <div class="container mx-auto max-w-screen-md px-4 py-10 md:py-16 space-y-8">
     <!-- Header -->
     <div class="flex flex-col items-center text-center space-y-2 border-b border-border/40 pb-8">
-      <h1 class="text-3xl font-bold tracking-tight sm:text-4xl">ارتباط با من</h1>
+      <h1 class="text-3xl font-bold tracking-tight sm:text-4xl">Get in Touch</h1>
       <p class="text-muted-foreground text-base max-w-[30rem]">
-        جهت همکاری در پروژه‌ها، مشاوره یا مطرح کردن پیشنهادات می‌توانید پیام بفرستید.
+        Feel free to reach out for collaborations, research inquiries, or general questions.
       </p>
     </div>
 
-    <!-- Form Section (shadcn/ui style inputs) -->
+    <!-- Form Section -->
     <div class="rounded-lg border bg-card text-card-foreground shadow-sm p-6 sm:p-8">
       <form class="space-y-6">
         <div class="grid gap-4 sm:grid-cols-2">
           <div class="space-y-2">
             <label class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70" for="name">
-              نام و نام خانوادگی
+              Full Name
             </label>
             <input
               type="text"
               id="name"
-              placeholder="علی محمدی"
+              placeholder="John Doe"
               class="flex h-9 w-full rounded-md border border-input bg-transparent px-3 py-1 text-sm shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50"
             />
           </div>
 
           <div class="space-y-2">
             <label class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70" for="email">
-              ایمیل
+              Email Address
             </label>
             <input
               type="email"
               id="email"
-              placeholder="example@domain.com"
+              placeholder="name@example.com"
               class="flex h-9 w-full rounded-md border border-input bg-transparent px-3 py-1 text-sm shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50"
             />
           </div>
@@ -43,24 +43,24 @@ import Layout from '../layouts/Layout.astro';
 
         <div class="space-y-2">
           <label class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70" for="subject">
-            موضوع
+            Subject
           </label>
           <input
             type="text"
             id="subject"
-            placeholder="موضوع پیام..."
+            placeholder="Inquiry regarding..."
             class="flex h-9 w-full rounded-md border border-input bg-transparent px-3 py-1 text-sm shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50"
           />
         </div>
 
         <div class="space-y-2">
           <label class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70" for="message">
-            متن پیام
+            Message
           </label>
           <textarea
             id="message"
             rows="5"
-            placeholder="پیام خود را بنویسید..."
+            placeholder="Type your message here..."
             class="flex min-h-[60px] w-full rounded-md border border-input bg-transparent px-3 py-2 text-sm shadow-sm transition-colors placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50"
           ></textarea>
         </div>
@@ -69,7 +69,7 @@ import Layout from '../layouts/Layout.astro';
           type="submit"
           class="inline-flex h-10 w-full items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground shadow transition-colors hover:bg-primary/90 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring sm:w-auto"
         >
-          ارسال پیام
+          Send Message
         </button>
       </form>
     </div>

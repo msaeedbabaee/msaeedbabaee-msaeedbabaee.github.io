@@ -7,13 +7,13 @@ interface Props {
 }
 
 const { 
-  title = "پرتفولیو شخصی", 
-  description = "پرتفولیو و رزومه شخصی" 
+  title = "Personal Portfolio", 
+  description = "Personal portfolio and academic resume" 
 } = Astro.props;
 ---
 
 <!DOCTYPE html>
-<html lang="fa" dir="rtl">
+<html lang="en" dir="ltr">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -23,22 +23,21 @@ const {
     <title>{title}</title>
 
     <!-- Inter Font -->
-
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Vazirmatn:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
   </head>
   <body class="min-h-screen bg-background text-foreground antialiased selection:bg-primary selection:text-primary-foreground">
     <header class="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div class="container mx-auto flex h-14 max-w-screen-2xl items-center justify-between px-4">
         <a href="/" class="flex items-center space-x-2 font-bold tracking-tight">
-          <span>لوگو / نام</span>
+          <span>Portfolio</span>
         </a>
         <nav class="flex items-center gap-6 text-sm font-medium">
-          <a href="/projects" class="transition-colors hover:text-foreground/80 text-foreground/60">پروژه‌ها</a>
-          <a href="/research" class="transition-colors hover:text-foreground/80 text-foreground/60">تحقیقات</a>
-          <a href="/about" class="transition-colors hover:text-foreground/80 text-foreground/60">درباره من</a>
-          <a href="/contact" class="inline-flex h-9 items-center justify-center rounded-md bg-primary px-4 text-xs font-medium text-primary-foreground shadow transition-colors hover:bg-primary/90">ارتباط</a>
+          <a href="/projects" class="transition-colors hover:text-foreground/80 text-foreground/60">Projects</a>
+          <a href="/research" class="transition-colors hover:text-foreground/80 text-foreground/60">Research</a>
+          <a href="/about" class="transition-colors hover:text-foreground/80 text-foreground/60">About</a>
+          <a href="/contact" class="inline-flex h-9 items-center justify-center rounded-md bg-primary px-4 text-xs font-medium text-primary-foreground shadow transition-colors hover:bg-primary/90">Contact</a>
         </nav>
       </div>
     </header>
@@ -50,7 +49,7 @@ const {
     <footer class="border-t border-border/40 py-6 md:px-8 md:py-0">
       <div class="container mx-auto flex flex-col items-center justify-between gap-4 md:h-24 md:flex-row px-4">
         <p class="text-balance text-center text-sm leading-loose text-muted-foreground md:text-left">
-          تمامی حقوق محفوظ است.
+          © All rights reserved.
         </p>
       </div>
     </footer>
