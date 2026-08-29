@@ -1,13 +1,14 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import profileImg from '../../assets/images/profile.jpg';
 ---
 
 <Layout title="About | Saeed Babaee">
   <div class="space-y-12 max-w-4xl mx-auto">
-    <!-- Bio Header with Profile Picture -->
+    <!-- Bio Header -->
     <section class="flex flex-col sm:flex-row items-center sm:items-start gap-6 pt-2">
       <img
-        src="/assets/images/profile.jpg"
+        src={profileImg.src}
         alt="Saeed Babaee"
         class="w-32 h-32 sm:w-36 sm:h-36 rounded-full object-cover border-2 border-border shadow-md shrink-0"
       />
@@ -30,9 +31,9 @@ import Layout from '../layouts/Layout.astro';
           <div class="absolute -left-[21px] top-1.5 h-2.5 w-2.5 rounded-full bg-primary"></div>
           <div class="flex items-center justify-between text-xs font-mono text-muted-foreground">
             <span>M.Sc. in Geotechnical Engineering</span>
-            <span>Recent / Ongoing</span>
+            <span>University of Tehran</span>
           </div>
-          <h3 class="text-base font-semibold text-foreground">University of Tehran</h3>
+          <h3 class="text-base font-semibold text-foreground">Advanced Geomechanical Modeling & AI</h3>
           <p class="text-sm text-muted-foreground leading-relaxed">
             Focused on AI integration with slope stability analysis, finite element modeling, and probabilistic geotechnical calculations.
           </p>
@@ -59,14 +60,14 @@ import Layout from '../layouts/Layout.astro';
       </h2>
 
       <div class="grid gap-4 sm:grid-cols-2">
-        <div class="rounded-lg border border-border bg-card p-5 space-y-2">
+        <div class="rounded-lg border border-border bg-card p-5 space-y-2 hover:border-primary/50 transition-colors">
           <h3 class="font-bold text-card-foreground">Machine Learning & Physics-Informed AI</h3>
           <p class="text-sm text-muted-foreground leading-relaxed">
             Developing surrogate models and physics-informed neural networks (PINNs) to accelerate complex geotechnical simulations.
           </p>
         </div>
 
-        <div class="rounded-lg border border-border bg-card p-5 space-y-2">
+        <div class="rounded-lg border border-border bg-card p-5 space-y-2 hover:border-primary/50 transition-colors">
           <h3 class="font-bold text-card-foreground">Numerical Modeling & Automation</h3>
           <p class="text-sm text-muted-foreground leading-relaxed">
             Automating PLAXIS 2D/3D and numerical workflows using Python scripting for large-scale parametric studies.
