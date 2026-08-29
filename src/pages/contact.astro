@@ -3,30 +3,63 @@ import Layout from '../layouts/Layout.astro';
 ---
 
 <Layout title="Contact | Saeed Babaee">
-  <div class="max-w-xl mx-auto space-y-6">
-    <h1 class="text-3xl font-bold tracking-tight">Get in Touch</h1>
-    <p class="text-sm text-muted-foreground">Feel free to reach out for collaborations or inquiries.</p>
+  <div class="space-y-8 max-w-4xl mx-auto">
+    <div>
+      <h1 class="text-3xl font-extrabold tracking-tight text-foreground">Get in Touch</h1>
+      <p class="text-muted-foreground mt-2">Feel free to reach out for research collaborations, consulting, or general inquiries.</p>
+    </div>
 
-    <!-- جایگزینی YOUR_FORMSPREE_ID با شناسه واقعی -->
-    <form action="https://formspree.io/f/YOUR_FORMSPREE_ID" method="POST" class="space-y-4">
-      <div>
-        <label class="block text-sm font-medium mb-1" for="name">Name</label>
-        <input type="text" id="name" name="name" required class="w-full px-3 py-2 rounded-md border border-border bg-background text-foreground focus:outline-none focus:ring-2 focus:ring-primary text-sm" />
+    <div class="grid gap-8 md:grid-cols-5">
+      <!-- Direct Channels -->
+      <div class="md:col-span-2 space-y-6">
+        <div class="rounded-lg border border-border bg-card p-6 space-y-4">
+          <h2 class="text-lg font-bold text-card-foreground">Direct Channels</h2>
+          
+          <div class="space-y-4 text-sm">
+            <div>
+              <span class="block text-xs font-mono text-muted-foreground uppercase mb-1">Email</span>
+              <a href="mailto:msaeedbabaee@gmail.com" class="text-foreground hover:text-primary transition-colors font-medium break-all">
+                msaeedbabaee@gmail.com
+              </a>
+            </div>
+
+            <div>
+              <span class="block text-xs font-mono text-muted-foreground uppercase mb-1">Location</span>
+              <span class="text-foreground font-medium">Iran / Remote</span>
+            </div>
+
+            <div>
+              <span class="block text-xs font-mono text-muted-foreground uppercase mb-1">Profiles</span>
+              <div class="flex flex-wrap gap-2 text-xs font-mono pt-1">
+                <a href="https://github.com/msaeedbabaee" target="_blank" class="rounded bg-secondary px-2 py-1 text-secondary-foreground hover:bg-secondary/80 transition-colors">GitHub</a>
+                <a href="https://linkedin.com/in/msaeedbabaee" target="_blank" class="rounded bg-secondary px-2 py-1 text-secondary-foreground hover:bg-secondary/80 transition-colors">LinkedIn</a>
+                <a href="https://scholar.google.com" target="_blank" class="rounded bg-secondary px-2 py-1 text-secondary-foreground hover:bg-secondary/80 transition-colors">Google Scholar</a>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
 
-      <div>
-        <label class="block text-sm font-medium mb-1" for="email">Email</label>
-        <input type="email" id="email" name="email" required class="w-full px-3 py-2 rounded-md border border-border bg-background text-foreground focus:outline-none focus:ring-2 focus:ring-primary text-sm" />
+      <!-- Contact Form -->
+      <div class="md:col-span-3">
+        <form action="https://formspree.io/f/your-form-id" method="POST" class="space-y-4 rounded-lg border border-border bg-card p-6">
+          <div>
+            <label class="block text-xs font-mono uppercase text-muted-foreground mb-1">Name</label>
+            <input type="text" name="name" required class="w-full rounded-md border border-border bg-background px-3 py-2 text-sm text-foreground focus:outline-none focus:ring-1 focus:ring-primary" placeholder="Your Name" />
+          </div>
+          <div>
+            <label class="block text-xs font-mono uppercase text-muted-foreground mb-1">Email</label>
+            <input type="email" name="email" required class="w-full rounded-md border border-border bg-background px-3 py-2 text-sm text-foreground focus:outline-none focus:ring-1 focus:ring-primary" placeholder="name@example.com" />
+          </div>
+          <div>
+            <label class="block text-xs font-mono uppercase text-muted-foreground mb-1">Message</label>
+            <textarea name="message" rows="4" required class="w-full rounded-md border border-border bg-background px-3 py-2 text-sm text-foreground focus:outline-none focus:ring-1 focus:ring-primary" placeholder="How can I help you?"></textarea>
+          </div>
+          <button type="submit" class="w-full rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground hover:opacity-90 transition-opacity">
+            Send Message
+          </button>
+        </form>
       </div>
-
-      <div>
-        <label class="block text-sm font-medium mb-1" for="message">Message</label>
-        <textarea id="message" name="message" rows="4" required class="w-full px-3 py-2 rounded-md border border-border bg-background text-foreground focus:outline-none focus:ring-2 focus:ring-primary text-sm"></textarea>
-      </div>
-
-      <button type="submit" class="w-full bg-primary text-primary-foreground py-2 px-4 rounded-md text-sm font-medium hover:opacity-90 transition-opacity">
-        Send Message
-      </button>
-    </form>
+    </div>
   </div>
 </Layout>

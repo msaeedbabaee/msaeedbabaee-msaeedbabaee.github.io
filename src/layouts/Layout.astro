@@ -2,96 +2,116 @@
 import '../styles/global.css';
 
 interface Props {
-  title: string;
+  title?: string;
   description?: string;
 }
 
-const { title, description = "Saeed Babaee - Portfolio & Research" } = Astro.props;
+const { title = "Saeed Babaee | Computational Engineer & AI Researcher", description = "Portfolio & Research" } = Astro.props;
+const currentPath = Astro.url.pathname;
+
+const navItems = [
+  { name: 'Home', href: '/' },
+  { name: 'About', href: '/about' },
+  { name: 'Projects', href: '/projects' },
+  { name: 'Research', href: '/research' },
+  { name: 'Services', href: '/services' },
+  { name: 'Contact', href: '/contact' },
+];
 ---
 
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{title}</title>
     <meta name="description" content={description} />
-    <meta property="og:title" content={title} />
-    <meta property="og:description" content={description} />
-    <meta property="og:type" content="website" />
-
     <script is:inline>
       const theme = (() => {
         if (typeof localStorage !== 'undefined' && localStorage.getItem('theme')) {
           return localStorage.getItem('theme');
         }
-        return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+        if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+          return 'dark';
+        }
+        return 'light';
       })();
-      if (theme === 'dark') document.documentElement.classList.add('dark');
+      if (theme === 'dark') {
+        document.documentElement.classList.add('dark');
+      } else {
+        document.documentElement.classList.remove('dark');
+      }
     </script>
   </head>
-  <body class="min-h-screen bg-background text-foreground transition-colors duration-200">
-    <div class="max-w-5xl mx-auto px-6 py-6 flex flex-col min-h-screen">
-      <!-- Navbar -->
-      <header class="flex items-center justify-between py-4 border-b border-border">
-        <a href="/" class="flex items-center gap-2 font-bold text-base tracking-tight">
-          <span class="h-2.5 w-2.5 rounded-full bg-emerald-500"></span>
-          SAEED BABAEE
+  <body class="bg-background text-foreground min-h-screen flex flex-col font-sans antialiased">
+    <header class="sticky top-0 z-40 w-full border-b border-border bg-background/80 backdrop-blur">
+      <div class="max-w-4xl mx-auto flex h-16 items-center justify-between px-4 sm:px-6">
+        <a href="/" class="font-bold text-lg tracking-tight">
+          Saeed<span class="text-primary">.</span>
         </a>
 
         <!-- Desktop Navigation -->
-        <nav class="hidden md:flex items-center gap-6 text-sm font-medium text-muted-foreground">
-          <a href="/services" class="hover:text-foreground transition-colors">Services</a>
-          <a href="/projects" class="hover:text-foreground transition-colors">Projects</a>
-          <a href="/research" class="hover:text-foreground transition-colors">Research</a>
-          <a href="/about" class="hover:text-foreground transition-colors">About</a>
-          <a href="/contact" class="hover:text-foreground transition-colors">Contact</a>
-          <button id="theme-toggle" class="p-2 text-muted-foreground hover:text-foreground" aria-label="Toggle Theme">
-            🌙
-          </button>
+        <nav class="hidden md:flex items-center gap-6 text-sm font-medium">
+          {navItems.map((item) => {
+            const isActive = item.href === '/' 
+              ? currentPath === '/' 
+              : currentPath.startsWith(item.href);
+
+            return (
+              <a
+                href={item.href}
+                class={isActive ? "text-foreground font-semibold border-b-2 border-primary py-1" : "text-muted-foreground hover:text-foreground transition-colors py-1"}
+              >
+                {item.name}
+              </a>
+            );
+          })}
         </nav>
 
-        <!-- Mobile Menu Button -->
-        <button id="mobile-menu-btn" class="md:hidden p-2 text-foreground" aria-label="Toggle Menu">
-          ☰
-        </button>
-      </header>
+        <div class="flex items-center gap-3">
+          <!-- Theme Toggle Button -->
+          <button
+            id="theme-toggle"
+            aria-label="Toggle theme"
+            class="rounded-md border border-border bg-secondary/50 p-2 text-sm text-secondary-foreground hover:bg-secondary transition-colors"
+          >
+            <span id="theme-toggle-icon">🌙</span>
+          </button>
+        </div>
+      </div>
+    </header>
 
-      <!-- Mobile Dropdown -->
-      <nav id="mobile-menu" class="hidden flex-col gap-4 py-4 border-b border-border md:hidden text-sm font-medium">
-        <a href="/services" class="hover:text-primary">Services</a>
-        <a href="/projects" class="hover:text-primary">Projects</a>
-        <a href="/research" class="hover:text-primary">Research</a>
-        <a href="/about" class="hover:text-primary">About</a>
-        <a href="/contact" class="hover:text-primary">Contact</a>
-      </nav>
+    <main class="flex-1 max-w-4xl w-full mx-auto px-4 sm:px-6 py-8 sm:py-12">
+      <slot />
+    </main>
 
-      <!-- Main Content -->
-      <main class="flex-grow py-8">
-        <slot />
-      </main>
-
-      <!-- Footer -->
-      <footer class="py-6 border-t border-border mt-auto flex flex-col md:flex-row justify-between items-center text-xs text-muted-foreground gap-4">
+    <footer class="border-t border-border bg-background py-6">
+      <div class="max-w-4xl mx-auto px-4 sm:px-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-muted-foreground font-mono">
         <p>© {new Date().getFullYear()} Saeed Babaee. All rights reserved.</p>
         <div class="flex gap-4">
           <a href="https://github.com/msaeedbabaee" target="_blank" class="hover:text-foreground">GitHub</a>
-          <a href="https://linkedin.com" target="_blank" class="hover:text-foreground">LinkedIn</a>
-          <a href="mailto:email@example.com" class="hover:text-foreground">Email</a>
+          <a href="https://linkedin.com/in/msaeedbabaee" target="_blank" class="hover:text-foreground">LinkedIn</a>
         </div>
-      </footer>
-    </div>
+      </div>
+    </footer>
 
     <script>
-      // Toggle Theme
-      document.getElementById('theme-toggle')?.addEventListener('click', () => {
+      const toggleBtn = document.getElementById('theme-toggle');
+      const iconSpan = document.getElementById('theme-toggle-icon');
+
+      function updateIcon() {
+        const isDark = document.documentElement.classList.contains('dark');
+        if (iconSpan) {
+          iconSpan.textContent = isDark ? '☀️' : '🌙';
+        }
+      }
+
+      updateIcon();
+
+      toggleBtn?.addEventListener('click', () => {
         const isDark = document.documentElement.classList.toggle('dark');
         localStorage.setItem('theme', isDark ? 'dark' : 'light');
-      });
-
-      // Mobile Menu Toggle
-      document.getElementById('mobile-menu-btn')?.addEventListener('click', () => {
-        document.getElementById('mobile-menu')?.classList.toggle('hidden');
+        updateIcon();
       });
     </script>
   </body>
