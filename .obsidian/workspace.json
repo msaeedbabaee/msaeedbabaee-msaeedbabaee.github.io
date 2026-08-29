@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "_projects/ai slope.md",
+                "file": "_projects/ae.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "ai slope"
+              "title": "ae"
             }
           }
         ]
@@ -191,9 +191,10 @@
   "active": "bac8ab8f788b639e",
   "lastOpenFiles": [
     "_services/Slope Stability.md",
+    "_projects/ae.md",
+    "_templates/post-template.md.md",
     "_projects/ai slope.md",
     "README.md",
-    "_templates/post-template.md.md",
     "_services/slope-analysis.md",
     "_services/sample-service.md",
     "_services/foundation-design.md",
