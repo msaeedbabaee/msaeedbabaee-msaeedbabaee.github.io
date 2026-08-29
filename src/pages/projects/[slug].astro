@@ -1,6 +1,6 @@
 ---
-import { getCollection, render } from 'astro:content';
 import Layout from '../../layouts/Layout.astro';
+import { getCollection, render } from 'astro:content';
 
 export async function getStaticPaths() {
   const projects = await getCollection('projects');
@@ -14,17 +14,19 @@ const { project } = Astro.props;
 const { Content } = await render(project);
 ---
 
-<Layout title={project.data.title || project.id}>
-  <article class="max-w-3xl mx-auto py-8 prose prose-slate">
-    <a href="/projects" class="text-sm text-blue-600 hover:underline mb-4 inline-block">
-      ← Back to Projects
-    </a>
-    <h1 class="text-3xl font-bold mb-4">{project.data.title || project.id}</h1>
-    {project.data.description && (
-      <p class="text-lg text-gray-600 mb-6">{project.data.description}</p>
-    )}
-    <hr class="my-6 border-gray-200" />
-    <div class="content">
+<Layout title={`${project.data.title} | Saeed Babaee`}>
+  <article class="space-y-8">
+    <div class="space-y-3">
+      <a href="/projects" class="text-xs text-muted-foreground hover:text-foreground transition-colors">
+        ← Back to Projects
+      </a>
+      <h1 class="text-3xl font-extrabold tracking-tight text-foreground">{project.data.title}</h1>
+      <p class="text-sm text-muted-foreground">{project.data.description}</p>
+    </div>
+
+    <div class="h-[1px] w-full bg-border"></div>
+
+    <div class="prose prose-neutral dark:prose-invert max-w-none text-foreground">
       <Content />
     </div>
   </article>

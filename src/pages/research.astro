@@ -1,42 +1,36 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
 
-const posts = [
-  {
-    title: "Slope Stability Analysis using Neural Networks",
-    category: "Academic Paper",
-    date: "2026-08-29",
-    summary: "Investigation into incorporating soil constitutive equations into deep learning loss functions for real-time safety calculations."
-  }
-];
+const researchPapers = await getCollection('research');
 ---
 
-<Layout title="Blog & Research | Saeed Babaee">
+<Layout title="Research | Saeed Babaee">
   <div class="space-y-8">
     <div class="space-y-2">
-      <h1 class="text-3xl font-extrabold tracking-tight text-foreground">Research & Technical Notes</h1>
+      <h1 class="text-3xl font-extrabold tracking-tight text-foreground">Research & Publications</h1>
       <p class="text-sm text-muted-foreground">
-        Academic papers, thesis documents, and Quarto technical reports.
+        Academic papers, theses, and computational geotechnical engineering research.
       </p>
     </div>
 
     <div class="h-[1px] w-full bg-border"></div>
 
-    <div class="space-y-4">
-      {posts.map((post) => (
-        <div class="rounded-lg border border-border bg-card p-6 space-y-3 shadow-sm hover:border-accent-foreground/20 transition-colors">
+    <div class="grid gap-4">
+      {researchPapers.map((paper) => (
+        <div class="rounded-lg border border-border bg-card p-6 space-y-3 shadow-sm hover:border-foreground/20 transition-colors">
           <div class="flex items-center justify-between">
-            <span class="inline-flex items-center rounded-md border border-border bg-secondary px-2.5 py-0.5 text-[11px] font-mono font-medium text-secondary-foreground">
-              {post.category}
+            <span class="inline-flex items-center rounded-md border border-border bg-secondary px-2.5 py-0.5 text-xs font-mono text-secondary-foreground">
+              {paper.data.category || 'Paper'}
             </span>
-            <span class="text-xs font-mono text-muted-foreground">{post.date}</span>
+            {paper.data.year && <span class="text-xs font-mono text-muted-foreground">{paper.data.year}</span>}
           </div>
 
           <div class="space-y-1">
-            <h2 class="text-lg font-bold tracking-tight text-card-foreground leading-snug hover:text-muted-foreground transition-colors cursor-pointer">
-              {post.title}
+            <h2 class="text-lg font-bold tracking-tight text-card-foreground">
+              {paper.data.title}
             </h2>
-            <p class="text-xs text-muted-foreground leading-relaxed">{post.summary}</p>
+            <p class="text-sm text-muted-foreground leading-relaxed">{paper.data.description}</p>
           </div>
         </div>
       ))}
