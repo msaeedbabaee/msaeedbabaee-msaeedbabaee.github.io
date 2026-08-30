@@ -43,6 +43,7 @@ const blog = defineCollection({
     category: z.string().optional().default('Technical'),
     date: z.coerce.date(),
     draft: z.boolean().optional().default(false),
+    tags: z.array(z.string()).optional(),
   }),
 });
 
