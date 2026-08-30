@@ -21,7 +21,7 @@ const navItems = [
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{title}</title>
     <meta name="description" content={description} />
-    
+
     <!-- Inter Font -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -41,6 +41,7 @@ const navItems = [
   </head>
 
   <body class="bg-background text-foreground min-h-screen flex flex-col font-sans antialiased">
+    
     <!-- Header -->
     <header class="sticky top-0 z-50 w-full border-b border-border/60 bg-background/80 backdrop-blur-md">
       <div class="max-w-5xl mx-auto flex h-16 items-center justify-between px-4 sm:px-6">
@@ -51,7 +52,7 @@ const navItems = [
         </a>
 
         <!-- Desktop Nav -->
-        <nav class="hidden md:flex items-center gap-6 text-sm font-medium">
+        <nav class="hidden md:flex items-center gap-5 text-sm font-medium">
           {navItems.map((item) => {
             const isActive = pathname === item.href || (item.href !== '/' && pathname.startsWith(item.href));
             return (
@@ -65,10 +66,24 @@ const navItems = [
               </a>
             );
           })}
-          
-          <!-- Dark Mode Toggle -->
+
+          <!-- Search -->
+          <div class="relative">
+            <input
+              type="search"
+              id="site-search"
+              placeholder="Search..."
+              class="h-8 w-36 rounded-md border border-input bg-background px-3 pl-8 text-xs placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring transition-all focus:w-48"
+            />
+            <svg class="absolute left-2.5 top-1/2 -translate-y-1/2 h-3.5 w-3.5 text-muted-foreground pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+            </svg>
+          </div>
+
+          <!-- Dark Mode -->
           <button
             id="theme-toggle"
+            type="button"
             class="rounded-md p-2 text-muted-foreground hover:bg-accent hover:text-foreground transition-colors border border-border/40"
             aria-label="Toggle theme"
           >
@@ -80,14 +95,16 @@ const navItems = [
         <div class="flex items-center gap-2 md:hidden">
           <button
             id="theme-toggle-mobile"
+            type="button"
             class="rounded-md p-2 text-muted-foreground hover:bg-accent border border-border/40"
             aria-label="Toggle theme"
           >
             <span id="theme-icon-mobile" class="text-sm">🌙</span>
           </button>
-          
+
           <button
             id="mobile-menu-btn"
+            type="button"
             class="rounded-md p-2 text-muted-foreground hover:bg-accent border border-border/40"
             aria-label="Toggle Menu"
           >
@@ -108,6 +125,19 @@ const navItems = [
             {item.name}
           </a>
         ))}
+
+        <!-- Mobile Search -->
+        <div class="relative pt-2">
+          <input
+            type="search"
+            id="site-search-mobile"
+            placeholder="Search..."
+            class="h-9 w-full rounded-md border border-input bg-background px-3 pl-9 text-sm placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring"
+          />
+          <svg class="absolute left-3 top-[calc(50%+4px)] -translate-y-1/2 h-4 w-4 text-muted-foreground pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+          </svg>
+        </div>
       </div>
     </header>
 
@@ -143,8 +173,9 @@ const navItems = [
           const isDark = document.documentElement.classList.toggle('dark');
           localStorage.setItem('theme', isDark ? 'dark' : 'light');
           updateIcon();
-          // Sync the other icon too
-          const otherIcon = document.getElementById(iconId === 'theme-icon' ? 'theme-icon-mobile' : 'theme-icon');
+          // Sync other icon
+          const otherId = iconId === 'theme-icon' ? 'theme-icon-mobile' : 'theme-icon';
+          const otherIcon = document.getElementById(otherId);
           if (otherIcon) otherIcon.textContent = isDark ? '☀️' : '🌙';
         });
       }
@@ -158,6 +189,34 @@ const navItems = [
       mobileBtn?.addEventListener('click', () => {
         mobileMenu?.classList.toggle('hidden');
       });
+
+      // Search
+      function handleSearch(inputId) {
+        const input = document.getElementById(inputId);
+        input?.addEventListener('keydown', (e) => {
+          if (e.key === 'Enter') {
+            const q = e.target.value.trim().toLowerCase();
+            if (!q) return;
+
+            const pages = [
+              { keywords: ['project', 'slope', 'plaxis', 'stability', 'tool'], url: '/projects' },
+              { keywords: ['research', 'pinn', 'neural', 'geomechanic', 'publication'], url: '/research' },
+              { keywords: ['service', 'consult', 'ai', 'software', 'modeling', 'ml'], url: '/services' },
+              { keywords: ['blog', 'article', 'post', 'python', 'astro'], url: '/blog' },
+              { keywords: ['about', 'education', 'experience', 'me'], url: '/about' },
+              { keywords: ['contact', 'email', 'message', 'touch'], url: '/contact' },
+            ];
+
+            const match = pages.find(p => 
+              p.keywords.some(k => k.includes(q) || q.includes(k))
+            );
+            window.location.href = match ? match.url : '/projects';
+          }
+        });
+      }
+
+      handleSearch('site-search');
+      handleSearch('site-search-mobile');
     </script>
   </body>
 </html>
