@@ -3,13 +3,18 @@ import Layout from '../layouts/Layout.astro';
 import { getCollection } from 'astro:content';
 
 const allProjects = await getCollection('projects');
-const featuredProjects = allProjects.slice(0, 3);
+const featuredProjects = allProjects
+  .filter((p) => p.data.featured)
+  .slice(0, 3);
+const projectsToShow = featuredProjects.length > 0 
+  ? featuredProjects 
+  : allProjects.slice(0, 3);
 ---
 
 <Layout title="Saeed Babaee | Computational Engineer">
   <div class="space-y-16">
     
-    <!-- Hero Section -->
+    <!-- Hero -->
     <section class="space-y-6 pt-4 sm:pt-8">
       <div class="inline-flex items-center rounded-full border border-border px-3 py-1 text-xs font-medium text-muted-foreground bg-muted/50">
         Computational Engineering & Geotechnics
@@ -52,7 +57,7 @@ const featuredProjects = allProjects.slice(0, 3);
       </div>
 
       <div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-        {featuredProjects.map((project) => (
+        {projectsToShow.map((project) => (
           <a
             href={`/projects/${project.id}`}
             class="group block rounded-lg border border-border bg-card p-5 shadow-sm transition-all duration-200 hover:shadow-md hover:border-primary/40 hover:-translate-y-0.5"
