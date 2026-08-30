@@ -1,0 +1,61 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { getCollection, render } from 'astro:content';
+
+export async function getStaticPaths() {
+  const items = await getCollection('research');
+  return items.map((item) => ({
+    params: { id: item.id },
+    props: { item },
+  }));
+}
+
+const { item } = Astro.props;
+const { Content } = await render(item);
+---
+
+<Layout title={`${item.data.title} | Saeed Babaee`}>
+  <article class="max-w-3xl mx-auto space-y-8">
+    
+    <a href="/research" class="inline-flex items-center text-sm text-muted-foreground hover:text-foreground transition-colors">
+      ← Back to Research
+    </a>
+
+    <header class="space-y-4">
+      <div class="flex flex-wrap items-center gap-2">
+        <span class="rounded-md bg-muted px-2.5 py-1 text-xs font-medium text-muted-foreground">
+          {item.data.type || 'Scientific Publication'}
+        </span>
+        {item.data.year && (
+          <span class="text-xs text-muted-foreground">{item.data.year}</span>
+        )}
+        {item.data.status && (
+          <span class="text-xs text-muted-foreground">{item.data.status}</span>
+        )}
+      </div>
+
+      <h1 class="text-3xl sm:text-4xl font-bold tracking-tight">
+        {item.data.title}
+      </h1>
+
+      <p class="text-lg text-muted-foreground leading-relaxed">
+        {item.data.description}
+      </p>
+
+      {item.data.link && (
+        <a
+          href={item.data.link}
+          target="_blank"
+          class="inline-flex items-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground shadow hover:bg-primary/90 transition-colors"
+        >
+          Read Paper →
+        </a>
+      )}
+    </header>
+
+    <div class="prose prose-neutral dark:prose-invert max-w-none">
+      <Content />
+    </div>
+
+  </article>
+</Layout>
