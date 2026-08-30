@@ -7,7 +7,12 @@ const blog = defineCollection({
     title: z.string(),
     description: z.string(),
     category: z.string().optional().default('Technical'),
-    date: z.string(), // ساده شده به صورت رشته
+    date: z
+      .union([z.string(), z.date()])
+      .transform((val) => {
+        const d = new Date(val);
+        return isNaN(d.getTime()) ? String(val) : d.toISOString().slice(0, 10);
+      }),
     draft: z.boolean().optional().default(false),
     tags: z.array(z.string()).optional(),
   }),
