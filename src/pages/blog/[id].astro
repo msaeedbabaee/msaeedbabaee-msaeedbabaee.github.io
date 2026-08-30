@@ -1,0 +1,54 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { getCollection, render } from 'astro:content';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('blog');
+  return posts
+    .filter((post) => !post.data.draft)
+    .map((post) => ({
+      params: { id: post.id },
+      props: { post },
+    }));
+}
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+---
+
+<Layout title={`${post.data.title} | Saeed Babaee`}>
+  <article class="max-w-3xl mx-auto space-y-8">
+    
+    <a href="/blog" class="inline-flex items-center text-sm text-muted-foreground hover:text-foreground transition-colors">
+      ← Back to Blog
+    </a>
+
+    <header class="space-y-4">
+      <div class="flex flex-wrap items-center gap-2">
+        <span class="rounded-md bg-muted px-2.5 py-1 text-xs font-medium text-muted-foreground">
+          {post.data.category || 'Technical'}
+        </span>
+        <span class="text-xs text-muted-foreground">
+          {post.data.date.toLocaleDateString('en-US', {
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric',
+          })}
+        </span>
+      </div>
+
+      <h1 class="text-3xl sm:text-4xl font-bold tracking-tight">
+        {post.data.title}
+      </h1>
+
+      <p class="text-lg text-muted-foreground leading-relaxed">
+        {post.data.description}
+      </p>
+    </header>
+
+    <div class="prose prose-neutral dark:prose-invert max-w-none">
+      <Content />
+    </div>
+
+  </article>
+</Layout>
