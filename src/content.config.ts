@@ -7,12 +7,7 @@ const blog = defineCollection({
     title: z.string(),
     description: z.string(),
     category: z.string().optional().default('Technical'),
-    date: z
-      .union([z.string(), z.date()])
-      .transform((val) => {
-        const d = new Date(val);
-        return isNaN(d.getTime()) ? String(val) : d.toISOString().slice(0, 10);
-      }),
+    date: z.coerce.date(), // تبدیل خودکار به شیء Date جهت پشتیبانی از toLocaleDateString()
     draft: z.boolean().optional().default(false),
     tags: z.array(z.string()).optional(),
   }),
