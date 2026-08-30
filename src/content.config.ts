@@ -7,7 +7,7 @@ const blog = defineCollection({
     title: z.string(),
     description: z.string(),
     category: z.string().optional().default('Technical'),
-    date: z.coerce.date(),
+    date: z.string(), // ساده شده به صورت رشته
     draft: z.boolean().optional().default(false),
     tags: z.array(z.string()).optional(),
   }),
