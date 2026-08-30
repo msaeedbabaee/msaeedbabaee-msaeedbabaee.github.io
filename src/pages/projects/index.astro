@@ -3,6 +3,9 @@ import Layout from '../../layouts/Layout.astro';
 import { getCollection } from 'astro:content';
 
 const projects = await getCollection('projects');
+
+// استخراج همه تگ‌ها
+const allTags = [...new Set(projects.flatMap((p) => p.data.tags || []))].sort();
 ---
 
 <Layout title="Projects | Saeed Babaee">
@@ -14,11 +17,33 @@ const projects = await getCollection('projects');
       </p>
     </div>
 
-    <div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+    <!-- Filter Tags -->
+    {allTags.length > 0 && (
+      <div class="flex flex-wrap items-center gap-2" id="tag-filters">
+        <button
+          data-tag="all"
+          class="filter-btn active inline-flex items-center rounded-md border border-primary bg-primary px-3 py-1 text-xs font-medium text-primary-foreground transition-colors"
+        >
+          All
+        </button>
+        {allTags.map((tag) => (
+          <button
+            data-tag={tag}
+            class="filter-btn inline-flex items-center rounded-md border border-border bg-background px-3 py-1 text-xs font-medium text-muted-foreground transition-colors hover:bg-accent hover:text-accent-foreground"
+          >
+            {tag}
+          </button>
+        ))}
+      </div>
+    )}
+
+    <!-- Projects Grid -->
+    <div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-3" id="projects-grid">
       {projects.map((project) => (
         <a
           href={`/projects/${project.id}`}
-          class="group block rounded-lg border border-border bg-card p-5 shadow-sm transition-all duration-200 hover:shadow-md hover:border-primary/40 hover:-translate-y-0.5"
+          data-tags={(project.data.tags || []).join(',')}
+          class="project-card group block rounded-lg border border-border bg-card p-5 shadow-sm transition-all duration-200 hover:shadow-md hover:border-primary/40 hover:-translate-y-0.5"
         >
           <div class="flex items-center justify-between mb-2">
             <span class="text-xs font-medium text-muted-foreground uppercase tracking-wide">
@@ -49,5 +74,41 @@ const projects = await getCollection('projects');
         </a>
       ))}
     </div>
+
+    <!-- Empty state -->
+    <p id="no-results" class="hidden text-center text-sm text-muted-foreground py-8">
+      No projects match this filter.
+    </p>
   </div>
+
+  <script>
+    const buttons = document.querySelectorAll('.filter-btn');
+    const cards = document.querySelectorAll('.project-card');
+    const noResults = document.getElementById('no-results');
+
+    buttons.forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const tag = btn.getAttribute('data-tag');
+
+        // Update active button style
+        buttons.forEach((b) => {
+          b.classList.remove('bg-primary', 'text-primary-foreground', 'border-primary', 'active');
+          b.classList.add('bg-background', 'text-muted-foreground', 'border-border');
+        });
+        btn.classList.add('bg-primary', 'text-primary-foreground', 'border-primary', 'active');
+        btn.classList.remove('bg-background', 'text-muted-foreground', 'border-border');
+
+        // Filter cards
+        let visible = 0;
+        cards.forEach((card) => {
+          const cardTags = (card.getAttribute('data-tags') || '').split(',');
+          const show = tag === 'all' || cardTags.includes(tag);
+          card.classList.toggle('hidden', !show);
+          if (show) visible++;
+        });
+
+        noResults?.classList.toggle('hidden', visible > 0);
+      });
+    });
+  </script>
 </Layout>
