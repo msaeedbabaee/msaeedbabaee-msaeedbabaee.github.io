@@ -7,7 +7,6 @@ const researchItems = await getCollection('research');
 
 <Layout title="Research | Saeed Babaee">
   <div class="space-y-8">
-    
     <div class="space-y-2">
       <h1 class="text-3xl font-bold tracking-tight">Research & Publications</h1>
       <p class="text-muted-foreground">
@@ -18,7 +17,7 @@ const researchItems = await getCollection('research');
     <div class="space-y-4">
       {researchItems.length > 0 ? (
         researchItems.map((item) => (
-          <article class="group rounded-lg border border-border bg-card p-5 shadow-sm transition-all duration-200 hover:shadow-md hover:border-primary/40">
+          <article class="group rounded-lg border border-border bg-card p-5 shadow-sm transition-all duration-200 hover:shadow-md hover:border-primary/40 hover:-translate-y-0.5">
             <div class="flex flex-wrap items-center gap-2 mb-2">
               <span class="rounded-md bg-muted px-2 py-0.5 text-xs font-medium text-muted-foreground">
                 {item.data.type || 'Scientific Publication'}
@@ -27,26 +26,21 @@ const researchItems = await getCollection('research');
                 <span class="text-xs text-muted-foreground">{item.data.year}</span>
               )}
             </div>
-            
+
             <h2 class="text-lg font-semibold text-card-foreground group-hover:text-primary transition-colors">
               {item.data.title}
             </h2>
-            
+
             <p class="text-sm text-muted-foreground mt-2 leading-relaxed">
               {item.data.description}
             </p>
-            
+
             <div class="flex items-center justify-between mt-4 pt-3 border-t border-border/50">
               <span class="text-xs text-muted-foreground">
                 {item.data.status || 'Peer-reviewed'}
               </span>
-              
               {item.data.link ? (
-                <a 
-                  href={item.data.link} 
-                  target="_blank" 
-                  class="text-sm font-medium text-primary hover:underline"
-                >
+                <a href={item.data.link} target="_blank" class="text-sm font-medium text-primary hover:underline">
                   Read paper →
                 </a>
               ) : (
@@ -56,23 +50,18 @@ const researchItems = await getCollection('research');
           </article>
         ))
       ) : (
-        // Fallback if collection is empty
         <article class="rounded-lg border border-border bg-card p-5 shadow-sm">
           <div class="flex flex-wrap items-center gap-2 mb-2">
             <span class="rounded-md bg-muted px-2 py-0.5 text-xs font-medium text-muted-foreground">
               Scientific Publication
             </span>
-            <span class="text-xs text-muted-foreground">2024</span>
           </div>
-          
           <h2 class="text-lg font-semibold text-card-foreground">
             Physics-Informed Neural Networks in Geomechanics
           </h2>
-          
           <p class="text-sm text-muted-foreground mt-2 leading-relaxed">
             A research review on application of PINNs for solving partial differential equations in soil mechanics.
           </p>
-          
           <div class="flex items-center justify-between mt-4 pt-3 border-t border-border/50">
             <span class="text-xs text-muted-foreground">Peer-reviewed</span>
             <span class="text-sm text-muted-foreground">Coming soon</span>
@@ -80,6 +69,5 @@ const researchItems = await getCollection('research');
         </article>
       )}
     </div>
-
   </div>
 </Layout>
