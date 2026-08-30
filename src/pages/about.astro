@@ -24,8 +24,6 @@ import Layout from '../layouts/Layout.astro';
       <h2 class="text-xl font-semibold tracking-tight border-b border-border pb-2">Education</h2>
       
       <div class="relative space-y-8 pl-6 before:absolute before:left-[7px] before:top-2 before:bottom-2 before:w-px before:bg-border">
-        
-        <!-- M.Sc -->
         <div class="relative">
           <div class="absolute -left-6 top-1.5 h-3.5 w-3.5 rounded-full border-2 border-primary bg-background"></div>
           <div class="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-1">
@@ -40,7 +38,6 @@ import Layout from '../layouts/Layout.astro';
           </div>
         </div>
 
-        <!-- B.Sc -->
         <div class="relative">
           <div class="absolute -left-6 top-1.5 h-3.5 w-3.5 rounded-full border-2 border-muted-foreground/40 bg-background"></div>
           <div class="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-1">
@@ -54,7 +51,6 @@ import Layout from '../layouts/Layout.astro';
             <span class="text-xs text-muted-foreground whitespace-nowrap sm:mt-1">Completed</span>
           </div>
         </div>
-
       </div>
     </section>
 
@@ -63,14 +59,14 @@ import Layout from '../layouts/Layout.astro';
       <h2 class="text-xl font-semibold tracking-tight border-b border-border pb-2">Core Specializations</h2>
       
       <div class="grid gap-4 sm:grid-cols-2">
-        <div class="rounded-lg border border-border bg-card p-5 shadow-sm transition-all hover:shadow-md hover:border-primary/30">
+        <div class="rounded-lg border border-border bg-card p-5 shadow-sm transition-all duration-200 hover:shadow-md hover:border-primary/40 hover:-translate-y-0.5">
           <h3 class="font-semibold text-foreground mb-2">Machine Learning & Physics-Informed AI</h3>
           <p class="text-sm text-muted-foreground leading-relaxed">
             Developing surrogate models and physics-informed neural networks (PINNs) to accelerate complex geotechnical simulations.
           </p>
         </div>
         
-        <div class="rounded-lg border border-border bg-card p-5 shadow-sm transition-all hover:shadow-md hover:border-primary/30">
+        <div class="rounded-lg border border-border bg-card p-5 shadow-sm transition-all duration-200 hover:shadow-md hover:border-primary/40 hover:-translate-y-0.5">
           <h3 class="font-semibold text-foreground mb-2">Numerical Modeling & Automation</h3>
           <p class="text-sm text-muted-foreground leading-relaxed">
             Automating PLAXIS 2D/3D and numerical workflows using Python scripting for large-scale parametric studies.
