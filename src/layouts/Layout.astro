@@ -22,7 +22,6 @@ const navItems = [
     <title>{title}</title>
     <meta name="description" content={description} />
 
-    <!-- Inter Font -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
@@ -34,31 +33,27 @@ const navItems = [
         }
         return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
       })();
-      if (theme === 'dark') {
-        document.documentElement.classList.add('dark');
-      }
+      if (theme === 'dark') document.documentElement.classList.add('dark');
     </script>
   </head>
 
   <body class="bg-background text-foreground min-h-screen flex flex-col font-sans antialiased">
-    
-    <!-- Header -->
     <header class="sticky top-0 z-50 w-full border-b border-border/60 bg-background/80 backdrop-blur-md">
-      <div class="max-w-5xl mx-auto flex h-16 items-center justify-between px-4 sm:px-6">
+      <div class="max-w-5xl mx-auto flex h-14 items-center justify-between px-4 sm:px-6 gap-4">
         
         <!-- Logo -->
-        <a href="/" class="text-lg font-bold tracking-tight hover:opacity-80 transition-opacity">
+        <a href="/" class="text-lg font-bold tracking-tight shrink-0 hover:opacity-80 transition-opacity">
           Saeed<span class="text-primary">.</span>
         </a>
 
         <!-- Desktop Nav -->
-        <nav class="hidden md:flex items-center gap-5 text-sm font-medium">
+        <nav class="hidden lg:flex items-center gap-4 text-sm font-medium">
           {navItems.map((item) => {
             const isActive = pathname === item.href || (item.href !== '/' && pathname.startsWith(item.href));
             return (
               <a
                 href={item.href}
-                class={`transition-colors hover:text-foreground ${
+                class={`transition-colors hover:text-foreground whitespace-nowrap ${
                   isActive ? 'text-foreground font-semibold' : 'text-muted-foreground'
                 }`}
               >
@@ -66,21 +61,29 @@ const navItems = [
               </a>
             );
           })}
+        </nav>
 
-          <!-- Search -->
-          <div class="relative">
+        <!-- Right side: Search + Theme + Mobile menu -->
+        <div class="flex items-center gap-2 shrink-0">
+          
+          <!-- Search (always visible on desktop) -->
+          <div class="relative hidden sm:block">
             <input
               type="search"
               id="site-search"
               placeholder="Search..."
-              class="h-8 w-36 rounded-md border border-input bg-background px-3 pl-8 text-xs placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring transition-all focus:w-48"
+              class="h-8 w-28 md:w-36 rounded-md border border-input bg-background px-3 pl-8 text-xs 
+                     placeholder:text-muted-foreground focus-visible:outline-none 
+                     focus-visible:ring-1 focus-visible:ring-ring transition-all focus:w-44"
             />
-            <svg class="absolute left-2.5 top-1/2 -translate-y-1/2 h-3.5 w-3.5 text-muted-foreground pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+            <svg class="absolute left-2.5 top-1/2 -translate-y-1/2 h-3.5 w-3.5 text-muted-foreground pointer-events-none" 
+                 fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
+                    d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
             </svg>
           </div>
 
-          <!-- Dark Mode -->
+          <!-- Theme Toggle -->
           <button
             id="theme-toggle"
             type="button"
@@ -89,23 +92,12 @@ const navItems = [
           >
             <span id="theme-icon" class="text-sm">🌙</span>
           </button>
-        </nav>
 
-        <!-- Mobile Buttons -->
-        <div class="flex items-center gap-2 md:hidden">
-          <button
-            id="theme-toggle-mobile"
-            type="button"
-            class="rounded-md p-2 text-muted-foreground hover:bg-accent border border-border/40"
-            aria-label="Toggle theme"
-          >
-            <span id="theme-icon-mobile" class="text-sm">🌙</span>
-          </button>
-
+          <!-- Mobile Menu Button -->
           <button
             id="mobile-menu-btn"
             type="button"
-            class="rounded-md p-2 text-muted-foreground hover:bg-accent border border-border/40"
+            class="lg:hidden rounded-md p-2 text-muted-foreground hover:bg-accent border border-border/40"
             aria-label="Toggle Menu"
           >
             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -115,38 +107,44 @@ const navItems = [
         </div>
       </div>
 
-      <!-- Mobile Menu -->
-      <div id="mobile-menu" class="hidden md:hidden border-b border-border bg-background px-4 py-3 space-y-1">
-        {navItems.map((item) => (
-          <a
-            href={item.href}
-            class="block py-2.5 text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
-          >
-            {item.name}
-          </a>
-        ))}
+      <!-- Mobile / Tablet Menu -->
+      <div id="mobile-menu" class="hidden lg:hidden border-b border-border bg-background px-4 py-3 space-y-1">
+        {navItems.map((item) => {
+          const isActive = pathname === item.href || (item.href !== '/' && pathname.startsWith(item.href));
+          return (
+            <a
+              href={item.href}
+              class={`block py-2.5 text-sm font-medium transition-colors ${
+                isActive ? 'text-foreground font-semibold' : 'text-muted-foreground hover:text-foreground'
+              }`}
+            >
+              {item.name}
+            </a>
+          );
+        })}
 
         <!-- Mobile Search -->
-        <div class="relative pt-2">
+        <div class="relative pt-2 sm:hidden">
           <input
             type="search"
             id="site-search-mobile"
             placeholder="Search..."
-            class="h-9 w-full rounded-md border border-input bg-background px-3 pl-9 text-sm placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring"
+            class="h-9 w-full rounded-md border border-input bg-background px-3 pl-9 text-sm 
+                   placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring"
           />
-          <svg class="absolute left-3 top-[calc(50%+4px)] -translate-y-1/2 h-4 w-4 text-muted-foreground pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+          <svg class="absolute left-3 top-[calc(50%+4px)] -translate-y-1/2 h-4 w-4 text-muted-foreground pointer-events-none" 
+               fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
+                  d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
           </svg>
         </div>
       </div>
     </header>
 
-    <!-- Main -->
     <main class="flex-1 max-w-5xl w-full mx-auto px-4 sm:px-6 py-8 sm:py-12">
       <slot />
     </main>
 
-    <!-- Footer -->
     <footer class="border-t border-border/60 py-6">
       <div class="max-w-5xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4 px-4 sm:px-6 text-xs text-muted-foreground">
         <p>© {new Date().getFullYear()} Saeed Babaee. All rights reserved.</p>
@@ -158,65 +156,48 @@ const navItems = [
     </footer>
 
     <script>
-      // Theme Toggle
-      function setupThemeToggle(btnId, iconId) {
+      // Theme
+      function setupTheme(btnId, iconId) {
         const btn = document.getElementById(btnId);
         const icon = document.getElementById(iconId);
-
-        function updateIcon() {
-          const isDark = document.documentElement.classList.contains('dark');
-          if (icon) icon.textContent = isDark ? '☀️' : '🌙';
-        }
-        updateIcon();
-
+        const update = () => {
+          const dark = document.documentElement.classList.contains('dark');
+          if (icon) icon.textContent = dark ? '☀️' : '🌙';
+        };
+        update();
         btn?.addEventListener('click', () => {
-          const isDark = document.documentElement.classList.toggle('dark');
-          localStorage.setItem('theme', isDark ? 'dark' : 'light');
-          updateIcon();
-          // Sync other icon
-          const otherId = iconId === 'theme-icon' ? 'theme-icon-mobile' : 'theme-icon';
-          const otherIcon = document.getElementById(otherId);
-          if (otherIcon) otherIcon.textContent = isDark ? '☀️' : '🌙';
+          const dark = document.documentElement.classList.toggle('dark');
+          localStorage.setItem('theme', dark ? 'dark' : 'light');
+          update();
         });
       }
+      setupTheme('theme-toggle', 'theme-icon');
 
-      setupThemeToggle('theme-toggle', 'theme-icon');
-      setupThemeToggle('theme-toggle-mobile', 'theme-icon-mobile');
-
-      // Mobile Menu
-      const mobileBtn = document.getElementById('mobile-menu-btn');
-      const mobileMenu = document.getElementById('mobile-menu');
-      mobileBtn?.addEventListener('click', () => {
-        mobileMenu?.classList.toggle('hidden');
+      // Mobile menu
+      document.getElementById('mobile-menu-btn')?.addEventListener('click', () => {
+        document.getElementById('mobile-menu')?.classList.toggle('hidden');
       });
 
       // Search
-      function handleSearch(inputId) {
-        const input = document.getElementById(inputId);
-        input?.addEventListener('keydown', (e) => {
-          if (e.key === 'Enter') {
-            const q = e.target.value.trim().toLowerCase();
-            if (!q) return;
-
-            const pages = [
-              { keywords: ['project', 'slope', 'plaxis', 'stability', 'tool'], url: '/projects' },
-              { keywords: ['research', 'pinn', 'neural', 'geomechanic', 'publication'], url: '/research' },
-              { keywords: ['service', 'consult', 'ai', 'software', 'modeling', 'ml'], url: '/services' },
-              { keywords: ['blog', 'article', 'post', 'python', 'astro'], url: '/blog' },
-              { keywords: ['about', 'education', 'experience', 'me'], url: '/about' },
-              { keywords: ['contact', 'email', 'message', 'touch'], url: '/contact' },
-            ];
-
-            const match = pages.find(p => 
-              p.keywords.some(k => k.includes(q) || q.includes(k))
-            );
-            window.location.href = match ? match.url : '/projects';
-          }
+      function setupSearch(id) {
+        document.getElementById(id)?.addEventListener('keydown', (e) => {
+          if (e.key !== 'Enter') return;
+          const q = e.target.value.trim().toLowerCase();
+          if (!q) return;
+          const pages = [
+            { keys: ['project','slope','plaxis','stability','tool'], url: '/projects' },
+            { keys: ['research','pinn','neural','geomechanic','publication'], url: '/research' },
+            { keys: ['service','consult','ai','software','modeling','ml'], url: '/services' },
+            { keys: ['blog','article','post','python','astro'], url: '/blog' },
+            { keys: ['about','education','experience','me'], url: '/about' },
+            { keys: ['contact','email','message','touch'], url: '/contact' },
+          ];
+          const match = pages.find(p => p.keys.some(k => k.includes(q) || q.includes(k)));
+          window.location.href = match ? match.url : '/projects';
         });
       }
-
-      handleSearch('site-search');
-      handleSearch('site-search-mobile');
+      setupSearch('site-search');
+      setupSearch('site-search-mobile');
     </script>
   </body>
 </html>
