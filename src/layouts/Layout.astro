@@ -178,24 +178,81 @@ const navItems = [
         document.getElementById('mobile-menu')?.classList.toggle('hidden');
       });
 
-      // Search
-      function setupSearch(id) {
-        document.getElementById(id)?.addEventListener('keydown', (e) => {
+      // ========== Search ==========
+      function setupSearch(inputId) {
+        const input = document.getElementById(inputId);
+        if (!input) return;
+
+        // لیست صفحات + کلمات کلیدی مرتبط
+        const pages = [
+          {
+            title: 'Projects',
+            url: '/projects',
+            keys: ['project', 'projects', 'slope', 'stability', 'plaxis', 'tool', 'assessment', 'fem', 'analysis']
+          },
+          {
+            title: 'Research',
+            url: '/research',
+            keys: ['research', 'publication', 'paper', 'pinn', 'neural', 'geomechanic', 'physics', 'informed']
+          },
+          {
+            title: 'Services',
+            url: '/services',
+            keys: ['service', 'services', 'consult', 'consulting', 'ai', 'ml', 'software', 'modeling', 'freelance']
+          },
+          {
+            title: 'Blog',
+            url: '/blog',
+            keys: ['blog', 'article', 'post', 'python', 'astro', 'tutorial', 'guide']
+          },
+          {
+            title: 'About',
+            url: '/about',
+            keys: ['about', 'me', 'education', 'experience', 'skill', 'bio', 'background']
+          },
+          {
+            title: 'Contact',
+            url: '/contact',
+            keys: ['contact', 'email', 'message', 'touch', 'reach', 'hire']
+          },
+        ];
+
+        input.addEventListener('keydown', (e) => {
           if (e.key !== 'Enter') return;
-          const q = e.target.value.trim().toLowerCase();
+
+          const q = input.value.trim().toLowerCase();
           if (!q) return;
-          const pages = [
-            { keys: ['project','slope','plaxis','stability','tool'], url: '/projects' },
-            { keys: ['research','pinn','neural','geomechanic','publication'], url: '/research' },
-            { keys: ['service','consult','ai','software','modeling','ml'], url: '/services' },
-            { keys: ['blog','article','post','python','astro'], url: '/blog' },
-            { keys: ['about','education','experience','me'], url: '/about' },
-            { keys: ['contact','email','message','touch'], url: '/contact' },
-          ];
-          const match = pages.find(p => p.keys.some(k => k.includes(q) || q.includes(k)));
-          window.location.href = match ? match.url : '/projects';
+
+          // پیدا کردن بهترین تطبیق
+          let best = null;
+          let bestScore = 0;
+
+          for (const page of pages) {
+            let score = 0;
+            for (const key of page.keys) {
+              if (key === q) score += 10;           // تطبیق کامل
+              else if (key.startsWith(q)) score += 5;
+              else if (key.includes(q)) score += 2;
+              else if (q.includes(key)) score += 1;
+            }
+            // تطبیق با عنوان صفحه
+            if (page.title.toLowerCase().includes(q)) score += 8;
+
+            if (score > bestScore) {
+              bestScore = score;
+              best = page;
+            }
+          }
+
+          if (best && bestScore > 0) {
+            window.location.href = best.url;
+          } else {
+            // اگر چیزی پیدا نشد → صفحه پروژه‌ها
+            window.location.href = '/projects';
+          }
         });
       }
+
       setupSearch('site-search');
       setupSearch('site-search-mobile');
     </script>
