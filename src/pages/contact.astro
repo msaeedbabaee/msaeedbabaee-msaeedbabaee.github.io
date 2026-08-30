@@ -15,8 +15,8 @@ import Layout from '../layouts/Layout.astro';
     <div class="grid gap-6 md:grid-cols-5">
       
       <!-- Direct Channels -->
-      <div class="md:col-span-2 rounded-lg border border-border bg-card p-5 shadow-sm space-y-5">
-        <h2 class="font-semibold text-foreground">Direct Channels</h2>
+      <div class="md:col-span-2 rounded-lg border border-border bg-card p-5 shadow-sm transition-all duration-200 hover:shadow-md hover:border-primary/40 hover:-translate-y-0.5">
+        <h2 class="font-semibold text-foreground mb-5">Direct Channels</h2>
         
         <div class="space-y-4 text-sm">
           <div>
@@ -46,8 +46,8 @@ import Layout from '../layouts/Layout.astro';
       </div>
 
       <!-- Contact Form -->
-      <div class="md:col-span-3 rounded-lg border border-border bg-card p-5 shadow-sm">
-        <form class="space-y-4" action="#" method="POST">
+      <div class="md:col-span-3 rounded-lg border border-border bg-card p-5 shadow-sm transition-all duration-200 hover:shadow-md hover:border-primary/40 hover:-translate-y-0.5">
+        <form class="space-y-4" action="https://formspree.io/f/xrpgbzoa" method="POST">
           <div class="grid gap-4 sm:grid-cols-2">
             <div class="space-y-1.5">
               <label for="name" class="text-sm font-medium">Full Name</label>
@@ -56,8 +56,8 @@ import Layout from '../layouts/Layout.astro';
                 id="name"
                 name="name"
                 placeholder="Your name"
-                class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
                 required
+                class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
               />
             </div>
             
@@ -68,8 +68,8 @@ import Layout from '../layouts/Layout.astro';
                 id="email"
                 name="email"
                 placeholder="name@example.com"
-                class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
                 required
+                class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
               />
             </div>
           </div>
@@ -81,7 +81,7 @@ import Layout from '../layouts/Layout.astro';
               id="subject"
               name="subject"
               placeholder="Inquiry regarding..."
-              class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+              class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
             />
           </div>
 
@@ -92,14 +92,14 @@ import Layout from '../layouts/Layout.astro';
               name="message"
               rows="4"
               placeholder="Type your message here..."
-              class="flex w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 resize-none"
               required
+              class="flex w-full rounded-md border border-input bg-background px-3 py-2 text-sm placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring resize-none"
             ></textarea>
           </div>
 
           <button
             type="submit"
-            class="inline-flex items-center justify-center rounded-md bg-primary px-5 py-2.5 text-sm font-medium text-primary-foreground shadow transition-all hover:bg-primary/90 active:scale-[0.98] w-full sm:w-auto"
+            class="inline-flex items-center justify-center rounded-md bg-primary px-5 py-2.5 text-sm font-medium text-primary-foreground shadow transition-all hover:bg-primary/90 active:scale-[0.98]"
           >
             Send Message
           </button>
