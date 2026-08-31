@@ -4,7 +4,7 @@ import { getCollection } from 'astro:content';
 
 const posts = (await getCollection('blog'))
   .filter((post) => !post.data.draft)
-  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+  .sort((a, b) => new Date(b.data.date).valueOf() - new Date(a.data.date).valueOf());
 
 const allCategories = [...new Set(posts.map((p) => p.data.category || 'Technical'))].sort();
 ---
@@ -44,28 +44,42 @@ const allCategories = [...new Set(posts.map((p) => p.data.category || 'Technical
         <a
           href={`/blog/${post.id}`}
           data-cat={post.data.category || 'Technical'}
-          class="post-card group block rounded-lg border border-border bg-card p-5 shadow-sm transition-all duration-200 hover:shadow-md hover:border-primary/40 hover:-translate-y-0.5"
+          class="post-card group block overflow-hidden rounded-lg border border-border bg-card shadow-sm transition-all duration-200 hover:shadow-md hover:border-primary/40 hover:-translate-y-0.5"
         >
-          <div class="flex flex-wrap items-center gap-2 mb-2">
-            <span class="rounded-md bg-muted px-2 py-0.5 text-xs font-medium text-muted-foreground">
-              {post.data.category}
-            </span>
-            <span class="text-xs text-muted-foreground">
-              {post.data.date.toLocaleDateString('en-US', { year: 'numeric', month: 'short' })}
-            </span>
-          </div>
+          <!-- عکس فقط اگر وجود داشته باشد -->
+          {post.data.image && (
+            <div class="aspect-[21/9] w-full overflow-hidden bg-muted">
+              <img
+                src={post.data.image}
+                alt={post.data.title}
+                class="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
+                loading="lazy"
+              />
+            </div>
+          )}
 
-          <h2 class="text-lg font-semibold text-card-foreground group-hover:text-primary transition-colors">
-            {post.data.title}
-          </h2>
+          <div class="p-5">
+            <div class="flex flex-wrap items-center gap-2 mb-2">
+              <span class="rounded-md bg-muted px-2 py-0.5 text-xs font-medium text-muted-foreground">
+                {post.data.category}
+              </span>
+              <span class="text-xs text-muted-foreground">
+                {new Date(post.data.date).toLocaleDateString('en-US', { year: 'numeric', month: 'short' })}
+              </span>
+            </div>
 
-          <p class="text-sm text-muted-foreground mt-2 leading-relaxed">
-            {post.data.description}
-          </p>
+            <h2 class="text-lg font-semibold text-card-foreground group-hover:text-primary transition-colors">
+              {post.data.title}
+            </h2>
 
-          <div class="mt-4 pt-3 border-t border-border/50 flex justify-between items-center">
-            <span class="text-sm text-muted-foreground">Read article</span>
-            <span class="text-sm font-medium text-primary opacity-0 group-hover:opacity-100 transition-opacity">→</span>
+            <p class="text-sm text-muted-foreground mt-2 leading-relaxed">
+              {post.data.description}
+            </p>
+
+            <div class="mt-4 pt-3 border-t border-border/50 flex justify-between items-center">
+              <span class="text-sm text-muted-foreground">Read article</span>
+              <span class="text-sm font-medium text-primary opacity-0 group-hover:opacity-100 transition-opacity">→</span>
+            </div>
           </div>
         </a>
       ))}
