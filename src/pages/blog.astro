@@ -4,7 +4,7 @@ import { getCollection } from 'astro:content';
 
 const posts = (await getCollection('blog'))
   .filter((post) => !post.data.draft)
-  .sort((a, b) => new Date(b.data.date).valueOf() - new Date(a.data.date).valueOf());
+  .sort((a, b) => String(b.data.date).localeCompare(String(a.data.date)));
 
 const allCategories = [...new Set(posts.map((p) => p.data.category || 'Technical'))].sort();
 ---
@@ -18,7 +18,7 @@ const allCategories = [...new Set(posts.map((p) => p.data.category || 'Technical
       </p>
     </div>
 
-    <!-- Category Filters -->
+    {/* فیلتر دسته‌بندی */}
     {allCategories.length > 1 && (
       <div class="flex flex-wrap items-center gap-2">
         <button
@@ -38,17 +38,17 @@ const allCategories = [...new Set(posts.map((p) => p.data.category || 'Technical
       </div>
     )}
 
-    <!-- Posts -->
-    <div class="space-y-4" id="posts-list">
+    {/* گرید کارت‌ها — مثل Projects */}
+    <div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-3" id="posts-list">
       {posts.map((post) => (
         <a
           href={`/blog/${post.id}`}
           data-cat={post.data.category || 'Technical'}
           class="post-card group block overflow-hidden rounded-lg border border-border bg-card shadow-sm transition-all duration-200 hover:shadow-md hover:border-primary/40 hover:-translate-y-0.5"
         >
-          <!-- عکس واقعی یا گرادیان جایگزین -->
+          {/* عکس یا گرادیان */}
           {post.data.image ? (
-            <div class="aspect-[21/9] w-full overflow-hidden bg-muted">
+            <div class="aspect-video w-full overflow-hidden bg-muted">
               <img
                 src={post.data.image}
                 alt={post.data.title}
@@ -57,8 +57,8 @@ const allCategories = [...new Set(posts.map((p) => p.data.category || 'Technical
               />
             </div>
           ) : (
-            <div class="aspect-[21/9] w-full bg-gradient-to-br from-primary/10 via-muted to-secondary/20 flex items-center justify-center">
-              <span class="text-3xl font-bold text-muted-foreground/25 select-none">
+            <div class="aspect-video w-full bg-gradient-to-br from-primary/15 via-muted to-secondary/25 flex items-center justify-center">
+              <span class="text-4xl font-bold text-muted-foreground/30 select-none">
                 {(post.data.title || 'B').charAt(0)}
               </span>
             </div>
@@ -67,10 +67,13 @@ const allCategories = [...new Set(posts.map((p) => p.data.category || 'Technical
           <div class="p-5">
             <div class="flex flex-wrap items-center gap-2 mb-2">
               <span class="rounded-md bg-muted px-2 py-0.5 text-xs font-medium text-muted-foreground">
-                {post.data.category}
+                {post.data.category || 'Technical'}
               </span>
               <span class="text-xs text-muted-foreground">
-                {new Date(post.data.date).toLocaleDateString('en-US', { year: 'numeric', month: 'short' })}
+                {new Date(post.data.date).toLocaleDateString('en-US', {
+                  year: 'numeric',
+                  month: 'short',
+                })}
               </span>
             </div>
 
@@ -78,14 +81,9 @@ const allCategories = [...new Set(posts.map((p) => p.data.category || 'Technical
               {post.data.title}
             </h2>
 
-            <p class="text-sm text-muted-foreground mt-2 leading-relaxed">
+            <p class="text-sm text-muted-foreground mt-2 line-clamp-3 leading-relaxed">
               {post.data.description}
             </p>
-
-            <div class="mt-4 pt-3 border-t border-border/50 flex justify-between items-center">
-              <span class="text-sm text-muted-foreground">Read article</span>
-              <span class="text-sm font-medium text-primary opacity-0 group-hover:opacity-100 transition-opacity">→</span>
-            </div>
           </div>
         </a>
       ))}
