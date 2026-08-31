@@ -44,6 +44,80 @@ const projectsToShow = featuredProjects.length > 0
       </div>
     </section>
 
+    <!-- Services Preview Section -->
+    <section class="space-y-6">
+      <div class="flex items-center justify-between">
+        <div>
+          <h2 class="text-2xl font-bold tracking-tight text-foreground">Services</h2>
+          <p class="text-sm text-muted-foreground mt-1">
+            Specialized engineering services I offer.
+          </p>
+        </div>
+        <a href="/services" class="text-sm font-medium text-primary hover:underline hidden sm:inline-flex">
+          View All →
+        </a>
+      </div>
+
+      <!-- کارت‌ها در یک سطر در دسکتاپ (lg:grid-cols-4) -->
+      <div class="grid gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
+        <a
+          href="/services"
+          class="group rounded-lg border border-border bg-card p-4 shadow-sm transition-all duration-200 hover:shadow-md hover:border-primary/40 hover:-translate-y-0.5 flex flex-col justify-between"
+        >
+          <div>
+            <h3 class="text-base font-semibold text-card-foreground group-hover:text-primary transition-colors mb-1.5">
+              Geotechnical Modeling
+            </h3>
+            <p class="text-xs text-muted-foreground leading-relaxed">
+              Numerical modeling with PLAXIS, slope stability, and soil-structure interaction.
+            </p>
+          </div>
+        </a>
+
+        <a
+          href="/services"
+          class="group rounded-lg border border-border bg-card p-4 shadow-sm transition-all duration-200 hover:shadow-md hover:border-primary/40 hover:-translate-y-0.5 flex flex-col justify-between"
+        >
+          <div>
+            <h3 class="text-base font-semibold text-card-foreground group-hover:text-primary transition-colors mb-1.5">
+              AI & Machine Learning
+            </h3>
+            <p class="text-xs text-muted-foreground leading-relaxed">
+              Physics-informed neural networks, surrogate models, and data-driven simulation tools.
+            </p>
+          </div>
+        </a>
+
+        <a
+          href="/services"
+          class="group rounded-lg border border-border bg-card p-4 shadow-sm transition-all duration-200 hover:shadow-md hover:border-primary/40 hover:-translate-y-0.5 flex flex-col justify-between"
+        >
+          <div>
+            <h3 class="text-base font-semibold text-card-foreground group-hover:text-primary transition-colors mb-1.5">
+              Custom Software
+            </h3>
+            <p class="text-xs text-muted-foreground leading-relaxed">
+              Python automation for PLAXIS workflows, parametric studies, and custom tools.
+            </p>
+          </div>
+        </a>
+
+        <a
+          href="/services"
+          class="group rounded-lg border border-border bg-card p-4 shadow-sm transition-all duration-200 hover:shadow-md hover:border-primary/40 hover:-translate-y-0.5 flex flex-col justify-between"
+        >
+          <div>
+            <h3 class="text-base font-semibold text-card-foreground group-hover:text-primary transition-colors mb-1.5">
+              Consulting
+            </h3>
+            <p class="text-xs text-muted-foreground leading-relaxed">
+              Project-based consulting for geotechnical and computational challenges.
+            </p>
+          </div>
+        </a>
+      </div>
+    </section>
+
     <!-- Featured Projects Section -->
     <section class="space-y-6">
       <div class="flex items-center justify-between">
@@ -111,71 +185,6 @@ const projectsToShow = featuredProjects.length > 0
             )}
           </a>
         ))}
-      </div>
-    </section>
-
-    <!-- Services Preview Section -->
-    <section class="space-y-6">
-      <div class="flex items-center justify-between">
-        <div>
-          <h2 class="text-2xl font-bold tracking-tight text-foreground">Services</h2>
-          <p class="text-sm text-muted-foreground mt-1">
-            Specialized engineering services I offer.
-          </p>
-        </div>
-        <a href="/services" class="text-sm font-medium text-primary hover:underline hidden sm:inline-flex">
-          View All →
-        </a>
-      </div>
-
-      <div class="grid gap-5 sm:grid-cols-2">
-        <a
-          href="/services"
-          class="group rounded-lg border border-border bg-card p-5 shadow-sm transition-all duration-200 hover:shadow-md hover:border-primary/40 hover:-translate-y-0.5"
-        >
-          <h3 class="text-lg font-semibold text-card-foreground group-hover:text-primary transition-colors mb-2">
-            Geotechnical Modeling
-          </h3>
-          <p class="text-sm text-muted-foreground leading-relaxed">
-            Advanced numerical modeling with PLAXIS, slope stability, and soil-structure interaction analysis.
-          </p>
-        </a>
-
-        <a
-          href="/services"
-          class="group rounded-lg border border-border bg-card p-5 shadow-sm transition-all duration-200 hover:shadow-md hover:border-primary/40 hover:-translate-y-0.5"
-        >
-          <h3 class="text-lg font-semibold text-card-foreground group-hover:text-primary transition-colors mb-2">
-            AI & Machine Learning
-          </h3>
-          <p class="text-sm text-muted-foreground leading-relaxed">
-            Physics-informed neural networks, surrogate models, and data-driven tools for engineering simulations.
-          </p>
-        </a>
-
-        <a
-          href="/services"
-          class="group rounded-lg border border-border bg-card p-5 shadow-sm transition-all duration-200 hover:shadow-md hover:border-primary/40 hover:-translate-y-0.5"
-        >
-          <h3 class="text-lg font-semibold text-card-foreground group-hover:text-primary transition-colors mb-2">
-            Custom Software
-          </h3>
-          <p class="text-sm text-muted-foreground leading-relaxed">
-            Python automation for PLAXIS workflows, parametric studies, and specialized engineering tools.
-          </p>
-        </a>
-
-        <a
-          href="/services"
-          class="group rounded-lg border border-border bg-card p-5 shadow-sm transition-all duration-200 hover:shadow-md hover:border-primary/40 hover:-translate-y-0.5"
-        >
-          <h3 class="text-lg font-semibold text-card-foreground group-hover:text-primary transition-colors mb-2">
-            Consulting
-          </h3>
-          <p class="text-sm text-muted-foreground leading-relaxed">
-            Project-based consulting and technical collaboration for geotechnical and computational challenges.
-          </p>
-        </a>
       </div>
     </section>
 
