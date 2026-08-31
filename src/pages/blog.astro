@@ -46,8 +46,8 @@ const allCategories = [...new Set(posts.map((p) => p.data.category || 'Technical
           data-cat={post.data.category || 'Technical'}
           class="post-card group block overflow-hidden rounded-lg border border-border bg-card shadow-sm transition-all duration-200 hover:shadow-md hover:border-primary/40 hover:-translate-y-0.5"
         >
-          <!-- عکس فقط اگر وجود داشته باشد -->
-          {post.data.image && (
+          <!-- عکس واقعی یا گرادیان جایگزین -->
+          {post.data.image ? (
             <div class="aspect-[21/9] w-full overflow-hidden bg-muted">
               <img
                 src={post.data.image}
@@ -55,6 +55,12 @@ const allCategories = [...new Set(posts.map((p) => p.data.category || 'Technical
                 class="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
                 loading="lazy"
               />
+            </div>
+          ) : (
+            <div class="aspect-[21/9] w-full bg-gradient-to-br from-primary/10 via-muted to-secondary/20 flex items-center justify-center">
+              <span class="text-3xl font-bold text-muted-foreground/25 select-none">
+                {(post.data.title || 'B').charAt(0)}
+              </span>
             </div>
           )}
 
