@@ -15,6 +15,7 @@ const allTags = [...new Set(projects.flatMap((p) => p.data.tags || []))].sort();
       </p>
     </div>
 
+    <!-- Tag Filters -->
     {allTags.length > 0 && (
       <div class="flex flex-wrap items-center gap-2" id="tag-filters">
         <button
@@ -34,6 +35,7 @@ const allTags = [...new Set(projects.flatMap((p) => p.data.tags || []))].sort();
       </div>
     )}
 
+    <!-- Projects Grid -->
     <div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-3" id="projects-grid">
       {projects.map((project) => (
         <a
@@ -41,7 +43,8 @@ const allTags = [...new Set(projects.flatMap((p) => p.data.tags || []))].sort();
           data-tags={(project.data.tags || []).join(',')}
           class="project-card group block overflow-hidden rounded-lg border border-border bg-card shadow-sm transition-all duration-200 hover:shadow-md hover:border-primary/40 hover:-translate-y-0.5"
         >
-          {project.data.image && (
+          {/* عکس واقعی یا گرادیان */}
+          {project.data.image ? (
             <div class="aspect-video w-full overflow-hidden bg-muted">
               <img
                 src={project.data.image}
@@ -49,6 +52,12 @@ const allTags = [...new Set(projects.flatMap((p) => p.data.tags || []))].sort();
                 class="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
                 loading="lazy"
               />
+            </div>
+          ) : (
+            <div class="aspect-video w-full bg-gradient-to-br from-primary/15 via-muted to-secondary/25 flex items-center justify-center">
+              <span class="text-4xl font-bold text-muted-foreground/30 select-none">
+                {(project.data.title || 'P').charAt(0)}
+              </span>
             </div>
           )}
 
