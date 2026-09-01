@@ -13,8 +13,8 @@ const projectsToShow = featuredProjects.length > 0
 
 <Layout title="Saeed Babaee | Computational Engineer">
   <div class="space-y-16">
-    
-    <!-- 1. Hero Section -->
+
+    <!-- Hero -->
     <section class="space-y-6 pt-4 sm:pt-8">
       <div class="inline-flex items-center rounded-full border border-border px-3 py-1 text-xs font-medium text-muted-foreground bg-muted/50">
         Computational Engineering & Geotechnics
@@ -44,7 +44,7 @@ const projectsToShow = featuredProjects.length > 0
       </div>
     </section>
 
-    <!-- 2. Featured Projects Section (پروژه‌ها آمده بالا) -->
+    <!-- Featured Projects -->
     <section class="space-y-6">
       <div class="flex items-center justify-between">
         <div>
@@ -60,68 +60,61 @@ const projectsToShow = featuredProjects.length > 0
         {projectsToShow.map((project) => (
           <a
             href={`/projects/${project.id}`}
-            class="group block overflow-hidden rounded-lg border border-border bg-card shadow-sm transition-all duration-200 hover:shadow-md hover:border-primary/40 hover:-translate-y-0.5 flex flex-col justify-between"
+            class="group block overflow-hidden rounded-lg border border-border bg-card shadow-sm transition-all duration-200 hover:shadow-md hover:border-primary/40 hover:-translate-y-0.5"
           >
-            <div>
-              {/* عکس واقعی یا گرادیان جایگزین */}
-              {project.data.image ? (
-                <div class="aspect-video w-full overflow-hidden bg-muted">
-                  <img
-                    src={project.data.image}
-                    alt={project.data.title}
-                    class="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
-                    loading="lazy"
-                  />
-                </div>
-              ) : (
-                <div class="aspect-video w-full bg-gradient-to-br from-primary/15 via-muted to-secondary/25 flex items-center justify-center">
-                  <span class="text-4xl font-bold text-muted-foreground/30 select-none">
-                    {(project.data.title || 'P').charAt(0)}
-                  </span>
-                </div>
-              )}
-
-              {/* محتوای کارت */}
-              <div class="p-5">
-                <div class="text-xs font-medium text-muted-foreground uppercase tracking-wide mb-2">
-                  {project.data.category || 'Project'}
-                </div>
-
-                <h3 class="text-lg font-semibold text-card-foreground group-hover:text-primary transition-colors">
-                  {project.data.title}
-                </h3>
-
-                <p class="text-sm text-muted-foreground mt-2 line-clamp-3 leading-relaxed">
-                  {project.data.description}
-                </p>
+            {project.data.image ? (
+              <div class="aspect-video w-full overflow-hidden bg-muted">
+                <img
+                  src={project.data.image}
+                  alt={project.data.title}
+                  class="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
+                  loading="lazy"
+                />
               </div>
-            </div>
+            ) : (
+              <div class="aspect-video w-full bg-gradient-to-br from-primary/15 via-muted to-secondary/25 flex items-center justify-center">
+                <span class="text-4xl font-bold text-muted-foreground/30 select-none">
+                  {(project.data.title || 'P').charAt(0)}
+                </span>
+              </div>
+            )}
 
-            <!-- تگ‌ها در انتهای کارت -->
-            {project.data.tags && project.data.tags.length > 0 && (
-              <div class="px-5 pb-5 pt-0">
-                <div class="flex flex-wrap gap-1.5 pt-3 border-t border-border/50">
+            <div class="p-5">
+              <div class="text-xs font-medium text-muted-foreground uppercase tracking-wide mb-2">
+                {project.data.category || 'Project'}
+              </div>
+              <h3 class="text-lg font-semibold text-card-foreground group-hover:text-primary transition-colors">
+                {project.data.title}
+              </h3>
+              <p class="text-sm text-muted-foreground mt-2 line-clamp-3 leading-relaxed">
+                {project.data.description}
+              </p>
+              {project.data.outcome && (
+                <p class="text-xs text-primary/80 mt-3 font-medium leading-relaxed">
+                  → {project.data.outcome}
+                </p>
+              )}
+              {project.data.tags && project.data.tags.length > 0 && (
+                <div class="flex flex-wrap gap-1.5 mt-4 pt-3 border-t border-border/50">
                   {project.data.tags.map((tag) => (
                     <span class="rounded-md bg-muted px-2 py-0.5 text-xs text-muted-foreground transition-colors group-hover:bg-primary/10 group-hover:text-primary">
                       {tag}
                     </span>
                   ))}
                 </div>
-              </div>
-            )}
+              )}
+            </div>
           </a>
         ))}
       </div>
     </section>
 
-    <!-- 3. Services Preview Section -->
+    <!-- Services -->
     <section class="space-y-6">
       <div class="flex items-center justify-between">
         <div>
           <h2 class="text-2xl font-bold tracking-tight text-foreground">Services</h2>
-          <p class="text-sm text-muted-foreground mt-1">
-            Specialized engineering services I offer.
-          </p>
+          <p class="text-sm text-muted-foreground mt-1">Specialized engineering services I offer.</p>
         </div>
         <a href="/services" class="text-sm font-medium text-primary hover:underline hidden sm:inline-flex">
           View All →
@@ -129,160 +122,9 @@ const projectsToShow = featuredProjects.length > 0
       </div>
 
       <div class="grid gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
-        <a
-          href="/services"
-          class="group rounded-lg border border-border bg-card p-4 shadow-sm transition-all duration-200 hover:shadow-md hover:border-primary/40 hover:-translate-y-0.5 flex flex-col justify-between"
-        >
-          <div>
-            <h3 class="text-base font-semibold text-card-foreground group-hover:text-primary transition-colors mb-1.5">
-              Geotechnical Modeling
-            </h3>
-            <p class="text-xs text-muted-foreground leading-relaxed">
-              Numerical modeling with PLAXIS, slope stability, and soil-structure interaction.
-            </p>
-          </div>
+        <a href="/services" class="group rounded-lg border border-border bg-card p-4 shadow-sm transition-all duration-200 hover:shadow-md hover:border-primary/40 hover:-translate-y-0.5">
+          <h3 class="text-base font-semibold text-card-foreground group-hover:text-primary transition-colors mb-1.5">Geotechnical Modeling</h3>
+          <p class="text-xs text-muted-foreground leading-relaxed">Numerical modeling with PLAXIS, slope stability, and soil-structure interaction.</p>
         </a>
-
-        <a
-          href="/services"
-          class="group rounded-lg border border-border bg-card p-4 shadow-sm transition-all duration-200 hover:shadow-md hover:border-primary/40 hover:-translate-y-0.5 flex flex-col justify-between"
-        >
-          <div>
-            <h3 class="text-base font-semibold text-card-foreground group-hover:text-primary transition-colors mb-1.5">
-              AI & Machine Learning
-            </h3>
-            <p class="text-xs text-muted-foreground leading-relaxed">
-              Physics-informed neural networks, surrogate models, and data-driven simulation tools.
-            </p>
-          </div>
-        </a>
-
-        <a
-          href="/services"
-          class="group rounded-lg border border-border bg-card p-4 shadow-sm transition-all duration-200 hover:shadow-md hover:border-primary/40 hover:-translate-y-0.5 flex flex-col justify-between"
-        >
-          <div>
-            <h3 class="text-base font-semibold text-card-foreground group-hover:text-primary transition-colors mb-1.5">
-              Custom Software
-            </h3>
-            <p class="text-xs text-muted-foreground leading-relaxed">
-              Python automation for PLAXIS workflows, parametric studies, and custom tools.
-            </p>
-          </div>
-        </a>
-
-        <a
-          href="/services"
-          class="group rounded-lg border border-border bg-card p-4 shadow-sm transition-all duration-200 hover:shadow-md hover:border-primary/40 hover:-translate-y-0.5 flex flex-col justify-between"
-        >
-          <div>
-            <h3 class="text-base font-semibold text-card-foreground group-hover:text-primary transition-colors mb-1.5">
-              Consulting
-            </h3>
-            <p class="text-xs text-muted-foreground leading-relaxed">
-              Project-based consulting for geotechnical and computational challenges.
-            </p>
-          </div>
-        </a>
-      </div>
-    </section>
-
-    <!-- 4. Tech Stack Section -->
-    <section class="space-y-6">
-      <div>
-        <h2 class="text-2xl font-bold tracking-tight text-foreground">Tech Stack</h2>
-        <p class="text-sm text-muted-foreground mt-1">
-          Tools and technologies I work with.
-        </p>
-      </div>
-
-      <div class="space-y-6">
-
-        <!-- Engineering & Simulation -->
-        <div class="space-y-3">
-          <h3 class="text-xs font-medium text-muted-foreground uppercase tracking-wider">
-            Engineering & Simulation
-          </h3>
-          <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3">
-            {[
-              { name: 'PLAXIS 2D/3D', desc: 'FEA' },
-              { name: 'Python', desc: 'Automation' },
-              { name: 'MATLAB', desc: 'Analysis' },
-              { name: 'GeoStudio', desc: 'Geotech' },
-            ].map((item) => (
-              <div class="group flex flex-col items-center justify-center gap-1.5 rounded-lg border border-border bg-card p-4 shadow-sm transition-all duration-200 hover:shadow-md hover:border-primary/40 hover:-translate-y-0.5">
-                <div class="flex h-10 w-10 items-center justify-center rounded-md bg-muted text-sm font-bold text-muted-foreground group-hover:bg-primary/10 group-hover:text-primary transition-colors">
-                  {item.name.charAt(0)}
-                </div>
-                <span class="text-sm font-medium text-foreground text-center">{item.name}</span>
-                <span class="text-[11px] text-muted-foreground">{item.desc}</span>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        <!-- AI & Machine Learning -->
-        <div class="space-y-3">
-          <h3 class="text-xs font-medium text-muted-foreground uppercase tracking-wider">
-            AI & Machine Learning
-          </h3>
-          <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3">
-            {[
-              { name: 'PyTorch', desc: 'Deep Learning' },
-              { name: 'TensorFlow', desc: 'ML Framework' },
-              { name: 'PINNs', desc: 'Physics-Informed' },
-              { name: 'Scikit-learn', desc: 'ML Toolkit' },
-            ].map((item) => (
-              <div class="group flex flex-col items-center justify-center gap-1.5 rounded-lg border border-border bg-card p-4 shadow-sm transition-all duration-200 hover:shadow-md hover:border-primary/40 hover:-translate-y-0.5">
-                <div class="flex h-10 w-10 items-center justify-center rounded-md bg-muted text-sm font-bold text-muted-foreground group-hover:bg-primary/10 group-hover:text-primary transition-colors">
-                  {item.name.charAt(0)}
-                </div>
-                <span class="text-sm font-medium text-foreground text-center">{item.name}</span>
-                <span class="text-[11px] text-muted-foreground">{item.desc}</span>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        <!-- Web & Development -->
-        <div class="space-y-3">
-          <h3 class="text-xs font-medium text-muted-foreground uppercase tracking-wider">
-            Web & Development
-          </h3>
-          <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3">
-            {[
-              { name: 'Astro', desc: 'Static Sites' },
-              { name: 'Tailwind', desc: 'CSS' },
-              { name: 'TypeScript', desc: 'Typed JS' },
-              { name: 'Git', desc: 'Version Control' },
-            ].map((item) => (
-              <div class="group flex flex-col items-center justify-center gap-1.5 rounded-lg border border-border bg-card p-4 shadow-sm transition-all duration-200 hover:shadow-md hover:border-primary/40 hover:-translate-y-0.5">
-                <div class="flex h-10 w-10 items-center justify-center rounded-md bg-muted text-sm font-bold text-muted-foreground group-hover:bg-primary/10 group-hover:text-primary transition-colors">
-                  {item.name.charAt(0)}
-                </div>
-                <span class="text-sm font-medium text-foreground text-center">{item.name}</span>
-                <span class="text-[11px] text-muted-foreground">{item.desc}</span>
-              </div>
-            ))}
-          </div>
-        </div>
-
-      </div>
-    </section>
-
-    <!-- 5. CTA Section (بخش انتهای صفحه) -->
-    <section class="rounded-lg border border-border bg-card p-8 text-center space-y-4 shadow-sm">
-      <h2 class="text-xl font-semibold tracking-tight">Ready to collaborate?</h2>
-      <p class="text-sm text-muted-foreground max-w-md mx-auto">
-        Available for remote consulting, research collaboration, and custom engineering software projects.
-      </p>
-      <a
-        href="/contact"
-        class="inline-flex items-center justify-center rounded-md bg-primary px-6 py-2.5 text-sm font-medium text-primary-foreground shadow transition-all hover:bg-primary/90"
-      >
-        Get in Touch
-      </a>
-    </section>
-
-  </div>
-</Layout>
+        <a href="/services" class="group rounded-lg border border-border bg-card p-4 shadow-sm transition-all duration-200 hover:shadow-md hover:border-primary/40 hover:-translate-y-0.5">
+          <h3 class="text-base font-semibold text-card-foreground group-hover:text-primary 
