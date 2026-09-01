@@ -1,19 +1,16 @@
 ---
 import '../styles/global.css';
-
 const { title = "Saeed Babaee | Computational Engineer", description = "Personal Website & Portfolio of Saeed Babaee" } = Astro.props;
 const pathname = new URL(Astro.request.url).pathname;
-
 const navItems = [
-{ name: 'Projects', href: '/projects' },
-  { name: 'Services', href: '/services' },   // ← جدید (اولویت)
+  { name: 'Projects', href: '/projects' },
+  { name: 'Services', href: '/services' },
   { name: 'Research', href: '/research' },
   { name: 'Blog', href: '/blog' },
   { name: 'About', href: '/about' },
   { name: 'Contact', href: '/contact' },
 ];
 ---
-
 <!DOCTYPE html>
 <html lang="en" class="scroll-smooth">
   <head>
@@ -21,11 +18,9 @@ const navItems = [
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{title}</title>
     <meta name="description" content={description} />
-
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
-
     <script is:inline>
       const theme = (() => {
         if (typeof localStorage !== 'undefined' && localStorage.getItem('theme')) {
@@ -36,7 +31,6 @@ const navItems = [
       if (theme === 'dark') document.documentElement.classList.add('dark');
     </script>
   </head>
-
   <body class="bg-background text-foreground min-h-screen flex flex-col font-sans antialiased">
     <header class="sticky top-0 z-50 w-full border-b border-border/60 bg-background/80 backdrop-blur-md">
       <div class="max-w-5xl mx-auto flex h-14 items-center justify-between px-4 sm:px-6 gap-4">
@@ -45,7 +39,6 @@ const navItems = [
         <a href="/" class="text-lg font-bold tracking-tight shrink-0 hover:opacity-80 transition-opacity">
           Saeed<span class="text-primary">.</span>
         </a>
-
         <!-- Desktop Nav -->
         <nav class="hidden lg:flex items-center gap-4 text-sm font-medium">
           {navItems.map((item) => {
@@ -62,11 +55,10 @@ const navItems = [
             );
           })}
         </nav>
-
         <!-- Right side: Search + Theme + Mobile menu -->
         <div class="flex items-center gap-2 shrink-0">
           
-          <!-- Search (always visible on desktop) -->
+          <!-- Search (desktop) -->
           <div class="relative hidden sm:block">
             <input
               type="search"
@@ -82,7 +74,6 @@ const navItems = [
                     d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
             </svg>
           </div>
-
           <!-- Theme Toggle -->
           <button
             id="theme-toggle"
@@ -92,7 +83,6 @@ const navItems = [
           >
             <span id="theme-icon" class="text-sm">🌙</span>
           </button>
-
           <!-- Mobile Menu Button -->
           <button
             id="mobile-menu-btn"
@@ -106,7 +96,6 @@ const navItems = [
           </button>
         </div>
       </div>
-
       <!-- Mobile / Tablet Menu -->
       <div id="mobile-menu" class="hidden lg:hidden border-b border-border bg-background px-4 py-3 space-y-1">
         {navItems.map((item) => {
@@ -122,7 +111,6 @@ const navItems = [
             </a>
           );
         })}
-
         <!-- Mobile Search -->
         <div class="relative pt-2 sm:hidden">
           <input
@@ -140,23 +128,67 @@ const navItems = [
         </div>
       </div>
     </header>
-
+    <!-- Main Content -->
     <main class="flex-1 max-w-5xl w-full mx-auto px-4 sm:px-6 py-8 sm:py-12">
       <slot />
     </main>
-
-    <footer class="border-t border-border/60 py-6">
-      <div class="max-w-5xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4 px-4 sm:px-6 text-xs text-muted-foreground">
-        <p>© {new Date().getFullYear()} Saeed Babaee. All rights reserved.</p>
-        <div class="flex gap-4">
-          <a href="https://github.com/msaeedbabaee" target="_blank" class="hover:text-foreground transition-colors">GitHub</a>
-          <a href="https://linkedin.com/in/msaeedbabaee" target="_blank" class="hover:text-foreground transition-colors">LinkedIn</a>
+    <!-- Footer -->
+    <footer class="border-t border-border/60 mt-auto">
+      <div class="max-w-5xl mx-auto px-4 sm:px-6 py-10">
+        
+        <div class="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+          
+          <!-- Brand + Availability -->
+          <div class="space-y-3">
+            <a href="/" class="text-lg font-bold tracking-tight hover:opacity-80 transition-opacity">
+              Saeed<span class="text-primary">.</span>
+            </a>
+            <p class="text-sm text-muted-foreground leading-relaxed max-w-xs">
+              Computational Engineer focused on AI, numerical modeling, and geotechnical applications.
+            </p>
+            <p class="text-xs font-medium text-primary">
+              Available for remote consulting
+            </p>
+          </div>
+          <!-- Quick Links -->
+          <div class="space-y-3">
+            <h3 class="text-sm font-semibold text-foreground">Navigate</h3>
+            <div class="flex flex-col gap-2 text-sm text-muted-foreground">
+              <a href="/projects" class="hover:text-foreground transition-colors">Projects</a>
+              <a href="/services" class="hover:text-foreground transition-colors">Services</a>
+              <a href="/research" class="hover:text-foreground transition-colors">Research</a>
+              <a href="/about" class="hover:text-foreground transition-colors">About</a>
+              <a href="/contact" class="hover:text-foreground transition-colors">Contact</a>
+            </div>
+          </div>
+          <!-- Contact & Profiles -->
+          <div class="space-y-3">
+            <h3 class="text-sm font-semibold text-foreground">Connect</h3>
+            <div class="flex flex-col gap-2 text-sm text-muted-foreground">
+              <a href="mailto:msaeedbabaee@gmail.com" class="hover:text-foreground transition-colors">
+                msaeedbabaee@gmail.com
+              </a>
+              <a href="https://github.com/msaeedbabaee" target="_blank" rel="noopener noreferrer" class="hover:text-foreground transition-colors">
+                GitHub
+              </a>
+              <a href="https://linkedin.com/in/msaeedbabaee" target="_blank" rel="noopener noreferrer" class="hover:text-foreground transition-colors">
+                LinkedIn
+              </a>
+              <a href="https://scholar.google.com/citations?user=YOUR_ID" target="_blank" rel="noopener noreferrer" class="hover:text-foreground transition-colors">
+                Google Scholar
+              </a>
+            </div>
+          </div>
+        </div>
+        <!-- Bottom bar -->
+        <div class="mt-10 pt-6 border-t border-border/50 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-muted-foreground">
+          <p>© {new Date().getFullYear()} Saeed Babaee. All rights reserved.</p>
+          <p class="text-muted-foreground/70">Built with Astro · Tailwind · shadcn style</p>
         </div>
       </div>
     </footer>
-
     <script>
-      // Theme
+      // Theme Toggle logic
       function setupTheme(btnId, iconId) {
         const btn = document.getElementById(btnId);
         const icon = document.getElementById(iconId);
@@ -172,18 +204,14 @@ const navItems = [
         });
       }
       setupTheme('theme-toggle', 'theme-icon');
-
-      // Mobile menu
+      // Mobile Menu logic
       document.getElementById('mobile-menu-btn')?.addEventListener('click', () => {
         document.getElementById('mobile-menu')?.classList.toggle('hidden');
       });
-
-      // ========== Search ==========
+      // Search Navigation logic
       function setupSearch(inputId) {
         const input = document.getElementById(inputId);
         if (!input) return;
-
-        // لیست صفحات + کلمات کلیدی مرتبط
         const pages = [
           {
             title: 'Projects',
@@ -216,43 +244,33 @@ const navItems = [
             keys: ['contact', 'email', 'message', 'touch', 'reach', 'hire']
           },
         ];
-
         input.addEventListener('keydown', (e) => {
           if (e.key !== 'Enter') return;
-
           const q = input.value.trim().toLowerCase();
           if (!q) return;
-
-          // پیدا کردن بهترین تطبیق
           let best = null;
           let bestScore = 0;
-
           for (const page of pages) {
             let score = 0;
             for (const key of page.keys) {
-              if (key === q) score += 10;           // تطبیق کامل
+              if (key === q) score += 10;
               else if (key.startsWith(q)) score += 5;
               else if (key.includes(q)) score += 2;
               else if (q.includes(key)) score += 1;
             }
-            // تطبیق با عنوان صفحه
             if (page.title.toLowerCase().includes(q)) score += 8;
-
             if (score > bestScore) {
               bestScore = score;
               best = page;
             }
           }
-
           if (best && bestScore > 0) {
             window.location.href = best.url;
           } else {
-            // اگر چیزی پیدا نشد → صفحه پروژه‌ها
             window.location.href = '/projects';
           }
         });
       }
-
       setupSearch('site-search');
       setupSearch('site-search-mobile');
     </script>
