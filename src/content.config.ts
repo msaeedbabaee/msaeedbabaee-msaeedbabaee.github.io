@@ -7,10 +7,10 @@ const blog = defineCollection({
     title: z.string(),
     description: z.string(),
     category: z.string().optional().default('Technical'),
-    date: z.coerce.date(), // تبدیل خودکار به شیء Date جهت پشتیبانی از toLocaleDateString()
+    date: z.coerce.date(),
     draft: z.boolean().optional().default(false),
     tags: z.array(z.string()).optional(),
-    image: z.string().optional(), // مسیر تصویر (مثلاً "/images/blog/cover.jpg")
+    image: z.string().optional(),
   }),
 });
 
@@ -23,7 +23,7 @@ const projects = defineCollection({
     tags: z.array(z.string()).optional(),
     year: z.number().optional(),
     featured: z.boolean().optional().default(false),
-    image: z.string().optional(), // مسیر تصویر (مثلاً "/images/projects/slope.jpg")
+    image: z.string().optional(),
   }),
 });
 

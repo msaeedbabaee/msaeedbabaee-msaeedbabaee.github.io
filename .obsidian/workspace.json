@@ -11,14 +11,10 @@
             "id": "bac8ab8f788b639e",
             "type": "leaf",
             "state": {
-              "type": "markdown",
-              "state": {
-                "file": "_projects/ae.md",
-                "mode": "source",
-                "source": false
-              },
+              "type": "empty",
+              "state": {},
               "icon": "lucide-file",
-              "title": "ae"
+              "title": "New tab"
             }
           }
         ]
@@ -190,6 +186,7 @@
   },
   "active": "bac8ab8f788b639e",
   "lastOpenFiles": [
+    "src/content/content.rar",
     "_services/Slope Stability.md",
     "_projects/ae.md",
     "_templates/post-template.md.md",
