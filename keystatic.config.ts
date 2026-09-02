@@ -1,7 +1,13 @@
 import { config, collection, fields } from '@keystatic/core';
 
 export default config({
-  storage: { kind: 'local' },
+  storage: {
+    kind: 'github',
+    repo: {
+      owner: 'msaeedbabaee',
+      name: 'msaeedbabaee.github.io',
+    },
+  },
   collections: {
     blog: collection({
       label: 'Blog',
@@ -19,7 +25,6 @@ export default config({
         content: fields.mdx({ label: 'Content' }),
       },
     }),
-
     projects: collection({
       label: 'Projects',
       slugField: 'title',
@@ -36,7 +41,6 @@ export default config({
         content: fields.mdx({ label: 'Content' }),
       },
     }),
-
     services: collection({
       label: 'Services',
       slugField: 'title',
@@ -50,7 +54,6 @@ export default config({
         content: fields.mdx({ label: 'Content' }),
       },
     }),
-
     research: collection({
       label: 'Research & Notes',
       slugField: 'title',
