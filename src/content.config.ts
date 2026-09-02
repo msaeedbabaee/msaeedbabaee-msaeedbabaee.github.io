@@ -1,52 +1,77 @@
-import { defineCollection, z } from 'astro:content';
-import { glob } from 'astro/loaders';
+import { config, collection, fields } from '@keystatic/core';
 
-const blog = defineCollection({
-  loader: glob({ pattern: '**/*.{md,mdx}', base: './src/content/blog' }),
-  schema: z.object({
-    title: z.string(),
-    description: z.string(),
-    category: z.string().optional().default('Technical'),
-    date: z.coerce.date(), // تبدیل خودکار به شیء Date جهت پشتیبانی از toLocaleDateString()
-    draft: z.boolean().optional().default(false),
-    tags: z.array(z.string()).optional(),
-    image: z.string().optional(), // مسیر تصویر (مثلاً "/images/blog/cover.jpg")
-  }),
+export default config({
+  storage: { kind: 'local' },
+  collections: {
+    blog: collection({
+      label: 'Blog',
+      slugField: 'title',
+      path: 'src/content/blog/*',
+      format: { contentField: 'content' },
+      schema: {
+        title: fields.slug({ name: { label: 'Title' } }),
+        description: fields.text({ label: 'Description', multiline: true }),
+        category: fields.text({ label: 'Category', defaultValue: 'Technical' }),
+        date: fields.date({ label: 'Date' }),
+        draft: fields.checkbox({ label: 'Draft', defaultValue: false }),
+        tags: fields.array(fields.text({ label: 'Tag' }), { label: 'Tags' }),
+        image: fields.text({ label: 'Image Path', description: 'e.g. /assets/images/blog/cover.jpg' }),
+        content: fields.mdx({ label: 'Content' }),
+      },
+    }),
+
+    projects: collection({
+      label: 'Projects',
+      slugField: 'title',
+      path: 'src/content/projects/*',
+      format: { contentField: 'content' },
+      schema: {
+        title: fields.slug({ name: { label: 'Title' } }),
+        description: fields.text({ label: 'Description', multiline: true }),
+        category: fields.text({ label: 'Category' }),
+        tags: fields.array(fields.text({ label: 'Tag' }), { label: 'Tags' }),
+        year: fields.integer({ label: 'Year' }),
+        featured: fields.checkbox({ label: 'Featured', defaultValue: false }),
+        image: fields.text({ label: 'Image Path', description: 'e.g. /assets/images/projects/slope.jpg' }),
+        content: fields.mdx({ label: 'Content' }),
+      },
+    }),
+
+    services: collection({
+      label: 'Services',
+      slugField: 'title',
+      path: 'src/content/services/*',
+      format: { contentField: 'content' },
+      schema: {
+        title: fields.slug({ name: { label: 'Title' } }),
+        description: fields.text({ label: 'Description', multiline: true }),
+        tags: fields.array(fields.text({ label: 'Tag' }), { label: 'Tags' }),
+        order: fields.integer({ label: 'Order', defaultValue: 99 }),
+        content: fields.mdx({ label: 'Content' }),
+      },
+    }),
+
+    research: collection({
+      label: 'Research & Notes',
+      slugField: 'title',
+      path: 'src/content/research/*',
+      format: { contentField: 'content' },
+      schema: {
+        title: fields.slug({ name: { label: 'Title' } }),
+        description: fields.text({ label: 'Description', multiline: true }),
+        type: fields.select({
+          label: 'Type',
+          options: [
+            { label: 'Academic Paper / Thesis', value: 'paper' },
+            { label: 'Quarto Report', value: 'quarto' },
+          ],
+          defaultValue: 'paper',
+        }),
+        status: fields.text({ label: 'Status' }),
+        year: fields.integer({ label: 'Year' }),
+        link: fields.url({ label: 'Link' }),
+        content: fields.mdx({ label: 'Abstract / Main Text' }),
+      },
+    }),
+  },
 });
-
-const projects = defineCollection({
-  loader: glob({ pattern: '**/*.{md,mdx}', base: './src/content/projects' }),
-  schema: z.object({
-    title: z.string(),
-    description: z.string(),
-    category: z.string().optional(),
-    tags: z.array(z.string()).optional(),
-    year: z.number().optional(),
-    featured: z.boolean().optional().default(false),
-    image: z.string().optional(), // مسیر تصویر (مثلاً "/images/projects/slope.jpg")
-  }),
-});
-
-const research = defineCollection({
-  loader: glob({ pattern: '**/*.{md,mdx}', base: './src/content/research' }),
-  schema: z.object({
-    title: z.string(),
-    description: z.string(),
-    type: z.string().optional(),
-    status: z.string().optional(),
-    year: z.number().optional(),
-    link: z.string().url().optional(),
-  }),
-});
-
-const services = defineCollection({
-  loader: glob({ pattern: '**/*.{md,mdx}', base: './src/content/services' }),
-  schema: z.object({
-    title: z.string(),
-    description: z.string(),
-    tags: z.array(z.string()).optional(),
-    order: z.number().optional().default(99),
-  }),
-});
-
-export const collections = { blog, projects, research, services };
