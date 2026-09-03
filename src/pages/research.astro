@@ -3,6 +3,7 @@ import Layout from '../layouts/Layout.astro';
 import { getCollection } from 'astro:content';
 
 const researchItems = await getCollection('research');
+const allTags = [...new Set(researchItems.flatMap((r) => r.data.tags || []))].sort();
 ---
 
 <Layout title="Research | Saeed Babaee">
@@ -14,12 +15,49 @@ const researchItems = await getCollection('research');
       </p>
     </div>
 
-    <div class="space-y-4">
+    {researchItems.length > 0 && (
+      <div class="relative max-w-md">
+        <svg class="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-4.35-4.35M17 10.5a6.5 6.5 0 11-13 0 6.5 6.5 0 0113 0z" />
+        </svg>
+        <input
+          id="search-input"
+          type="text"
+          placeholder="Search research by title or description..."
+          class="w-full rounded-md border border-border bg-background py-2 pl-9 pr-3 text-sm placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/40"
+        />
+      </div>
+    )}
+
+    {allTags.length > 0 && (
+      <div class="flex flex-wrap items-center gap-2" id="tag-filters">
+        {allTags.map((tag) => (
+          <button
+            type="button"
+            data-tag={tag}
+            class="filter-btn inline-flex items-center rounded-md border border-border bg-background px-3 py-1 text-xs font-medium text-muted-foreground transition-colors hover:bg-accent hover:text-accent-foreground"
+          >
+            {tag}
+          </button>
+        ))}
+        <button
+          type="button"
+          id="clear-filters"
+          class="hidden inline-flex items-center rounded-md px-2 py-1 text-xs font-medium text-primary hover:underline"
+        >
+          Clear filters
+        </button>
+      </div>
+    )}
+
+    <div class="space-y-4" id="research-list">
       {researchItems.length > 0 ? (
         researchItems.map((item) => (
           <a
-            href={`/research/${item.slug || item.id}`}
-            class="group block rounded-lg border border-border bg-card p-5 shadow-sm transition-all duration-200 hover:shadow-md hover:border-primary/40 hover:-translate-y-0.5"
+            href={`/research/${item.id}`}
+            data-tags={(item.data.tags || []).join(',')}
+            data-search={`${item.data.title} ${item.data.description}`.toLowerCase()}
+            class="research-card group block rounded-lg border border-border bg-card p-5 shadow-sm transition-all duration-200 hover:shadow-md hover:border-primary/40 hover:-translate-y-0.5"
           >
             <div class="flex flex-wrap items-center gap-2 mb-2">
               <span class="rounded-md bg-muted px-2 py-0.5 text-xs font-medium text-muted-foreground">
@@ -37,6 +75,16 @@ const researchItems = await getCollection('research');
             <p class="text-sm text-muted-foreground mt-2 leading-relaxed">
               {item.data.description}
             </p>
+
+            {item.data.tags && item.data.tags.length > 0 && (
+              <div class="flex flex-wrap gap-1.5 mt-3">
+                {item.data.tags.map((tag) => (
+                  <span class="rounded-md bg-muted px-2 py-0.5 text-xs text-muted-foreground transition-colors group-hover:bg-primary/10 group-hover:text-primary">
+                    {tag}
+                  </span>
+                ))}
+              </div>
+            )}
 
             <div class="flex items-center justify-between mt-4 pt-3 border-t border-border/50">
               <span class="text-xs text-muted-foreground">
@@ -68,5 +116,66 @@ const researchItems = await getCollection('research');
         </div>
       )}
     </div>
+
+    <p id="no-results" class="hidden text-center text-sm text-muted-foreground py-8">
+      No research items match your search or filters.
+    </p>
   </div>
+
+  <script>
+    const searchInput = document.getElementById('search-input') as HTMLInputElement | null;
+    const tagButtons = document.querySelectorAll<HTMLButtonElement>('.filter-btn');
+    const clearBtn = document.getElementById('clear-filters');
+    const cards = document.querySelectorAll<HTMLAnchorElement>('.research-card');
+    const noResults = document.getElementById('no-results');
+
+    const activeTags = new Set<string>();
+
+    function applyFilters() {
+      const query = (searchInput?.value || '').trim().toLowerCase();
+      let visible = 0;
+
+      cards.forEach((card) => {
+        const cardTags = (card.getAttribute('data-tags') || '').split(',').filter(Boolean);
+        const cardSearch = card.getAttribute('data-search') || '';
+
+        const matchesTags = activeTags.size === 0 || cardTags.some((t) => activeTags.has(t));
+        const matchesSearch = query === '' || cardSearch.includes(query);
+        const show = matchesTags && matchesSearch;
+
+        card.classList.toggle('hidden', !show);
+        if (show) visible++;
+      });
+
+      noResults?.classList.toggle('hidden', visible > 0);
+      clearBtn?.classList.toggle('hidden', activeTags.size === 0);
+    }
+
+    tagButtons.forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const tag = btn.getAttribute('data-tag') || '';
+        if (activeTags.has(tag)) {
+          activeTags.delete(tag);
+          btn.classList.remove('bg-primary', 'text-primary-foreground', 'border-primary');
+          btn.classList.add('bg-background', 'text-muted-foreground', 'border-border');
+        } else {
+          activeTags.add(tag);
+          btn.classList.add('bg-primary', 'text-primary-foreground', 'border-primary');
+          btn.classList.remove('bg-background', 'text-muted-foreground', 'border-border');
+        }
+        applyFilters();
+      });
+    });
+
+    clearBtn?.addEventListener('click', () => {
+      activeTags.clear();
+      tagButtons.forEach((b) => {
+        b.classList.remove('bg-primary', 'text-primary-foreground', 'border-primary');
+        b.classList.add('bg-background', 'text-muted-foreground', 'border-border');
+      });
+      applyFilters();
+    });
+
+    searchInput?.addEventListener('input', applyFilters);
+  </script>
 </Layout>
