@@ -18,7 +18,7 @@ const services = (await getCollection('services')).sort(
 
     <div class="grid gap-5 sm:grid-cols-2">
       {services.map((service) => (
-        <div class="rounded-lg border border-border bg-card p-6 shadow-sm transition-all duration-200 hover:shadow-md hover:border-primary/40 hover:-translate-y-0.5">
+        <a href={`/services/${service.id}`} class="block rounded-lg border border-border bg-card p-6 shadow-sm transition-all duration-200 hover:shadow-md hover:border-primary/40 hover:-translate-y-0.5">
           <h2 class="text-lg font-semibold text-card-foreground mb-2">
             {service.data.title}
           </h2>
@@ -34,7 +34,7 @@ const services = (await getCollection('services')).sort(
               ))}
             </div>
           )}
-        </div>
+        </a>
       ))}
     </div>
 
