@@ -1,0 +1,22 @@
+---
+// کامپوننت عمومی برای Embed کردن هر چیز iframe-پذیر:
+// دموهای تعاملی (CodePen, StackBlitz, Replit)، نمودارهای تعاملی (Observable, Plotly Chart Studio)،
+// نقشه‌ها، شبیه‌سازها، یا هر پلتفرم دیگری غیر از یوتیوب
+interface Props {
+  url: string;
+  title?: string;
+  height?: number;
+}
+const { url, title = 'Embedded content', height = 480 } = Astro.props;
+---
+<div class="not-prose my-6 w-full overflow-hidden rounded-lg border border-border shadow-sm">
+  <iframe
+    class="w-full"
+    style={{ height: `${height}px` }}
+    src={url}
+    title={title}
+    loading="lazy"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; fullscreen"
+    allowfullscreen
+  ></iframe>
+</div>
