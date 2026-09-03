@@ -1,0 +1,58 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { getCollection, render } from 'astro:content';
+import { mdxComponents } from '../../components/mdx';
+
+export async function getStaticPaths() {
+  const services = await getCollection('services');
+  return services.map((service) => ({
+    params: { id: service.id },
+    props: { service },
+  }));
+}
+
+const { service } = Astro.props;
+const { Content } = await render(service);
+---
+
+<Layout title={`${service.data.title} | Services`} description={service.data.description}>
+  <article class="max-w-3xl mx-auto space-y-8">
+
+    <a href="/services" class="inline-flex items-center text-sm text-muted-foreground hover:text-foreground transition-colors">
+      ← Back to Services
+    </a>
+
+    <header class="space-y-4">
+      <h1 class="text-3xl sm:text-4xl font-bold tracking-tight">
+        {service.data.title}
+      </h1>
+      <p class="text-lg text-muted-foreground leading-relaxed">
+        {service.data.description}
+      </p>
+      {service.data.tags && service.data.tags.length > 0 && (
+        <div class="flex flex-wrap gap-1.5">
+          {service.data.tags.map((tag: string) => (
+            <span class="rounded-md bg-muted px-2 py-0.5 text-xs text-muted-foreground">
+              {tag}
+            </span>
+          ))}
+        </div>
+      )}
+    </header>
+
+    <div class="prose prose-neutral dark:prose-invert max-w-none">
+      <Content components={mdxComponents} />
+    </div>
+
+    <div class="rounded-lg border border-border bg-card p-6 text-center space-y-4 shadow-sm">
+      <h3 class="text-lg font-semibold">Interested in this service?</h3>
+      <a
+        href="/contact"
+        class="inline-flex items-center justify-center rounded-md bg-primary px-5 py-2.5 text-sm font-medium text-primary-foreground shadow transition-all hover:bg-primary/90"
+      >
+        Get in Touch
+      </a>
+    </div>
+
+  </article>
+</Layout>
