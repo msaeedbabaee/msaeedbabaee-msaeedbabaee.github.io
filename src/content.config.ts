@@ -36,6 +36,7 @@ const research = defineCollection({
     status: z.string().optional(),
     year: z.number().optional(),
     link: z.string().url().optional(),
+    tags: z.array(z.string()).optional(),
   }),
 });
 
