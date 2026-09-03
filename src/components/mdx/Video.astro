@@ -1,0 +1,23 @@
+---
+// درج مستقیم فایل ویدیویی (mp4/webm) داخل محتوای MDX
+interface Props {
+  src: string;
+  poster?: string;
+  caption?: string;
+}
+const { src, poster, caption } = Astro.props;
+---
+<figure class="not-prose my-6">
+  <video
+    class="w-full rounded-lg border border-border shadow-sm"
+    src={src}
+    poster={poster}
+    controls
+    preload="metadata"
+  >
+    مرورگر شما از پخش ویدیو پشتیبانی نمی‌کند.
+  </video>
+  {caption && (
+    <figcaption class="mt-2 text-center text-sm text-muted-foreground">{caption}</figcaption>
+  )}
+</figure>
