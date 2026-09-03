@@ -135,6 +135,7 @@ export default config({
         status: fields.text({ label: 'Status' }),
         year: fields.integer({ label: 'Year' }),
         link: fields.url({ label: 'Link' }),
+        tags: fields.array(fields.text({ label: 'Tag' }), { label: 'Tags' }),
         content: fields.mdx({
           label: 'Abstract / Main Text',
           options: {
