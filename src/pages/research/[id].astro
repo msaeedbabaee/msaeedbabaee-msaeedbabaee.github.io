@@ -1,6 +1,7 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 import { getCollection, render } from 'astro:content';
+import { mdxComponents } from '../../components/mdx';
 
 export async function getStaticPaths() {
   const items = await getCollection('research');
@@ -54,7 +55,7 @@ const { Content } = await render(item);
     </header>
 
     <div class="prose prose-neutral dark:prose-invert max-w-none">
-      <Content />
+      <Content components={mdxComponents} />
     </div>
 
   </article>
