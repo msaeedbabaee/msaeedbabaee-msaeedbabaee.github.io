@@ -1,0 +1,30 @@
+{
+  "introHeading": "About Me",
+  "introText": "I am a Computational Engineer and AI Researcher dedicated to bridging numerical modeling in geotechnical engineering with modern machine learning methodologies.",
+  "education": [
+    {
+      "degreeLabel": "M.Sc. in Geotechnical Engineering",
+      "title": "Advanced Geomechanical Modeling & AI",
+      "description": "Focused on AI integration with slope stability analysis, finite element modeling, and probabilistic geotechnical calculations.",
+      "institution": "University of Tehran",
+      "current": true
+    },
+    {
+      "degreeLabel": "B.Sc. in Civil Engineering",
+      "title": "Civil Engineering Department",
+      "description": "Core studies in soil mechanics, structural dynamics, computer programming, and numerical methods.",
+      "institution": "Completed",
+      "current": false
+    }
+  ],
+  "specializations": [
+    {
+      "title": "Machine Learning & Physics-Informed AI",
+      "description": "Developing surrogate models and physics-informed neural networks (PINNs) to accelerate complex geotechnical simulations."
+    },
+    {
+      "title": "Numerical Modeling & Automation",
+      "description": "Automating PLAXIS 2D/3D and numerical workflows using Python scripting for large-scale parametric studies."
+    }
+  ]
+}

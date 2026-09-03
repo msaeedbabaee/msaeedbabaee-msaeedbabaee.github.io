@@ -1,14 +1,25 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import { getCollection } from 'astro:content';
+import { getCollection, getEntry } from 'astro:content';
+import { getSkillVisual } from '../utils/skillVisual';
 
 const allProjects = await getCollection('projects');
 const featuredProjects = allProjects
   .filter((p) => p.data.featured)
   .slice(0, 3);
-const projectsToShow = featuredProjects.length > 0 
-  ? featuredProjects 
+const projectsToShow = featuredProjects.length > 0
+  ? featuredProjects
   : allProjects.slice(0, 3);
+
+const allServices = (await getCollection('services'))
+  .sort((a, b) => (a.data.order ?? 99) - (b.data.order ?? 99))
+  .slice(0, 4);
+
+const settingsEntry = await getEntry('siteSettings', 'settings');
+const settings = settingsEntry!.data;
+
+const techStackEntry = await getEntry('techStack', 'techStack');
+const techStack = techStackEntry!.data;
 ---
 
 <Layout title="Saeed Babaee | Computational Engineer">
@@ -17,15 +28,15 @@ const projectsToShow = featuredProjects.length > 0
     <!-- Hero -->
     <section class="space-y-6 pt-4 sm:pt-8">
       <div class="inline-flex items-center rounded-full border border-border px-3 py-1 text-xs font-medium text-muted-foreground bg-muted/50">
-        Computational Engineering & Geotechnics
+        {settings.heroBadge}
       </div>
-      
+
       <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-foreground leading-tight">
-        Integrating AI & Computational Mechanics
+        {settings.heroHeadline}
       </h1>
-      
+
       <p class="text-lg text-muted-foreground max-w-2xl leading-relaxed">
-        I specialize in numerical modeling, geotechnical simulation, physics-informed machine learning, and automation for engineering applications.
+        {settings.heroSubheadline}
       </p>
 
       <div class="flex flex-wrap gap-3 pt-2">
@@ -89,11 +100,6 @@ const projectsToShow = featuredProjects.length > 0
               <p class="text-sm text-muted-foreground mt-2 line-clamp-3 leading-relaxed">
                 {project.data.description}
               </p>
-              {project.data.outcome && (
-                <p class="text-xs text-primary/80 mt-3 font-medium leading-relaxed">
-                  → {project.data.outcome}
-                </p>
-              )}
               {project.data.tags && project.data.tags.length > 0 && (
                 <div class="flex flex-wrap gap-1.5 mt-4 pt-3 border-t border-border/50">
                   {project.data.tags.map((tag) => (
@@ -122,100 +128,49 @@ const projectsToShow = featuredProjects.length > 0
       </div>
 
       <div class="grid gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
-        <a href="/services" class="group rounded-lg border border-border bg-card p-4 shadow-sm transition-all duration-200 hover:shadow-md hover:border-primary/40 hover:-translate-y-0.5">
-          <h3 class="text-base font-semibold text-card-foreground group-hover:text-primary transition-colors mb-1.5">Geotechnical Modeling</h3>
-          <p class="text-xs text-muted-foreground leading-relaxed">Numerical modeling with PLAXIS, slope stability, and soil-structure interaction.</p>
-        </a>
-        <a href="/services" class="group rounded-lg border border-border bg-card p-4 shadow-sm transition-all duration-200 hover:shadow-md hover:border-primary/40 hover:-translate-y-0.5">
-          <h3 class="text-base font-semibold text-card-foreground group-hover:text-primary transition-colors mb-1.5">AI & Machine Learning</h3>
-          <p class="text-xs text-muted-foreground leading-relaxed">Physics-informed neural networks, surrogate models, and data-driven simulation tools.</p>
-        </a>
-        <a href="/services" class="group rounded-lg border border-border bg-card p-4 shadow-sm transition-all duration-200 hover:shadow-md hover:border-primary/40 hover:-translate-y-0.5">
-          <h3 class="text-base font-semibold text-card-foreground group-hover:text-primary transition-colors mb-1.5">Custom Software</h3>
-          <p class="text-xs text-muted-foreground leading-relaxed">Python automation for PLAXIS workflows, parametric studies, and custom tools.</p>
-        </a>
-        <a href="/services" class="group rounded-lg border border-border bg-card p-4 shadow-sm transition-all duration-200 hover:shadow-md hover:border-primary/40 hover:-translate-y-0.5">
-          <h3 class="text-base font-semibold text-card-foreground group-hover:text-primary transition-colors mb-1.5">Consulting</h3>
-          <p class="text-xs text-muted-foreground leading-relaxed">Project-based consulting for geotechnical and computational challenges.</p>
-        </a>
+        {allServices.map((service) => (
+          <a href={`/services/${service.id}`} class="group rounded-lg border border-border bg-card p-4 shadow-sm transition-all duration-200 hover:shadow-md hover:border-primary/40 hover:-translate-y-0.5">
+            <h3 class="text-base font-semibold text-card-foreground group-hover:text-primary transition-colors mb-1.5">{service.data.title}</h3>
+            <p class="text-xs text-muted-foreground leading-relaxed">{service.data.description}</p>
+          </a>
+        ))}
       </div>
     </section>
 
     <!-- Tech Stack -->
-    <section class="space-y-8">
+    <section id="tech-stack" class="space-y-8 scroll-mt-20">
       <div>
         <h2 class="text-2xl font-bold tracking-tight text-foreground">Tech Stack</h2>
         <p class="text-sm text-muted-foreground mt-1">Tools and technologies I work with.</p>
       </div>
 
       <div class="space-y-8">
-        <div class="space-y-3">
-          <h3 class="text-xs font-semibold text-muted-foreground uppercase tracking-wider">Engineering & Simulation</h3>
-          <div class="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 gap-3">
-            {[
-              { name: 'PLAXIS', color: 'bg-blue-600', letter: 'P' },
-              { name: 'Python', color: 'bg-yellow-500', letter: 'Py' },
-              { name: 'MATLAB', color: 'bg-orange-600', letter: 'M' },
-              { name: 'GeoStudio', color: 'bg-emerald-600', letter: 'G' },
-              { name: 'FEA', color: 'bg-slate-600', letter: 'F' },
-            ].map((item) => (
-              <div class="group flex flex-col items-center gap-2 rounded-xl border border-border bg-card p-4 shadow-sm transition-all duration-200 hover:shadow-md hover:border-primary/40 hover:-translate-y-0.5">
-                <div class={`flex h-12 w-12 items-center justify-center rounded-lg ${item.color} text-white text-sm font-bold shadow-sm`}>
-                  {item.letter}
-                </div>
-                <span class="text-xs font-medium text-foreground text-center leading-tight">{item.name}</span>
-              </div>
-            ))}
+        {techStack.categories.map((category) => (
+          <div class="space-y-3">
+            <h3 class="text-xs font-semibold text-muted-foreground uppercase tracking-wider">{category.name}</h3>
+            <div class="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 gap-3">
+              {category.skills.map((skillName) => {
+                const { color, letter } = getSkillVisual(skillName);
+                return (
+                  <div class="group flex flex-col items-center gap-2 rounded-xl border border-border bg-card p-4 shadow-sm transition-all duration-200 hover:shadow-md hover:border-primary/40 hover:-translate-y-0.5">
+                    <div class={`flex h-12 w-12 items-center justify-center rounded-lg ${color} text-white text-sm font-bold shadow-sm`}>
+                      {letter}
+                    </div>
+                    <span class="text-xs font-medium text-foreground text-center leading-tight">{skillName}</span>
+                  </div>
+                );
+              })}
+            </div>
           </div>
-        </div>
-
-        <div class="space-y-3">
-          <h3 class="text-xs font-semibold text-muted-foreground uppercase tracking-wider">AI & Machine Learning</h3>
-          <div class="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 gap-3">
-            {[
-              { name: 'PyTorch', color: 'bg-orange-500', letter: 'PT' },
-              { name: 'TensorFlow', color: 'bg-amber-500', letter: 'TF' },
-              { name: 'PINNs', color: 'bg-violet-600', letter: 'PN' },
-              { name: 'Scikit-learn', color: 'bg-sky-500', letter: 'Sk' },
-              { name: 'NumPy', color: 'bg-indigo-500', letter: 'Np' },
-            ].map((item) => (
-              <div class="group flex flex-col items-center gap-2 rounded-xl border border-border bg-card p-4 shadow-sm transition-all duration-200 hover:shadow-md hover:border-primary/40 hover:-translate-y-0.5">
-                <div class={`flex h-12 w-12 items-center justify-center rounded-lg ${item.color} text-white text-sm font-bold shadow-sm`}>
-                  {item.letter}
-                </div>
-                <span class="text-xs font-medium text-foreground text-center leading-tight">{item.name}</span>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        <div class="space-y-3">
-          <h3 class="text-xs font-semibold text-muted-foreground uppercase tracking-wider">Web & Development</h3>
-          <div class="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 gap-3">
-            {[
-              { name: 'Astro', color: 'bg-purple-600', letter: 'As' },
-              { name: 'TypeScript', color: 'bg-blue-500', letter: 'TS' },
-              { name: 'Tailwind', color: 'bg-cyan-500', letter: 'Tw' },
-              { name: 'Git', color: 'bg-red-500', letter: 'Git' },
-              { name: 'FastAPI', color: 'bg-teal-600', letter: 'FA' },
-            ].map((item) => (
-              <div class="group flex flex-col items-center gap-2 rounded-xl border border-border bg-card p-4 shadow-sm transition-all duration-200 hover:shadow-md hover:border-primary/40 hover:-translate-y-0.5">
-                <div class={`flex h-12 w-12 items-center justify-center rounded-lg ${item.color} text-white text-sm font-bold shadow-sm`}>
-                  {item.letter}
-                </div>
-                <span class="text-xs font-medium text-foreground text-center leading-tight">{item.name}</span>
-              </div>
-            ))}
-          </div>
-        </div>
+        ))}
       </div>
     </section>
 
     <!-- CTA -->
     <section class="rounded-lg border border-border bg-card p-8 text-center space-y-4 shadow-sm">
-      <h2 class="text-xl font-semibold tracking-tight">Ready to collaborate?</h2>
+      <h2 class="text-xl font-semibold tracking-tight">{settings.ctaHeading}</h2>
       <p class="text-sm text-muted-foreground max-w-md mx-auto">
-        Available for remote consulting, research collaboration, and custom engineering software projects.
+        {settings.ctaText}
       </p>
       <a
         href="/contact"

@@ -1,97 +1,81 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import { getEntry } from 'astro:content';
+
+const aboutEntry = await getEntry('about', 'about');
+const about = aboutEntry!.data;
 ---
 
 <Layout title="About | Saeed Babaee">
   <div class="space-y-12">
-    
+
     <!-- Header -->
     <div class="flex flex-col sm:flex-row items-start gap-6">
       <div class="flex h-20 w-20 shrink-0 items-center justify-center rounded-xl bg-primary text-primary-foreground text-2xl font-bold shadow-sm">
         SB
       </div>
-      
+
       <div class="space-y-3">
-        <h1 class="text-3xl font-bold tracking-tight">About Me</h1>
+        <h1 class="text-3xl font-bold tracking-tight">{about.introHeading}</h1>
         <p class="text-muted-foreground leading-relaxed max-w-2xl">
-          I am a Computational Engineer and AI Researcher dedicated to bridging numerical modeling in geotechnical engineering with modern machine learning methodologies.
+          {about.introText}
         </p>
       </div>
     </div>
 
     <!-- Education -->
-    <section class="space-y-5">
-      <h2 class="text-xl font-semibold tracking-tight border-b border-border pb-2">Education</h2>
-      
-      <div class="relative space-y-8 pl-6 before:absolute before:left-[7px] before:top-2 before:bottom-2 before:w-px before:bg-border">
-        <div class="relative">
-          <div class="absolute -left-6 top-1.5 h-3.5 w-3.5 rounded-full border-2 border-primary bg-background"></div>
-          <div class="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-1">
-            <div>
-              <p class="text-xs font-medium text-muted-foreground">M.Sc. in Geotechnical Engineering</p>
-              <h3 class="font-semibold text-foreground">Advanced Geomechanical Modeling & AI</h3>
-              <p class="text-sm text-muted-foreground mt-1 leading-relaxed">
-                Focused on AI integration with slope stability analysis, finite element modeling, and probabilistic geotechnical calculations.
-              </p>
-            </div>
-            <span class="text-xs text-muted-foreground whitespace-nowrap sm:mt-1">University of Tehran</span>
-          </div>
-        </div>
+    {about.education && about.education.length > 0 && (
+      <section class="space-y-5">
+        <h2 class="text-xl font-semibold tracking-tight border-b border-border pb-2">Education</h2>
 
-        <div class="relative">
-          <div class="absolute -left-6 top-1.5 h-3.5 w-3.5 rounded-full border-2 border-muted-foreground/40 bg-background"></div>
-          <div class="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-1">
-            <div>
-              <p class="text-xs font-medium text-muted-foreground">B.Sc. in Civil Engineering</p>
-              <h3 class="font-semibold text-foreground">Civil Engineering Department</h3>
-              <p class="text-sm text-muted-foreground mt-1 leading-relaxed">
-                Core studies in soil mechanics, structural dynamics, computer programming, and numerical methods.
-              </p>
+        <div class="relative space-y-8 pl-6 before:absolute before:left-[7px] before:top-2 before:bottom-2 before:w-px before:bg-border">
+          {about.education.map((edu) => (
+            <div class="relative">
+              <div class={`absolute -left-6 top-1.5 h-3.5 w-3.5 rounded-full border-2 bg-background ${edu.current ? 'border-primary' : 'border-muted-foreground/40'}`}></div>
+              <div class="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-1">
+                <div>
+                  <p class="text-xs font-medium text-muted-foreground">{edu.degreeLabel}</p>
+                  <h3 class="font-semibold text-foreground">{edu.title}</h3>
+                  <p class="text-sm text-muted-foreground mt-1 leading-relaxed">
+                    {edu.description}
+                  </p>
+                </div>
+                <span class="text-xs text-muted-foreground whitespace-nowrap sm:mt-1">{edu.institution}</span>
+              </div>
             </div>
-            <span class="text-xs text-muted-foreground whitespace-nowrap sm:mt-1">Completed</span>
-          </div>
+          ))}
         </div>
-      </div>
-    </section>
+      </section>
+    )}
 
     <!-- Core Specializations -->
-    <section class="space-y-5">
-      <h2 class="text-xl font-semibold tracking-tight border-b border-border pb-2">
-        Core Specializations
-      </h2>
-      
-      <div class="grid gap-4 sm:grid-cols-2">
-        <div class="group rounded-lg border border-border bg-card p-5 shadow-sm transition-all duration-200 hover:shadow-md hover:border-primary/40 hover:-translate-y-0.5">
-          <h3 class="font-semibold text-foreground mb-2 group-hover:text-primary transition-colors">
-            Machine Learning & Physics-Informed AI
-          </h3>
-          <p class="text-sm text-muted-foreground leading-relaxed">
-            Developing surrogate models and physics-informed neural networks (PINNs) to accelerate complex geotechnical simulations.
-          </p>
+    {about.specializations && about.specializations.length > 0 && (
+      <section class="space-y-5">
+        <h2 class="text-xl font-semibold tracking-tight border-b border-border pb-2">
+          Core Specializations
+        </h2>
+
+        <div class="grid gap-4 sm:grid-cols-2">
+          {about.specializations.map((spec) => (
+            <div class="group rounded-lg border border-border bg-card p-5 shadow-sm transition-all duration-200 hover:shadow-md hover:border-primary/40 hover:-translate-y-0.5">
+              <h3 class="font-semibold text-foreground mb-2 group-hover:text-primary transition-colors">
+                {spec.title}
+              </h3>
+              <p class="text-sm text-muted-foreground leading-relaxed">
+                {spec.description}
+              </p>
+            </div>
+          ))}
         </div>
-        
-        <div class="group rounded-lg border border-border bg-card p-5 shadow-sm transition-all duration-200 hover:shadow-md hover:border-primary/40 hover:-translate-y-0.5">
-          <h3 class="font-semibold text-foreground mb-2 group-hover:text-primary transition-colors">
-            Numerical Modeling & Automation
-          </h3>
-          <p class="text-sm text-muted-foreground leading-relaxed">
-            Automating PLAXIS 2D/3D and numerical workflows using Python scripting for large-scale parametric studies.
-          </p>
-        </div>
-      </div>
-    </section>
+      </section>
+    )}
 
     <!-- Technical Stack -->
     <section class="space-y-5">
       <h2 class="text-xl font-semibold tracking-tight border-b border-border pb-2">Technical Stack</h2>
-      
-      <div class="flex flex-wrap gap-2">
-        {['Python', 'PyTorch', 'TensorFlow', 'PLAXIS 2D/3D', 'Geotechnical FEA', 'TypeScript', 'Astro', 'Tailwind CSS', 'FastAPI', 'Git / CI/CD'].map((skill) => (
-          <span class="rounded-md border border-border bg-muted/50 px-3 py-1.5 text-sm text-foreground">
-            {skill}
-          </span>
-        ))}
-      </div>
+      <p class="text-sm text-muted-foreground">
+        See the full breakdown on the <a href="/#tech-stack" class="text-primary hover:underline">homepage Tech Stack section</a>.
+      </p>
     </section>
 
   </div>

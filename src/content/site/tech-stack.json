@@ -1,0 +1,16 @@
+{
+  "categories": [
+    {
+      "name": "Engineering & Simulation",
+      "skills": ["PLAXIS", "Python", "MATLAB", "GeoStudio", "FEA"]
+    },
+    {
+      "name": "AI & Machine Learning",
+      "skills": ["PyTorch", "TensorFlow", "PINNs", "Scikit-learn", "NumPy"]
+    },
+    {
+      "name": "Web & Development",
+      "skills": ["Astro", "TypeScript", "Tailwind", "Git", "FastAPI"]
+    }
+  ]
+}
