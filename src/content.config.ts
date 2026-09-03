@@ -1,5 +1,6 @@
 import { defineCollection, z } from 'astro:content';
 import { glob } from 'astro/loaders';
+import { singletonFile } from './utils/singletonLoader';
 
 const blog = defineCollection({
   loader: glob({ pattern: '**/*.{md,mdx}', base: './src/content/blog' }),
@@ -50,4 +51,58 @@ const services = defineCollection({
   }),
 });
 
-export const collections = { blog, projects, research, services };
+const siteSettings = defineCollection({
+  loader: singletonFile('src/content/site/settings.json', 'settings'),
+  schema: z.object({
+    siteName: z.string(),
+    tagline: z.string(),
+    availabilityText: z.string(),
+    email: z.string(),
+    location: z.string(),
+    githubUrl: z.string().url(),
+    linkedinUrl: z.string().url(),
+    googleScholarUrl: z.string().url().optional(),
+    heroBadge: z.string(),
+    heroHeadline: z.string(),
+    heroSubheadline: z.string(),
+    ctaHeading: z.string(),
+    ctaText: z.string(),
+  }),
+});
+
+const about = defineCollection({
+  loader: singletonFile('src/content/site/about.json', 'about'),
+  schema: z.object({
+    introHeading: z.string(),
+    introText: z.string(),
+    education: z.array(
+      z.object({
+        degreeLabel: z.string(),
+        title: z.string(),
+        description: z.string(),
+        institution: z.string(),
+        current: z.boolean().optional().default(false),
+      })
+    ),
+    specializations: z.array(
+      z.object({
+        title: z.string(),
+        description: z.string(),
+      })
+    ),
+  }),
+});
+
+const techStack = defineCollection({
+  loader: singletonFile('src/content/site/tech-stack.json', 'techStack'),
+  schema: z.object({
+    categories: z.array(
+      z.object({
+        name: z.string(),
+        skills: z.array(z.string()),
+      })
+    ),
+  }),
+});
+
+export const collections = { blog, projects, research, services, siteSettings, about, techStack };
