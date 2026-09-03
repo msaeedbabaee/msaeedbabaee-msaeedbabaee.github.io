@@ -1,4 +1,4 @@
-import { config, collection, fields } from '@keystatic/core';
+import { config, collection, singleton, fields } from '@keystatic/core';
 import { block } from '@keystatic/core/content-components';
 
 // کامپوننت‌های تعاملی قابل‌درج داخل هر محتوای MDX (بلاگ، پروژه‌ها، سرویس‌ها، ریسرچ)
@@ -146,6 +146,77 @@ export default config({
           },
           components: mdxComponents,
         }),
+      },
+    }),
+  },
+  singletons: {
+    settings: singleton({
+      label: 'Site Settings',
+      path: 'src/content/site/settings',
+      format: { data: 'json' },
+      schema: {
+        siteName: fields.text({ label: 'Site Name (e.g. Saeed)' }),
+        tagline: fields.text({ label: 'Footer Tagline', multiline: true }),
+        availabilityText: fields.text({ label: 'Availability Text' }),
+        email: fields.text({ label: 'Contact Email' }),
+        location: fields.text({ label: 'Location' }),
+        githubUrl: fields.url({ label: 'GitHub URL' }),
+        linkedinUrl: fields.url({ label: 'LinkedIn URL' }),
+        googleScholarUrl: fields.url({ label: 'Google Scholar URL (optional)' }),
+        heroBadge: fields.text({ label: 'Homepage Hero Badge' }),
+        heroHeadline: fields.text({ label: 'Homepage Hero Headline' }),
+        heroSubheadline: fields.text({ label: 'Homepage Hero Subheadline', multiline: true }),
+        ctaHeading: fields.text({ label: 'Homepage CTA Heading' }),
+        ctaText: fields.text({ label: 'Homepage CTA Text', multiline: true }),
+      },
+    }),
+    about: singleton({
+      label: 'About Page',
+      path: 'src/content/site/about',
+      format: { data: 'json' },
+      schema: {
+        introHeading: fields.text({ label: 'Intro Heading', defaultValue: 'About Me' }),
+        introText: fields.text({ label: 'Intro Text', multiline: true }),
+        education: fields.array(
+          fields.object({
+            degreeLabel: fields.text({ label: 'Degree Label', description: 'e.g. M.Sc. in Geotechnical Engineering' }),
+            title: fields.text({ label: 'Title' }),
+            description: fields.text({ label: 'Description', multiline: true }),
+            institution: fields.text({ label: 'Institution / Status' }),
+            current: fields.checkbox({ label: 'Currently In Progress', defaultValue: false }),
+          }),
+          {
+            label: 'Education Entries',
+            itemLabel: (props) => props.fields.title.value || 'Education entry',
+          }
+        ),
+        specializations: fields.array(
+          fields.object({
+            title: fields.text({ label: 'Title' }),
+            description: fields.text({ label: 'Description', multiline: true }),
+          }),
+          {
+            label: 'Core Specializations',
+            itemLabel: (props) => props.fields.title.value || 'Specialization',
+          }
+        ),
+      },
+    }),
+    techStack: singleton({
+      label: 'Tech Stack',
+      path: 'src/content/site/tech-stack',
+      format: { data: 'json' },
+      schema: {
+        categories: fields.array(
+          fields.object({
+            name: fields.text({ label: 'Category Name', description: 'e.g. AI & Machine Learning' }),
+            skills: fields.array(fields.text({ label: 'Skill' }), { label: 'Skills' }),
+          }),
+          {
+            label: 'Categories',
+            itemLabel: (props) => props.fields.name.value || 'Category',
+          }
+        ),
       },
     }),
   },
