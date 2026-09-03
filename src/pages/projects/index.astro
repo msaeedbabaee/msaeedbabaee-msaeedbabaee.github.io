@@ -15,35 +15,47 @@ const allTags = [...new Set(projects.flatMap((p) => p.data.tags || []))].sort();
       </p>
     </div>
 
-    <!-- Tag Filters -->
+    <div class="relative max-w-md">
+      <svg class="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-4.35-4.35M17 10.5a6.5 6.5 0 11-13 0 6.5 6.5 0 0113 0z" />
+      </svg>
+      <input
+        id="search-input"
+        type="text"
+        placeholder="Search projects by title or description..."
+        class="w-full rounded-md border border-border bg-background py-2 pl-9 pr-3 text-sm placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/40"
+      />
+    </div>
+
     {allTags.length > 0 && (
       <div class="flex flex-wrap items-center gap-2" id="tag-filters">
-        <button
-          data-tag="all"
-          class="filter-btn active inline-flex items-center rounded-md border border-primary bg-primary px-3 py-1 text-xs font-medium text-primary-foreground transition-colors"
-        >
-          All
-        </button>
         {allTags.map((tag) => (
           <button
+            type="button"
             data-tag={tag}
             class="filter-btn inline-flex items-center rounded-md border border-border bg-background px-3 py-1 text-xs font-medium text-muted-foreground transition-colors hover:bg-accent hover:text-accent-foreground"
           >
             {tag}
           </button>
         ))}
+        <button
+          type="button"
+          id="clear-filters"
+          class="hidden inline-flex items-center rounded-md px-2 py-1 text-xs font-medium text-primary hover:underline"
+        >
+          Clear filters
+        </button>
       </div>
     )}
 
-    <!-- Projects Grid -->
     <div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-3" id="projects-grid">
       {projects.map((project) => (
         <a
           href={`/projects/${project.id}`}
           data-tags={(project.data.tags || []).join(',')}
+          data-search={`${project.data.title} ${project.data.description}`.toLowerCase()}
           class="project-card group block overflow-hidden rounded-lg border border-border bg-card shadow-sm transition-all duration-200 hover:shadow-md hover:border-primary/40 hover:-translate-y-0.5"
         >
-          {/* عکس واقعی یا گرادیان */}
           {project.data.image ? (
             <div class="aspect-video w-full overflow-hidden bg-muted">
               <img
@@ -94,36 +106,64 @@ const allTags = [...new Set(projects.flatMap((p) => p.data.tags || []))].sort();
     </div>
 
     <p id="no-results" class="hidden text-center text-sm text-muted-foreground py-8">
-      No projects match this filter.
+      No projects match your search or filters.
     </p>
   </div>
 
   <script>
-    const buttons = document.querySelectorAll('.filter-btn');
-    const cards = document.querySelectorAll('.project-card');
+    const searchInput = document.getElementById('search-input') as HTMLInputElement | null;
+    const tagButtons = document.querySelectorAll<HTMLButtonElement>('.filter-btn');
+    const clearBtn = document.getElementById('clear-filters');
+    const cards = document.querySelectorAll<HTMLAnchorElement>('.project-card');
     const noResults = document.getElementById('no-results');
 
-    buttons.forEach((btn) => {
+    const activeTags = new Set<string>();
+
+    function applyFilters() {
+      const query = (searchInput?.value || '').trim().toLowerCase();
+      let visible = 0;
+
+      cards.forEach((card) => {
+        const cardTags = (card.getAttribute('data-tags') || '').split(',').filter(Boolean);
+        const cardSearch = card.getAttribute('data-search') || '';
+
+        const matchesTags = activeTags.size === 0 || cardTags.some((t) => activeTags.has(t));
+        const matchesSearch = query === '' || cardSearch.includes(query);
+        const show = matchesTags && matchesSearch;
+
+        card.classList.toggle('hidden', !show);
+        if (show) visible++;
+      });
+
+      noResults?.classList.toggle('hidden', visible > 0);
+      clearBtn?.classList.toggle('hidden', activeTags.size === 0);
+    }
+
+    tagButtons.forEach((btn) => {
       btn.addEventListener('click', () => {
-        const tag = btn.getAttribute('data-tag');
-
-        buttons.forEach((b) => {
-          b.classList.remove('bg-primary', 'text-primary-foreground', 'border-primary', 'active');
-          b.classList.add('bg-background', 'text-muted-foreground', 'border-border');
-        });
-        btn.classList.add('bg-primary', 'text-primary-foreground', 'border-primary', 'active');
-        btn.classList.remove('bg-background', 'text-muted-foreground', 'border-border');
-
-        let visible = 0;
-        cards.forEach((card) => {
-          const cardTags = (card.getAttribute('data-tags') || '').split(',');
-          const show = tag === 'all' || cardTags.includes(tag);
-          card.classList.toggle('hidden', !show);
-          if (show) visible++;
-        });
-
-        noResults?.classList.toggle('hidden', visible > 0);
+        const tag = btn.getAttribute('data-tag') || '';
+        if (activeTags.has(tag)) {
+          activeTags.delete(tag);
+          btn.classList.remove('bg-primary', 'text-primary-foreground', 'border-primary');
+          btn.classList.add('bg-background', 'text-muted-foreground', 'border-border');
+        } else {
+          activeTags.add(tag);
+          btn.classList.add('bg-primary', 'text-primary-foreground', 'border-primary');
+          btn.classList.remove('bg-background', 'text-muted-foreground', 'border-border');
+        }
+        applyFilters();
       });
     });
+
+    clearBtn?.addEventListener('click', () => {
+      activeTags.clear();
+      tagButtons.forEach((b) => {
+        b.classList.remove('bg-primary', 'text-primary-foreground', 'border-primary');
+        b.classList.add('bg-background', 'text-muted-foreground', 'border-border');
+      });
+      applyFilters();
+    });
+
+    searchInput?.addEventListener('input', applyFilters);
   </script>
 </Layout>
