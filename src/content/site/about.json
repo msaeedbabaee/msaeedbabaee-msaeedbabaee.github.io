@@ -4,10 +4,10 @@
   "education": [
     {
       "degreeLabel": "M.Sc. in Geotechnical Engineering",
-      "title": "Advanced Geomechanical Modeling & AI",
+      "title": "Advanced ",
       "description": "Focused on AI integration with slope stability analysis, finite element modeling, and probabilistic geotechnical calculations.",
-      "institution": "University of Tehran",
-      "current": true
+      "institution": "SUT",
+      "current": false
     },
     {
       "degreeLabel": "B.Sc. in Civil Engineering",
