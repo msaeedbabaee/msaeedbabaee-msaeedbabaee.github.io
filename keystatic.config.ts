@@ -37,11 +37,10 @@ const mdxComponents = {
 
 export default config({
   storage: {
-    kind: 'github',
-    repo: {
-      owner: 'msaeedbabaee',
-      name: 'msaeedbabaee.github.io',
-    },
+    kind: 'cloud',
+  },
+  cloud: {
+    project: 'msb6/githubio',
   },
   collections: {
     blog: collection({
